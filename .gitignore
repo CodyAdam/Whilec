@@ -37,3 +37,4 @@ build/
 java/build/**
 
 **/.vscode
+output
