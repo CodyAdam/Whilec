@@ -1,5 +1,5 @@
 # Mobile Tools for Java (J2ME)
-.mtj.tmp/
+**/.mtj.tmp/
 
 # Package Files #
 *.jar
@@ -10,12 +10,12 @@
 hs_err_pid*
 
 # Eclipse
-.classpath
-.project
-.settings/
+**/.classpath
+**/.project
+**/.settings/
 
 # Intellij
-.idea/
+**/.idea/
 *.iml
 *.iws
 
@@ -35,3 +35,5 @@ bin/
 build/
 /bin1/
 java/build/**
+
+**/.vscode
