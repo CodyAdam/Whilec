@@ -21,8 +21,8 @@ inputsub
 	
 //output 	:	 VARIABLE' , 'output | VARIABLE;
 
-//commands 
-//	:	 (command' ; 'commands)|command;
+/*commands 
+	:	 (command' ; 'commands)|command;*/
 commands 
 	:	 command+;
 	
@@ -35,9 +35,16 @@ command	 :	 'nop'|(vars' := 'exprs)|
 vars 	:	 (VARIABLE' , 'vars)|VARIABLE;
 
 exprs 	:	(expression' , 'exprs)|expression;
+//exprs 	:	 expression+;
 
+/*exprbase 
+    :    'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl 'exprbase')'|'('SYMBOL lexpr')';*/
+    
 exprbase 
-    :    'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl 'exprbase')'|'('SYMBOL lexpr')';
+    :    '(hd 'sub_exprbase')'|'(tl 'sub_exprbase')'|sub_exprbase;
+    
+sub_exprbase 
+	:	exprbase|'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
 
 expression 
     :    exprbase | exprbase ' = '? exprbase;
