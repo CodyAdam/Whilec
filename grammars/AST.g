@@ -1,5 +1,5 @@
 grammar AST;
-
+options { output=AST; }
 
 // ------------------------- RULES -------------------------
 program :	 function+;
