@@ -26,30 +26,34 @@ inputsub
 commands 
 	:	 command+;
 	
-command	 :	 'nop'|(vars' := 'exprs)|
+command	 :	 'nop'/*|(vars' := 'exprs)|
 		('if 'expression' then 'commands(' else 'commands)?' fi')|
 		('while 'expression' do 'commands' od')|
 		('for 'expression' do 'commands' od')|
-		('foreach 'VARIABLE' in 'expression' do 'commands' od');
+		('foreach 'VARIABLE' in 'expression' do 'commands' od')*/;
 
-vars 	:	 (VARIABLE' , 'vars)|VARIABLE;
+//vars 	:	 (VARIABLE' , 'vars)|VARIABLE;
+vars 	:	 VARIABLE;
 
-exprs 	:	(expression' , 'exprs)|expression;
-//exprs 	:	 expression+;
+//exprs 	:	(expression' , 'exprs)|expression;
+exprs 	:	 expression+;
+
+expression 
+	:	 'oui';
 
 /*exprbase 
     :    'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl 'exprbase')'|'('SYMBOL lexpr')';*/
     
-exprbase 
+/*exprbase 
     :    '(hd 'sub_exprbase')'|'(tl 'sub_exprbase')'|sub_exprbase;
     
 sub_exprbase 
-	:	exprbase|'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
+	:	'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
 
 expression 
     :    exprbase | exprbase ' = '? exprbase;
 
-lexpr     :    exprbase* ;
+lexpr     :    exprbase* ;*/
 
 // ------------------------- LEXEMES -------------------------
 
