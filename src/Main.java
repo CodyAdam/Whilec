@@ -1,4 +1,6 @@
 import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RuleReturnScope;
 import org.antlr.runtime.ANTLRFileStream;
 
 public class Main {
@@ -14,7 +16,11 @@ public class Main {
 
         System.out.println(cs.toString());
 
-        JavaParserLexer lexer = new JavaParserLexer(cs);
+        ASTLexer lexer = new ASTLexer(cs);
+        CommonTokenStream tokens = new CommonTokenStream();
+        tokens.setTokenSource(lexer);
+        ASTParser parser = new ASTParser(tokens);
+        RuleReturnScope result = parser.
 
     }
 }
