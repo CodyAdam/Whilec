@@ -2,23 +2,29 @@ grammar AST;
 
 
 // ------------------------- RULES -------------------------
-program :	 (function program) | function;
+program :	 function+;
 
 function
 	:	 'function 'SYMBOL' : 'definition;
 	
+//definition 
+//	:	'read 'input' % 'commands' % write 'output;
 definition 
-	:	'read 'input' % 'commands' % write 'output;
+	:	 'read 'input' % 'commands' % write 'input;
 	
-input 	:	 inputsub | '';
+input 	:	 inputsub?;
 
+//inputsub 
+//	:	 VARIABLE' , 'inputsub | VARIABLE;
 inputsub 
-	:	 VARIABLE' , 'inputsub | VARIABLE;
+	:	 VARIABLE;
 	
-output 	:	 VARIABLE' , 'output | VARIABLE;
+//output 	:	 VARIABLE' , 'output | VARIABLE;
 
+//commands 
+//	:	 (command' ; 'commands)|command;
 commands 
-	:	 (command' ; 'commands)|command;
+	:	 command+;
 	
 command	 :	 'nop'|(vars' := 'exprs)|
 		('if 'expression' then 'commands(' else 'commands)?' fi')|
@@ -31,26 +37,20 @@ vars 	:	 (VARIABLE' , 'vars)|VARIABLE;
 exprs 	:	(expression' , 'exprs)|expression;
 
 exprbase 
-    :    'nil' | VARIABLE | SYMBOL | '(''cons 'lexpr')'|'(''list 'lexpr')'|'(''hd 'exprbase')'|'(''tl 'exprbase')'|'('SYMBOL lexpr')';
+    :    'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl 'exprbase')'|'('SYMBOL lexpr')';
 
 expression 
     :    exprbase | exprbase ' = '? exprbase;
 
-lexpr     :    exprbase lexpr | '' ;
+lexpr     :    exprbase* ;
 
 // ------------------------- LEXEMES -------------------------
 
 
 SYMBOL 
-	:	MINISCULE(MAJUSCULE|MINISCULE|DIGIT)*('!'|'?')?;
+	:	('a'..'z')(('A'..'Z')|('a'..'z')|DIGIT)*('!'|'?')?;
 
 VARIABLE
- 	:	MAJUSCULE(MAJUSCULE|MINISCULE|DIGIT)*('!'|'?')?;
-	
-MINISCULE
-	:	('a'..'z');
-	
-MAJUSCULE 
-	:	 ('A'..'Z');
+ 	:	('A'..'Z')(('A'..'Z')|('a'..'z')|DIGIT)*('!'|'?')?;
 	
 DIGIT 	:	 ('0'..'9');
