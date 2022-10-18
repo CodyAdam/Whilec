@@ -2,19 +2,21 @@ grammar AST;
 
 
 // ------------------------- RULES -------------------------
-delegateGrammars
-    :   IMPORT delegateGrammar (COMMA delegateGrammar)* SEMI
-    ;
 
-delegateGrammar
-    :   id ASSIGN id
-    |   id
-    ;
-
-id  :   RULE_REF
-    |   TOKEN_REF
-    ;
 
 // ------------------------- LEXEMES -------------------------
 
 
+SYMBOL 
+	:	MINISCULE(MAJUSCULE|MINISCULE|DIGIT)*('!'|'?')?;
+
+VARIABLE
+ 	:	MAJUSCULE(MAJUSCULE|MINISCULE|DIGIT)*('!'|'?')?;
+	
+MINISCULE
+	:	('a'..'z');
+	
+MAJUSCULE 
+	:	 ('A'..'Z');
+	
+DIGIT 	:	 ('0'..'9');
