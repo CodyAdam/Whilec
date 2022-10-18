@@ -1,6 +1,5 @@
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RuleReturnScope;
 import org.antlr.runtime.ANTLRFileStream;
 
 public class Main {
@@ -8,7 +7,7 @@ public class Main {
         String filepath;
         if (args.length != 1) {
             System.err.println("Wrong number of arguments, expected 1, got " + args.length);
-            filepath = "test/1.while";
+            filepath = "test/and.while";
         } else {
             filepath = args[0];
         }
@@ -20,7 +19,7 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
         ASTParser parser = new ASTParser(tokens);
-        RuleReturnScope result = parser.
 
+        parser.program();
     }
 }
