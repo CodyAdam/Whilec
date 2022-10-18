@@ -4,7 +4,7 @@ grammar AST;
 // ------------------------- RULES -------------------------
 program :	 (function program) | function;
 
-function 
+function
 	:	 'function 'SYMBOL' : 'definition;
 	
 definition 
