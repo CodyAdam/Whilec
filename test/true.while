@@ -1,0 +1,7 @@
+// true constant (for lisibility)
+function true :
+  read
+  %
+    Result := (cons nil nil)
+  %
+write Result
