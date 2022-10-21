@@ -1,0 +1,7 @@
+function nope: 
+read
+%
+	nop;
+	nop;
+%
+write Out

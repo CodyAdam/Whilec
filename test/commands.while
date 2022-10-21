@@ -1,0 +1,6 @@
+nop;
+Ad := true;
+if true do nop;nop; else Ad := true fi;
+while true do nop od;
+for true do nop od;
+foreach Ad in true do nop od;
