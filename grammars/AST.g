@@ -1,67 +1,90 @@
 grammar AST;
-options { output=AST; }
+options {
+	output = AST;
+}
+
+tokens  {
+	ROOT;
+	COMMANDS;
+	COMMAND;
+	ASSIGN;
+	IF;
+	FOR;
+	WHILE;
+	FOREACH;
+	FUNC;
+	FUNCDEF;
+	
+}
+
+
 
 // ------------------------- RULES -------------------------
-program :	 function+;
 
-function
-	:	 'function 'SYMBOL' : 'definition;
-	
-//definition 
-//	:	'read 'input' % 'commands' % write 'output;
-definition 
-	:	 'read 'input' % 'commands' % write 'input;
-	
-input 	:	 inputsub?;
+program: function+ -> function+;
 
-//inputsub 
-//	:	 VARIABLE' , 'inputsub | VARIABLE;
-inputsub 
-	:	 VARIABLE;
-	
-//output 	:	 VARIABLE' , 'output | VARIABLE;
+function: WS? 'function' WS SYMBOL WS? ':' WSNL definition -> ^(FUNC SYMBOL definition);
 
-/*commands 
-	:	 (command' ; 'commands)|command;*/
-commands 
-	:	 command+;
-	
-command	 :	 'nop'/*|(vars' := 'exprs)|
-		('if 'expression' then 'commands(' else 'commands)?' fi')|
-		('while 'expression' do 'commands' od')|
-		('for 'expression' do 'commands' od')|
-		('foreach 'VARIABLE' in 'expression' do 'commands' od')*/;
+definition:
+	'read' WS? input WSNL '%' WSNL commands WSNL '%' WSNL 'write' output WSNL -> ^(FUNCDEF input commands output);
 
-//vars 	:	 (VARIABLE' , 'vars)|VARIABLE;
-vars 	:	 VARIABLE;
+input: inputsub? -> inputsub?;
 
-//exprs 	:	(expression' , 'exprs)|expression;
-exprs 	:	 expression+;
+inputsub: (WS? VARIABLE WS? ',' inputsub) -> VARIABLE | WS? VARIABLE -> VARIABLE;
 
-expression 
-	:	 'oui';
+output: (WS? VARIABLE WS? ',' output) -> VARIABLE | WS? VARIABLE -> VARIABLE;
 
-/*exprbase 
-    :    'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl 'exprbase')'|'('SYMBOL lexpr')';*/
-    
-/*exprbase 
-    :    '(hd 'sub_exprbase')'|'(tl 'sub_exprbase')'|sub_exprbase;
-    
-sub_exprbase 
-	:	'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
+commands: 
+	   WSNL? command (WS? ';' WSNL? command)* (';')? -> command+;
 
-expression 
-    :    exprbase | exprbase ' = '? exprbase;
+command:
+	  ('nop') -> 'nop'
+	| (vars WS ':=' WS exprs) -> ^(ASSIGN vars exprs)
+	| ('if' WS expression WS 'then' WSNL commands WSNL (WS? 'else' WSNL commands WSNL)? 'fi') -> ^(IF expression commands (commands)?)
+	| ('while' WS expression WS 'do' WSNL commands WSNL 'od') -> ^(WHILE expression commands)
+	| ('for' WS expression 'do' WSNL commands WSNL 'od') -> ^(FOR expression commands)
+	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WSNL commands WSNL ' od') -> ^(FOREACH VARIABLE expression commands);
 
-lexpr     :    exprbase* ;*/
+vars 	:	 
+	  (VARIABLE WS? ',' vars) -> VARIABLE 
+	| VARIABLE -> VARIABLE;
+
+exprs 	: 
+	  (WS? expression WS? ',' exprs) -> expression
+	| WS? expression -> expression;
+
+expression: 'true';
+
+/*exprbase
+ : 'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl
+ 'exprbase')'|'('SYMBOL lexpr')';
+ */
+
+/*exprbase
+ : '(hd 'sub_exprbase')'|'(tl 'sub_exprbase')'|sub_exprbase;
+ 
+ sub_exprbase : 'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
+ 
+
+ 
+
+ 
+
+ 
+
+ expression : exprbase | exprbase ' = '? exprbase;
+ 
+ lexpr : exprbase* ;
+ */
 
 // ------------------------- LEXEMES -------------------------
 
+SYMBOL: ('a' ..'z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
 
-SYMBOL 
-	:	('a'..'z')(('A'..'Z')|('a'..'z')|DIGIT)*('!'|'?')?;
+VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?'	)?;
 
-VARIABLE
- 	:	('A'..'Z')(('A'..'Z')|('a'..'z')|DIGIT)*('!'|'?')?;
-	
-DIGIT 	:	 ('0'..'9');
+DIGIT: ('0' ..'9');
+
+WS: (' ' | '\t')+; // Short for White Space
+
+WSNL: (WS | '\r'? '\n')+; // Short for White Space or New Line
