@@ -7,7 +7,7 @@ public class Main {
         String filepath;
         if (args.length != 1) {
             System.err.println("Wrong number of arguments, expected 1, got " + args.length);
-            filepath = "test/and.while";
+            filepath = "test/nop.while";
         } else {
             filepath = args[0];
         }
@@ -20,6 +20,11 @@ public class Main {
         tokens.setTokenSource(lexer);
         ASTParser parser = new ASTParser(tokens);
 
-        parser.program();
+        var prog = parser.program();
+        prog.getStart();
+        System.out.println(prog.getTree());
+        
+        System.out.println(prog.getTemplate());
+
     }
 }
