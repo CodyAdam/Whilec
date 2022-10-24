@@ -26,7 +26,7 @@ program: function+ -> function+;
 function: WS? 'function' WS SYMBOL WS? ':' WS definition -> ^(FUNC SYMBOL definition);
 
 definition:
-	'read' WS? input WS '%' WS commands WS '%' WS 'write' output WS -> ^(FUNCDEF input commands output);
+	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output WS? -> ^(FUNCDEF input commands output);
 
 input: inputsub? -> inputsub?;
 
@@ -42,8 +42,8 @@ command:
 	| (vars WS ':=' WS exprs) -> ^(ASSIGN vars exprs)
 	| ('if' WS expression WS 'then' WS commands WS (WS? 'else' WS commands WS)? 'fi') -> ^(IF expression commands (commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
-	| ('for' WS expression 'do' WS commands WS 'od') -> ^(FOR expression commands)
-	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS ' od') -> ^(FOREACH VARIABLE expression commands);
+	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
+	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE expression commands);
 
 vars 	:	 
 	  (VARIABLE WS? ',' vars) -> VARIABLE 
