@@ -7,7 +7,7 @@ public class Main {
         String filepath;
         if (args.length != 1) {
             System.err.println("Wrong number of arguments, expected 1, got " + args.length);
-            filepath = "test/and.while";
+            filepath = "test/nope.while";
         } else {
             filepath = args[0];
         }
