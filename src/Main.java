@@ -1,5 +1,6 @@
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.ANTLRFileStream;
 
 public class Main {
@@ -12,9 +13,6 @@ public class Main {
             filepath = args[0];
         }
         CharStream cs = new ANTLRFileStream(filepath);
-
-        System.out.println(cs.toString());
-
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
@@ -22,9 +20,8 @@ public class Main {
 
         var prog = parser.program();
         prog.getStart();
-        System.out.println(prog.getTree());
-        
-        System.out.println(prog.getTemplate());
+        CommonTree tree = (CommonTree) prog.getTree();
 
+        System.out.println(tree.toStringTree());
     }
 }
