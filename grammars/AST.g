@@ -4,24 +4,34 @@ options {
 }
 
 tokens  {
+	TOKENS;
 	ROOT;
+	FUNCTION;
+	FUNCDEF;
 	COMMANDS;
 	COMMAND;
-	ASSIGN;
+	INPUT;
+	OUTPUT;
+	 VARS;
+	VARIABLE;
+	SYMBOL;
 	IF;
-	FOR;
 	WHILE;
+	NOP;
+	FOR;
+	ASSIGN;
 	FOREACH;
-	FUNC;
-	FUNCDEF;
-	
+	EXPRS;
+	EXPR_BASE;
+	EXPRESSION;
+	EQUAL;
 }
 
 // ------------------------- RULES -------------------------
 
 program: function+ -> function+;
 
-function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNC SYMBOL definition);
+function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION SYMBOL definition);
 
 definition:
 	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? commands output); //
@@ -48,10 +58,10 @@ vars 	:
 	| VARIABLE -> VARIABLE;
 
 	
-exprs 	:	expression (WS? ','expression)* ;
+exprs 	:	expression (WS? ','expression)* -> expression+;
 
 //expression: 'true';
-expression : exprbase(' = ' exprbase)?;
+expression : exprbase(' = ' c=exprbase)? -> ^(EXPRESSION exprbase (EQUAL $c)?);
 /*
 //exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS) ('nil'|VARIABLE|SYMBOL) WS ')';
 
