@@ -2,91 +2,95 @@ import org.antlr.runtime.tree.CommonTree;
 
 public class Compiler {
   CommonTree tree;
+
   public Compiler(CommonTree root) {
     tree = root;
   }
 
   public String getCompiledCode() {
+    return rootNode(tree, 0);
+  }
+
+  static public String compile(CommonTree tree) {
+    return rootNode(tree, 0);
+  }
+
+  public String toString() {
+    return getCompiledCode();
+  }
+
+  private static String rootNode(CommonTree node, int depth) {
     // TODO
     return "";
   }
 
-  public String toString(){
-    return getCompiledCode();
-  }
-
-  private String rootNode(CommonTree node, int depth) {
-    //TODO
+  private static String mainNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String mainNode(CommonTree node, int depth) {
-    //TODO
+  private static String functionNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String functionNode(CommonTree node, int depth) {
-    //TODO
+  private static String expressionsNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String expressionsNode(CommonTree node, int depth) {
-    //TODO
+  private static String expressionNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String expressionNode(CommonTree node, int depth) {
-    //TODO
-    return "";
-  }
-
-  private String varsNode(CommonTree node, int depth) {
+  private static String varsNode(CommonTree node, int depth) {
     String t = node.getChild(0).getText();
 
     return t;
-  } 
+  }
 
-  private String varNode(CommonTree node, int depth) {
-    //TODO
+  private static String varNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String ifNode(CommonTree node, int depth) {
-    //TODO
+  private static String ifNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String forNode(CommonTree node, int depth) {
-    //TODO
+  private static String forNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String whileNode(CommonTree node, int depth) {
-    //TODO
+  private static String whileNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String assignNode(CommonTree node, int depth) {
-    //TODO
+  private static String assignNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String foreachNode(CommonTree node, int depth) {
-    //TODO
+  private static String foreachNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String nopNode(CommonTree node, int depth) {
-    //TODO
+  private static String nopNode(CommonTree node, int depth) {
+    // TODO
     return "";
   }
 
-  private String printNode(CommonTree node, int depth) {
+  private static String printNode(CommonTree node, int depth) {
     node.getChild(0).getText();
     return "print(" + depthToString(depth) + node.getChild(0).getText() + ")";
   }
 
-  private String depthToString(int depth) {
+  private static String depthToString(int depth) {
     String s = "";
     for (int i = 0; i < depth; i++) {
       s += "  ";
