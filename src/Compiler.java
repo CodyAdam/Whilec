@@ -20,8 +20,16 @@ public class Compiler {
   }
 
   private static String rootNode(CommonTree node, int depth) {
-    // TODO
-    return "";
+    String s = "";
+    int n = node.getChildCount();
+    for (int i = 0; i < n; i++) {
+      CommonTree child = (CommonTree) node.getChild(i);
+      s += child.getToken().getText() + "\n";
+      if (child.getType() == 0) {
+        return rootNode(child, depth);
+      }
+    }
+    return s;
   }
 
   private static String mainNode(CommonTree node, int depth) {
@@ -99,6 +107,10 @@ public class Compiler {
 
   private static String depthToString(int depth) {
     return "  ".repeat(depth);
+  }
+
+  private static String getToken(CommonTree node) {
+    return node.getToken().getText();
   }
 
 }
