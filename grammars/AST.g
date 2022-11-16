@@ -17,16 +17,14 @@ tokens  {
 	
 }
 
-
-
 // ------------------------- RULES -------------------------
 
 program: function+ -> function+;
 
-function: WS? 'function' WS SYMBOL WS? ':' WS definition -> ^(FUNC SYMBOL definition);
+function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNC SYMBOL definition);
 
 definition:
-	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output WS? -> ^(FUNCDEF input commands output);
+	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? commands output); //
 
 input: inputsub? -> inputsub?;
 
@@ -49,39 +47,38 @@ vars 	:
 	  (VARIABLE WS? ',' vars) -> VARIABLE 
 	| VARIABLE -> VARIABLE;
 
-exprs 	: 
-	  (WS? expression WS? ',' exprs) -> expression
-	| WS? expression -> expression;
+	
+exprs 	:	expression (WS? ','expression)* ;
 
-expression: 'true';
+//expression: 'true';
+expression : exprbase(' = ' exprbase)?;
+/*
+//exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS) ('nil'|VARIABLE|SYMBOL) WS ')';
+
+//exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS)* ('nil'|VARIABLE|SYMBOL)+ (')');
+
+exprbase:	 exprbase_low | ('nil'|VARIABLE|SYMBOL);
+
+exprbase_low:	 ('('('cons'|'list')WS) lexpr WS ')';
 
 /*exprbase
  : 'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl
  'exprbase')'|'('SYMBOL lexpr')';
  */
 
-/*exprbase
- : '(hd 'sub_exprbase')'|'(tl 'sub_exprbase')'|sub_exprbase;
+exprbase
+ : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')'|'('SYMBOL WS lexpr')' | 'nil' | VARIABLE | SYMBOL;
  
- sub_exprbase : 'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'('SYMBOL lexpr')';
+ lexpr
+    : (WS? (exprbase WS?)*);
  
-
- 
-
- 
-
- 
-
- expression : exprbase | exprbase ' = '? exprbase;
- 
- lexpr : exprbase* ;
- */
+ //lexpr : exprbase* ;
 
 // ------------------------- LEXEMES -------------------------
 
 SYMBOL: ('a' ..'z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
 
-VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?'	)?;
+VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 
 DIGIT: ('0' ..'9');
 
