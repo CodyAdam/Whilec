@@ -77,13 +77,12 @@ public class Compiler {
   }
 
   private String nopNode(CommonTree node, int depth) {
-    //TODO
-    return "";
+    return depthToString(depth) + "def nop():\n" + depthToString(depth+1) + "pass\n";
   }
 
   private String printNode(CommonTree node, int depth) {
     node.getChild(0).getText();
-    return "print(" + depthToString(depth) + node.getChild(0).getText() + ")";
+    return depthToString(depth) + "print(" + node.getChild(0).getText() + ")\n";
   }
 
   private String depthToString(int depth) {
