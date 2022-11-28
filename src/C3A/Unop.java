@@ -4,10 +4,10 @@ package C3A;
  * Unary operator extends ToAssign
  */
 public class Unop extends ToAssign {
-  public UnopEnum op;
-  public ToAssign arg;
+  private UnopEnum op;
+  private Variable arg;
 
-  public Unop(UnopEnum op, ToAssign arg) {
+  public Unop(UnopEnum op, Variable arg) {
     this.op = op;
     this.arg = arg;
   }
@@ -15,13 +15,22 @@ public class Unop extends ToAssign {
   @Override
   public String toString() {
     String opString;
-    if (op == UnopEnum.NOT) {
-      opString = "!";
-    } else if (op == UnopEnum.SUB) {
-      opString = "-";
-    } else {
-      opString = "~";
+    switch (op) {
+      case NOT:
+        opString = "!";
+        break;
+      case SUB:
+        opString = "-";
+        break;
+      case ADRESS:
+        opString = "&";
+        break;
+      case CONTENT:
+        opString = "*";
+        break;
+      default:
+        opString = "UNKNOWN_UNOP";
     }
-    return opString + " " + arg;
+    return opString + arg;
   }
 }

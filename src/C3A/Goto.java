@@ -1,14 +1,15 @@
 package C3A;
 
-public class Copy extends ToAssign {
+public class Goto extends Instruction{
   private String label;
 
-  public Copy(String label) {
+  public Goto(String label) {
     this.label = label;
   }
 
   @Override
   public String toString() {
-    return label;
+    return "goto " + label;
   }
+  
 }

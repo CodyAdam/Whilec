@@ -8,8 +8,12 @@ import java.util.List;
  * used by the C3A generator
  */
 public class Stack {
-  List<Instruction> stack;
+  private List<Instruction> stack;
   public Stack() {
     stack = new ArrayList<Instruction>();
+  }
+
+  public List<Instruction> getStack() {
+    return stack;
   }
 }
