@@ -1,9 +1,9 @@
 package C3A;
 
 public class Goto extends Instruction{
-  private String label;
+  private Label label;
 
-  public Goto(String label) {
+  public Goto(Label label) {
     this.label = label;
   }
 
