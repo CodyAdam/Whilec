@@ -1,9 +1,8 @@
 package C3A;
 
 public class C3A {
-  private Stack stack;
+  private Instructions instructions;
   public C3A() {
-    stack = new Stack();
+    instructions = new Instructions();
   }
-    
 }

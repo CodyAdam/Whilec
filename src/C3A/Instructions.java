@@ -7,13 +7,13 @@ import java.util.List;
  * Contains a list of Instruction
  * used by the C3A generator
  */
-public class Stack {
+public class Instructions {
   private List<Instruction> stack;
-  public Stack() {
+  public Instructions() {
     stack = new ArrayList<Instruction>();
   }
 
-  public List<Instruction> getStack() {
+  public List<Instruction> getInstructions() {
     return stack;
   }
 }
