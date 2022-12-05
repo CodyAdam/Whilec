@@ -1,9 +1,12 @@
 import org.antlr.runtime.tree.CommonTree;
 
-public class Compiler {
+public class Compiler3Adress {
   CommonTree tree;
 
-  public Compiler(CommonTree root) {
+  static final String dataTypesDef = 
+  "";
+
+  public Compiler3Adress(CommonTree root) {
     tree = root;
   }
 
