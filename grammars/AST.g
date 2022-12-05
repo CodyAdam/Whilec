@@ -30,22 +30,23 @@ tokens  {
 	HEAD;
 	TAIL;
 	CONS;
+	FUNCTIONCALL;
 }
 
 // ------------------------- RULES -------------------------
 
 program: function+ -> function+;
 
-function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION SYMBOL definition);
+function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
 
 definition:
-	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? commands output); //
+	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? ^(COMMANDS commands) ^(OUTPUT output)); //
 
-input: inputsub? -> inputsub?;
+input: inputsub? -> ^(INPUT inputsub?);
 
-inputsub: (WS? VARIABLE WS? ',' inputsub) -> VARIABLE | WS? VARIABLE -> VARIABLE;
+inputsub: (WS? VARIABLE WS? ',' inputsub) -> VARIABLE inputsub | WS? VARIABLE -> VARIABLE;
 
-output: (WS? VARIABLE WS? ',' output) -> VARIABLE | WS? VARIABLE -> VARIABLE;
+output: (WS? VARIABLE WS? ',' output) -> VARIABLE output | WS? VARIABLE -> VARIABLE; 
 
 commands: 
 	   WS? command (WS? ';' WS? command)* (';')? -> command+;
@@ -76,7 +77,7 @@ exprbase
  	|'(tl 'exprbase')' -> ^(TAIL exprbase)
  	| '(cons ' lexpr')' -> ^(CONS lexpr)
  	|'(list ' lexpr')' -> ^(LIST lexpr)
- 	|'('SYMBOL WS lexpr')' -> SYMBOL lexpr
+ 	|'('SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
 	| 'nil' -> NIL
  	| VARIABLE -> VARIABLE
  	| SYMBOL -> SYMBOL; 
