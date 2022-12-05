@@ -27,6 +27,9 @@ tokens  {
 	EQUALS;
 	NIL;
 	LIST;
+	HEAD;
+	TAIL;
+	CONS;
 }
 
 // ------------------------- RULES -------------------------
@@ -61,38 +64,25 @@ vars 	:
 
 	
 exprs 	:	expression (WS? ','expression)* -> expression+;
-
-//expression: 'true';
-/*expression : exprbase'='c=exprbase -> ^(EXPRESSION ^(EQUALS exprbase $c))
-	| exprbase -> ^(EXPRESSION exprbase); */
 	
 expression 
 	:	 e1=exprbase(
 		' = 'e2=exprbase -> ^(EXPRESSION ^(EQUALS $e1 $e2))
 		| -> ^(EXPRESSION $e1)
  	);
-/*
-//exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS) ('nil'|VARIABLE|SYMBOL) WS ')';
-
-//exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS)* ('nil'|VARIABLE|SYMBOL)+ (')');
-
-exprbase:	 exprbase_low | ('nil'|VARIABLE|SYMBOL);
-
-exprbase_low:	 ('('('cons'|'list')WS) lexpr WS ')';
-
-/*exprbase
- : 'nil' | VARIABLE | SYMBOL | '(cons 'lexpr')'|'(list 'lexpr')'|'(hd 'exprbase')'|'(tl
- 'exprbase')'|'('SYMBOL lexpr')';
- */
 
 exprbase
- : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')' -> ^(LIST lexpr)|'('SYMBOL WS lexpr')' -> (SYMBOL lexpr)| 'nil' -> NIL| VARIABLE -> VARIABLE| SYMBOL -> SYMBOL; 
+ : '(hd 'exprbase')' -> ^(HEAD exprbase)
+ 	|'(tl 'exprbase')' -> ^(TAIL exprbase)
+ 	| '(cons ' lexpr')' -> ^(CONS lexpr)
+ 	|'(list ' lexpr')' -> ^(LIST lexpr)
+ 	|'('SYMBOL WS lexpr')' -> SYMBOL lexpr
+	| 'nil' -> NIL
+ 	| VARIABLE -> VARIABLE
+ 	| SYMBOL -> SYMBOL; 
  
  lexpr
     : (WS? (exprbase WS?)*) -> exprbase*;
- 
- //lexpr : exprbase* ;
-
 // ------------------------- LEXEMES -------------------------
 
 SYMBOL: ('a' ..'z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
@@ -101,6 +91,4 @@ VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 
 DIGIT: ('0' ..'9');
 
-WS: (' ' | '\r'? '\n')+; // Short for White Space or New Line
-
-//WS: (' ' | '\t')+; // Short for White Space
+WS: (' ' | '\r'? '\n')+;
