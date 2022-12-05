@@ -22,6 +22,6 @@ public class Main {
         prog.getStart();
         CommonTree tree = (CommonTree) prog.getTree();
 
-        System.out.println(Compiler3Adress.compile(tree));
+        System.out.println(tree.getToken());
     }
 }
