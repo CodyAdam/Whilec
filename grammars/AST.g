@@ -24,7 +24,8 @@ tokens  {
 	EXPRS;
 	EXPR_BASE;
 	EXPRESSION;
-	EQUAL;
+	EQUALS;
+	NIL;
 }
 
 // ------------------------- RULES -------------------------
@@ -61,7 +62,14 @@ vars 	:
 exprs 	:	expression (WS? ','expression)* -> expression+;
 
 //expression: 'true';
-expression : exprbase(' = ' c=exprbase)? -> ^(EXPRESSION exprbase (EQUAL $c)?);
+/*expression : exprbase'='c=exprbase -> ^(EXPRESSION ^(EQUALS exprbase $c))
+	| exprbase -> ^(EXPRESSION exprbase); */
+	
+expression 
+	:	 e1=exprbase(
+		' = 'e2=exprbase -> ^(EXPRESSION ^(EQUALS $e1 $e2))
+		| -> ^(EXPRESSION $e1)
+ 	);
 /*
 //exprbase:	 ('('('cons'|'list'|'hd'|'tl')WS) ('nil'|VARIABLE|SYMBOL) WS ')';
 
@@ -77,7 +85,7 @@ exprbase_low:	 ('('('cons'|'list')WS) lexpr WS ')';
  */
 
 exprbase
- : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')'|'('SYMBOL WS lexpr')' | 'nil' | VARIABLE | SYMBOL;
+ : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')'|'('SYMBOL WS lexpr')'| 'nil'| VARIABLE | SYMBOL; 
  
  lexpr
     : (WS? (exprbase WS?)*);
