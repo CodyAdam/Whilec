@@ -26,6 +26,7 @@ tokens  {
 	EXPRESSION;
 	EQUALS;
 	NIL;
+	LIST;
 }
 
 // ------------------------- RULES -------------------------
@@ -85,10 +86,10 @@ exprbase_low:	 ('('('cons'|'list')WS) lexpr WS ')';
  */
 
 exprbase
- : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')'|'('SYMBOL WS lexpr')'| 'nil'| VARIABLE | SYMBOL; 
+ : '(hd 'exprbase')'|'(tl 'exprbase')'| '(cons ' lexpr')'|'(list ' lexpr')' -> ^(LIST lexpr)|'('SYMBOL WS lexpr')' -> (SYMBOL lexpr)| 'nil' -> NIL| VARIABLE -> VARIABLE| SYMBOL -> SYMBOL; 
  
  lexpr
-    : (WS? (exprbase WS?)*);
+    : (WS? (exprbase WS?)*) -> exprbase*;
  
  //lexpr : exprbase* ;
 
