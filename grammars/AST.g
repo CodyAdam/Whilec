@@ -35,9 +35,9 @@ tokens  {
 
 // ------------------------- RULES -------------------------
 
-program: function+ EOF -> function+;
+program: WS* function+ WS* -> function+;
 
-function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
+function: 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
 
 definition:
 	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? ^(COMMANDS commands) ^(OUTPUT output)); //
