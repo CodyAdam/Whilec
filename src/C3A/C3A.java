@@ -2,18 +2,32 @@ package C3A;
 
 import C3A.AstNode;
 import java.util.List;
-import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
 import org.antlr.runtime.tree.Tree;
 
 public class C3A {
   private Instructions instructions;
 
-  public C3A(CommonTree ast, List<Variable> stack) {
+  public C3A(Tree ast) {
     instructions = new Instructions();
-    instructions = AstToInstructions(ast);
+    instructions = fromRoot(ast);
   }
 
-  private Instructions fromFunction(CommonTree ast) {
+  public Instructions getInstructions() {
+    return instructions;
+  }
+
+  private Instructions fromRoot(Tree ast) {
+    Instructions i = new Instructions();
+    for (int j = 0; j < ast.getChildCount(); j++) {
+      Tree child = ast.getChild(j);
+      assert (child.getText().equals(AstNode.FUNCTION.toString()));
+      i.add(fromFunction((Tree) child));
+    }
+    return i;
+  }
+
+  private Instructions fromFunction(Tree ast) {
     Tree funcName = ast.getChild(0);
     Tree funcDef = ast.getChild(1);
     assert (funcName.getText().equals(AstNode.SYMBOL.toString()));
@@ -41,7 +55,7 @@ public class C3A {
    * d = c == 4
    * ifz d goto end
    */
-  private Instructions fromIf(CommonTree ast) {
+  private Instructions fromIf(Tree ast) {
     Tree condition = ast.getChild(0);
     Tree commandsIf = ast.getChild(1);
     Label els = new Label("else");
@@ -66,37 +80,7 @@ public class C3A {
     return i;
   }
 
-  private Instructions fromWhile(CommonTree ast) {
-    return this;
-  }
-
-  private Instructions fromFor(CommonTree ast) {
-    return this;
-  }
-
-  private Instructions fromAssign(CommonTree ast) {
-    return 
-  }
-
-  private Instructions AstToInstructions(CommonTree ast) {
-    String node = ast.getText();
-    System.out.println("Converting : " + node);
-    if (node.equals(AstNode.FUNCTION.toString())) {
-      return fromFunction(ast);
-    } else if (node.equals(AstNode.IF.toString())) {
-      return fromIf(ast);
-    } else if (node.equals(AstNode.WHILE.toString())) {
-      return fromWhile(ast);
-    } else if (node.equals(AstNode.FOR.toString())) {
-      return fromFor(ast);
-    } else if (node.equals(AstNode.ASSIGN.toString())) {
-      return fromAssign(ast);
-    } else {
-      return fromCommands(ast);
-    }
-  }
-
-  private Instructions fromCommands(CommonTree ast) {
+  private Instructions fromCommands(Tree ast) {
     return null;
   }
 
