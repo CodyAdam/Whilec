@@ -4,10 +4,10 @@ import C3A.AstNode;
 import java.util.List;
 import org.antlr.runtime.tree.Tree;
 
-public class C3AGenerator {
+public class Generator {
   private Instructions instructions;
 
-  public C3AGenerator(Tree ast) {
+  public Generator(Tree ast) {
     instructions = new Instructions();
     instructions = fromRoot(ast);
   }

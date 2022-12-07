@@ -10,8 +10,16 @@ object "COMMANDS" as 4 #666
 3 -down-> 4
 object "nop" as 5 #666
 4 -down-> 5
-object "OUTPUT" as 6 #666
-3 -down-> 6
-object "Out" as 7 #666
+object "ASSIGN" as 6 #666
+4 -down-> 6
+object "A" as 7 #666
 6 -down-> 7
+object "EXPRESSION" as 8 #666
+6 -down-> 8
+object "true" as 9 #666
+8 -down-> 9
+object "OUTPUT" as 10 #666
+3 -down-> 10
+object "A" as 11 #666
+10 -down-> 11
 @enduml
