@@ -24,21 +24,26 @@ public class Generator {
     return i;
   }
 
+  /**
+   * func begin <name>
+   * <command>
+   * <command>
+   * return <expr>  OR   Return
+   * <command>
+   * return <expr>  OR   Return
+   * func end
+   */
   private Instructions fromFunction(Tree ast) {
-    Tree funcName = ast.getChild(0);
-    Tree funcDef = ast.getChild(1);
-    assert (funcName.getText().equals(AstNode.SYMBOL.toString()));
-    assert (funcDef.getText().equals(AstNode.FUNC_DEF.toString()));
-
     Instructions i = new Instructions();
-    i.add(new FuncBegin(funcName.getText())); // TODO change later with a real function name
+    Tree funcName = ast.getChild(0);
+    i.add(new FuncBegin(funcName.getText()));
+    Tree funcDef = funcName.getChild(0);
 
-    Tree input = funcDef.getChild(0);
-    Tree commands = funcDef.getChild(1);
-    Tree output = funcDef.getChild(2);
-    assert (input.getText().equals(AstNode.INPUT.toString()));
-    assert (commands.getText().equals(AstNode.COMMANDS.toString()));
-    assert (output.getText().equals(AstNode.OUTPUT.toString()));
+    if (funcDef.getChildCount() == 3) { 
+      // Has parameters
+    } else {
+      // No Parameters
+    }
 
     return i;
   }
