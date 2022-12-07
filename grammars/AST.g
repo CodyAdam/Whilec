@@ -35,7 +35,7 @@ tokens  {
 
 // ------------------------- RULES -------------------------
 
-program: function+ -> function+;
+program: function+ EOF -> function+;
 
 function: WS? 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
 
@@ -92,4 +92,4 @@ VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 
 DIGIT: ('0' ..'9');
 
-WS: (' ' | '\r'? '\n')+;
+WS: (' ' | '\t' | '\r'? '\n')+;
