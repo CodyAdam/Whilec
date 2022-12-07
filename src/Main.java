@@ -30,7 +30,7 @@ public class Main {
         var prog = parser.program();
         prog.getStart();
         Tree tree = (Tree) prog.getTree();
-
+        System.out.println(tree.getChildCount());
 
         ASTPrinter printer = new ASTPrinter();
         printer.printTree(tree);
@@ -42,9 +42,9 @@ public class Main {
         // validator.addValidator(new TypingValidator());
         // validator.validate(tree);
 
-        Generator generator = new Generator(tree);
-        Instructions code3adress = generator.getInstructions();
-        System.out.println(code3adress);
+        // Generator generator = new Generator(tree);
+        // Instructions code3adress = generator.getInstructions();
+        // System.out.println(code3adress);
 
     }
 }
