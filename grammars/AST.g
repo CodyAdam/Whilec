@@ -35,7 +35,7 @@ tokens  {
 
 // ------------------------- RULES -------------------------
 
-program: WS* function+ WS* -> function+;
+program: WS* (function WS*)+ -> ^(ROOT function+);
 
 function: 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
 

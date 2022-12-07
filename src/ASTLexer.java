@@ -1,4 +1,4 @@
-// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:17:40
+// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:12
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -646,8 +646,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = SYMBOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:89:7: ( ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
-			// ./grammars/AST.g:89:9: ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
+			// ./grammars/AST.g:90:7: ( ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
+			// ./grammars/AST.g:90:9: ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -657,7 +657,7 @@ public class ASTLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ./grammars/AST.g:89:21: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
+			// ./grammars/AST.g:90:21: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -686,7 +686,7 @@ public class ASTLexer extends Lexer {
 				}
 			}
 
-			// ./grammars/AST.g:89:58: ( '!' | '?' )?
+			// ./grammars/AST.g:90:58: ( '!' | '?' )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='!'||LA2_0=='?') ) {
@@ -725,8 +725,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = VARIABLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:91:9: ( ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
-			// ./grammars/AST.g:91:11: ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
+			// ./grammars/AST.g:92:9: ( ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
+			// ./grammars/AST.g:92:11: ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
 				input.consume();
@@ -736,7 +736,7 @@ public class ASTLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ./grammars/AST.g:91:23: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
+			// ./grammars/AST.g:92:23: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -765,7 +765,7 @@ public class ASTLexer extends Lexer {
 				}
 			}
 
-			// ./grammars/AST.g:91:60: ( '!' | '?' )?
+			// ./grammars/AST.g:92:60: ( '!' | '?' )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='!'||LA4_0=='?') ) {
@@ -804,7 +804,7 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = DIGIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:93:6: ( ( '0' .. '9' ) )
+			// ./grammars/AST.g:94:6: ( ( '0' .. '9' ) )
 			// ./grammars/AST.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -831,10 +831,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:95:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' )+ )
-			// ./grammars/AST.g:95:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
+			// ./grammars/AST.g:96:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' )+ )
+			// ./grammars/AST.g:96:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
 			{
-			// ./grammars/AST.g:95:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
+			// ./grammars/AST.g:96:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
 			int cnt6=0;
 			loop6:
 			while (true) {
@@ -859,21 +859,21 @@ public class ASTLexer extends Lexer {
 				}
 				switch (alt6) {
 				case 1 :
-					// ./grammars/AST.g:95:6: ' '
+					// ./grammars/AST.g:96:6: ' '
 					{
 					match(' '); 
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:95:12: '\\t'
+					// ./grammars/AST.g:96:12: '\\t'
 					{
 					match('\t'); 
 					}
 					break;
 				case 3 :
-					// ./grammars/AST.g:95:19: ( '\\r' )? '\\n'
+					// ./grammars/AST.g:96:19: ( '\\r' )? '\\n'
 					{
-					// ./grammars/AST.g:95:19: ( '\\r' )?
+					// ./grammars/AST.g:96:19: ( '\\r' )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0=='\r') ) {
@@ -881,7 +881,7 @@ public class ASTLexer extends Lexer {
 					}
 					switch (alt5) {
 						case 1 :
-							// ./grammars/AST.g:95:19: '\\r'
+							// ./grammars/AST.g:96:19: '\\r'
 							{
 							match('\r'); 
 							}
