@@ -31,9 +31,7 @@ public class Main {
         prog.getStart();
         Tree tree = (Tree) prog.getTree();
 
-        Generator generator = new Generator(tree);
-        Instructions code3adress = generator.getInstructions();
-        System.out.println(code3adress);
+
         ASTPrinter printer = new ASTPrinter();
         printer.printTree(tree);
         printer.save("ASTPrinted.puml");
@@ -44,6 +42,9 @@ public class Main {
         // validator.addValidator(new TypingValidator());
         // validator.validate(tree);
 
-        // System.out.println(tree.getToken());
+        Generator generator = new Generator(tree);
+        Instructions code3adress = generator.getInstructions();
+        System.out.println(code3adress);
+
     }
 }
