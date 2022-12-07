@@ -25,6 +25,10 @@ public class Main {
         prog.getStart();
         CommonTree tree = (CommonTree) prog.getTree();
 
+        ASTPrinter printer = new ASTPrinter();
+        printer.printTree(tree);
+        printer.save("ASTPrinted.puml");
+
         PreCompileValidator validator = new PreCompileValidator();
         validator.addValidator(new FunctionNameNUsageValidator());
         validator.addValidator(new VariableNameNUsageValidator());
