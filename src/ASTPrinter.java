@@ -26,15 +26,18 @@ public class ASTPrinter {
 
     public void printTree(Tree tree){
         this.currentID = 0;
-        this.UMLResult = "@startuml\n"+"object \"AST\" as "+this.currentID+" #666\n";
+        this.UMLResult = "@startuml\n"+"object \"ROOT\" as "+this.currentID+" #A88\n";
 
-        printNode(tree, this.currentID);
+        int parentNode = this.currentID;
+        for(int i = 0; i < tree.getChildCount(); i++) {
+            printNode(tree.getChild(i), parentNode);
+        }
 
         this.UMLResult += "@enduml";
     }
 
     private void printNode(Tree node, int parentID){
-        this.UMLResult += "object \""+node.getText()+"\" as "+(++this.currentID)+" #666\n";
+        this.UMLResult += "object \""+node.getText()+"\" as "+(++this.currentID)+" #A8A\n";
         this.UMLResult += parentID + " -down-> "+this.currentID+"\n";
         int parentNode = this.currentID;
         for(int i = 0; i < node.getChildCount(); i++) {
