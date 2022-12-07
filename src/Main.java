@@ -21,30 +21,32 @@ public class Main {
             filepath = args[0];
         }
 
+        // Parse the input file
         CharStream cs = new ANTLRFileStream(filepath);
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
         ASTParser parser = new ASTParser(tokens);
-
         var prog = parser.program();
-        prog.getStart();
         Tree tree = (Tree) prog.getTree();
-        System.out.println(tree.getChildCount());
 
+
+        // Print the AST to PlantUML
         ASTPrinter printer = new ASTPrinter();
         printer.printTree(tree);
         printer.save("ASTPrinted.puml");
 
+        // Validate the AST
         // PreCompileValidator validator = new PreCompileValidator();
         // validator.addValidator(new FunctionNameNUsageValidator());
         // validator.addValidator(new VariableNameNUsageValidator());
         // validator.addValidator(new TypingValidator());
         // validator.validate(tree);
 
-        // Generator generator = new Generator(tree);
-        // Instructions code3adress = generator.getInstructions();
-        // System.out.println(code3adress);
+        // Generate 3-address code
+        Generator generator = new Generator(tree);
+        Instructions code3adress = generator.getInstructions();
+        System.out.println(code3adress);
 
     }
 }
