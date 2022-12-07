@@ -1,0 +1,17 @@
+@startuml
+object "AST" as 0 #666
+object "FUNCTION" as 1 #666
+0 -down-> 1
+object "nope" as 2 #666
+1 -down-> 2
+object "FUNCDEF" as 3 #666
+2 -down-> 3
+object "COMMANDS" as 4 #666
+3 -down-> 4
+object "nop" as 5 #666
+4 -down-> 5
+object "OUTPUT" as 6 #666
+3 -down-> 6
+object "Out" as 7 #666
+6 -down-> 7
+@enduml
