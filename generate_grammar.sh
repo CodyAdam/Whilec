@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar "./lib/antlr3.jar" "./AST.g"  -o "./src"
+java -jar "./lib/antlr3.jar" "./grammars/AST.g"  -o "./src"
