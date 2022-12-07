@@ -2,5 +2,7 @@ function nope:
 read
 %
 	nop;
+	A := true;
 %
-write Out
+write A
+

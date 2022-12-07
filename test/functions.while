@@ -1,0 +1,15 @@
+
+function true :
+  read
+  %
+    Result := (cons nil nil)
+  %
+write Result
+
+function nope: 
+read
+%
+	nop;
+	A := true;
+%
+write A
