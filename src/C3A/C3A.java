@@ -1,5 +1,8 @@
 package C3A;
 
+import C3A.AstNode;
+import java.util.List;
+import org.antlr.runtime.tree.Tree;
 import org.antlr.runtime.tree.Tree;
 
 public class Generator {
@@ -77,22 +80,13 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromWhile(Tree ast) {
-    Instructions i = new Instructions();
-    return i;
-  }
-
-  private Instructions fromFor(Tree ast) {
-    Instructions i = new Instructions();
-    return i;
-  }
-
-  private Instructions fromAssign(Tree ast) {
-    Instructions i = new Instructions();
-    return i;
-  }
-
   private Instructions fromCommands(Tree ast) {
+    } else {
+      return fromCommands(ast);
+    }
+  }
+
+  private Instructions fromCommands(CommonTree ast) {
     return null;
   }
 
