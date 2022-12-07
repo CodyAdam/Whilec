@@ -22,6 +22,10 @@ public class Instructions {
     stack.add(i);
   }
 
+  public void add(Instructions i) {
+    stack.addAll(i.getInstructions());
+  }
+
   public String toString() {
     String s = "";
     for (Instruction i : stack) {
