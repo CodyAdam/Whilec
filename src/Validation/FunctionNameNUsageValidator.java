@@ -1,19 +1,18 @@
 package Validation;
 
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.Tree;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import AST.*;
+import org.antlr.runtime.ANTLRFileStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
+
+import AST.ASTLexer;
+import AST.ASTParser;
 
 public class FunctionNameNUsageValidator extends Validator {
 
@@ -23,11 +22,11 @@ public class FunctionNameNUsageValidator extends Validator {
     public void validate(Tree tree) throws Exception {
         List<String> functionNames = new ArrayList<>();
         for (int i = 0; i < tree.getChildCount(); i++) {
-            Tree functionName = tree.getChild(i).getChild(0);
-            if(functionNames.contains(functionName.toString())) {
+            String functionName = tree.getChild(i).getChild(0).getText();
+            if(functionNames.contains(functionName)) {
                 throw new Exception("Multiple declarations with the same name");
             }
-            functionNames.add(functionName.toString());
+            functionNames.add(functionName);
             if(notVariable.contains(functionName)) {
                 throw new Exception("Invalid function name");
             }
