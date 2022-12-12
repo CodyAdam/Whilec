@@ -1,5 +1,8 @@
 
 // import Validation.*;
+import AST.ASTLexer;
+import AST.ASTParser;
+import AST.ASTPrinter;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;

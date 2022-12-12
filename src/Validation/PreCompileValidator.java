@@ -1,6 +1,7 @@
 package Validation;
 
 import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class PreCompileValidator {
         validators.add(validator);
     }
 
-    public void validate(CommonTree tree){
+    public void validate(Tree tree) throws Exception {
         for (Validator validator : validators) {
             validator.validate(tree);
         }

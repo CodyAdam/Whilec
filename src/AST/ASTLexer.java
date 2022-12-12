@@ -1,4 +1,4 @@
-// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:12
+package AST;// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:12
 
 import org.antlr.runtime.*;
 import java.util.Stack;
