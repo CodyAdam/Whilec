@@ -1,19 +1,24 @@
 package C3A;
 
-public class Variable {
+public class Variable<T> {
   private String name;
-  private int value;
+  private T value;
 
-  public Variable(String name, int value) {
+  public Variable(String name, T value) {
     this.name = name;
     this.value = value;
+  }
+
+  public Variable(String name) {
+    this.name = name;
+    this.value = null;
   }
 
   public String getName() {
     return name;
   }
 
-  public int getValue() {
+  public T getValue() {
     return value;
   }
 
