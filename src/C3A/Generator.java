@@ -26,15 +26,6 @@ public class Generator {
     return i;
   }
 
-  /**
-   * func begin <name>
-   * <command>
-   * <command>
-   * return <expr> OR Return
-   * <command>
-   * return <expr> OR Return
-   * func end
-   */
   private Instructions fromFunction(Tree ast) {
     Instructions i = new Instructions();
     HashMap<String, Variable> scopeVars = new HashMap<String, Variable>();
@@ -85,6 +76,56 @@ public class Generator {
   }
 
   /*
+   * Multiplexer for commands node
+   * Possible commands :
+   * - while
+   * - if
+   * - for
+   * - assign
+   * - foreach
+   * - nop
+   */
+  private Instructions fromCommands(Tree ast, HashMap<String, Variable> scopeVars) {
+    Instructions i = new Instructions();
+    for (int j = 0; j < ast.getChildCount(); j++) {
+      Tree child = ast.getChild(j);
+      switch (AstNode.valueOf(child.getText())) {
+        case WHILE:
+          i.add(new Comment("While"));
+          i.add(fromWhile(child));
+          break;
+        case IF:
+          i.add(new Comment("If"));
+          i.add(fromIf(child));
+          break;
+        case FOR:
+          i.add(new Comment("For"));
+          i.add(fromFor(child));
+          break;
+        case ASSIGN:
+          i.add(new Comment("Assign"));
+          i.add(fromAssign(child));
+          break;
+        case FOREACH:
+          i.add(new Comment("Foreach"));
+          i.add(fromForeach(child));
+          break;
+        case NOP:
+          i.add(new Comment("Nope command here"));
+          break;
+        default:
+          assert (false) : child.getText() + " is not valid child of COMMANDS";
+      }
+    }
+    return i;
+  }
+
+  private Instructions fromForeach(Tree child) {
+    Instructions i = new Instructions();
+    return i;
+  }
+
+  /*
    * 
    * 
    * 
@@ -131,11 +172,9 @@ public class Generator {
 
   private Instructions fromAssign(Tree ast) {
     Instructions i = new Instructions();
-    return i;
-  }
+    // CANT BE DONE NOW BECAUSE GRAMMAR IS BROKEN
+    // TODO
 
-  private Instructions fromCommands(Tree ast, HashMap<String, Variable> scopeVars) {
-    Instructions i = new Instructions();
     return i;
   }
 
