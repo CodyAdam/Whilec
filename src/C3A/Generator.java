@@ -1,5 +1,7 @@
 package C3A;
 
+import java.util.HashMap;
+
 import org.antlr.runtime.tree.Tree;
 
 public class Generator {
@@ -35,33 +37,51 @@ public class Generator {
    */
   private Instructions fromFunction(Tree ast) {
     Instructions i = new Instructions();
-    Tree funcName = ast.getChild(0);
-    i.add(new FuncBegin(funcName.getText()));
-    Tree funcDef = funcName.getChild(0);
     HashMap<String, Variable> scopeVars = new HashMap<String, Variable>();
 
-    int offset = 0
-    if (funcDef.getChildCount() == 3) {
-      offset = 1;
-      // Has parameters (3 childs)
-      // TODO
-      offset = 1;
-    } else {
-      // No parameters (2 childs)
-      offset = 0;
+    // Parse Func name
+    Tree funcName = ast.getChild(0);
+    i.add(new FuncBegin(funcName.getText()));
+
+    // Parse Func definition (input?, commands, output)
+    {
+      Tree funcDef = funcName.getChild(0);
+      Tree inputNode = funcDef.getChild(0);
+      Tree commandsNode = funcDef.getChild(0);
+      Tree outputNode = funcDef.getChild(1);
+      if (funcDef.getChildCount() == 3) {
+        // Has parameters
+        commandsNode = funcDef.getChild(1);
+        outputNode = funcDef.getChild(2);
+        // Parse input
+        for (int j = 0; j < inputNode.getChildCount(); j++) {
+          String varName = inputNode.getChild(j).getText();
+          Variable var = new Variable(varName);
+          i.add(new Assign(var, new Pop()));
+          scopeVars.put(varName, var);
+        }
+      }
+      // Add output variables to scope
+      for (int j = 0; j < outputNode.getChildCount(); j++) {
+        String varName = outputNode.getChild(j).getText();
+        if (!scopeVars.containsKey(varName)) {
+          scopeVars.put(varName, new Variable(varName));
+        }
+      }
+
+      // Parse commands
+      Instructions commands = fromCommands(commandsNode, scopeVars);
+      i.add(commands);
+
+      // Parse output
+      for (int j = 0; j < outputNode.getChildCount(); j++) {
+        String varName = outputNode.getChild(j).getText();
+        i.add(new FuncReturn(scopeVars.get(varName)));
+      }
+      i.add(new FuncEnd(funcName.getText()));
     }
-    // Parse output
-    Tree output = ast.getChild(1+offset);
-    for(int j = 0; j < output.getChildCount(); j++) {
-      Tree child = output.getChild(j);
-      Variable v = new Variable(child.getText());
-      scopeVars.put(child.getText(), v);
-    }
-    Instructions commands= fromCommands(ast.getChild(0+offset), scopeVars);
-    i.add(commands);
-    i.add(output);
+
     return i;
-    
   }
 
   /*
@@ -114,8 +134,9 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromCommands(Tree ast) {
-    return null;
+  private Instructions fromCommands(Tree ast, HashMap<String, Variable> scopeVars) {
+    Instructions i = new Instructions();
+    return i;
   }
 
   public String toString() {
