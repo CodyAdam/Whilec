@@ -33,7 +33,6 @@ public class Main {
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
-
         // Print the AST to PlantUML
         ASTPrinter printer = new ASTPrinter();
         printer.printTree(tree);
@@ -49,7 +48,7 @@ public class Main {
         // Generate 3-address code
         Generator generator = new Generator(tree);
         Instructions code3adress = generator.getInstructions();
-        System.out.println(code3adress);
+        System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
     }
 }

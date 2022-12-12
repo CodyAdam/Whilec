@@ -31,6 +31,8 @@ public class Instructions {
     for (Instruction i : stack) {
       s += i.toString() + "\n";
     }
+    // remove last \n
+    s = s.substring(0, s.length() - 1);
     return s;
   }
 }
