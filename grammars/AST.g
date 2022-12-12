@@ -53,7 +53,7 @@ commands:
 	   WS? command (WS? ';' WS? command)* (';')? -> command+;
 
 command:
-	  ('nop') -> 'nop'
+	  ('nop') -> NOP
 	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN vars exprs)
 	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
