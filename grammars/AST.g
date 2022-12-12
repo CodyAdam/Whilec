@@ -31,6 +31,7 @@ tokens  {
 	TAIL;
 	CONS;
 	FUNCTIONCALL;
+	ELSECOMMANDS;
 }
 
 // ------------------------- RULES -------------------------
@@ -53,8 +54,8 @@ commands:
 
 command:
 	  ('nop') -> 'nop'
-	| (vars WS ':=' WS exprs) -> ^(ASSIGN vars exprs)
-	| ('if' WS expression WS 'then' WS commands WS (WS? 'else' WS commands WS)? 'fi') -> ^(IF expression commands (commands)?)
+	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN vars exprs)
+	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
 	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
 	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE expression commands);
@@ -73,11 +74,14 @@ expression
  	);
 
 exprbase
- : '(hd 'exprbase')' -> ^(HEAD exprbase)
- 	|'(tl 'exprbase')' -> ^(TAIL exprbase)
- 	| '(cons ' lexpr')' -> ^(CONS lexpr)
- 	|'(list ' lexpr')' -> ^(LIST lexpr)
- 	|'('SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
+ : 	'('(
+ 	SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
+ 	| SYMBOL')' -> ^(FUNCTIONCALL SYMBOL)
+ 	|'hd 'exprbase')' -> ^(HEAD exprbase)
+ 	|'tl 'exprbase')' -> ^(TAIL exprbase)
+ 	|'cons 'lexpr')' -> ^(CONS lexpr)
+ 	|'list 'lexpr')' -> ^(LIST lexpr)
+ 	)
 	| 'nil' -> NIL
  	| VARIABLE -> VARIABLE
  	| SYMBOL -> SYMBOL; 
@@ -86,7 +90,7 @@ exprbase
     : (WS? (exprbase WS?)*) -> exprbase*;
 // ------------------------- LEXEMES -------------------------
 
-SYMBOL: ('a' ..'z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
+SYMBOL: ('a' ..'z')(('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
 
 VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 
