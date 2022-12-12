@@ -28,9 +28,9 @@ public class Generator {
    * func begin <name>
    * <command>
    * <command>
-   * return <expr>  OR   Return
+   * return <expr> OR Return
    * <command>
-   * return <expr>  OR   Return
+   * return <expr> OR Return
    * func end
    */
   private Instructions fromFunction(Tree ast) {
@@ -38,23 +38,40 @@ public class Generator {
     Tree funcName = ast.getChild(0);
     i.add(new FuncBegin(funcName.getText()));
     Tree funcDef = funcName.getChild(0);
+    HashMap<String, Variable> scopeVars = new HashMap<String, Variable>();
 
-    if (funcDef.getChildCount() == 3) { 
-      // Has parameters
+    int offset = 0
+    if (funcDef.getChildCount() == 3) {
+      offset = 1;
+      // Has parameters (3 childs)
+      // TODO
+      offset = 1;
     } else {
-      // No Parameters
+      // No parameters (2 childs)
+      offset = 0;
     }
-
+    // Parse output
+    Tree output = ast.getChild(1+offset);
+    for(int j = 0; j < output.getChildCount(); j++) {
+      Tree child = output.getChild(j);
+      Variable v = new Variable(child.getText());
+      scopeVars.put(child.getText(), v);
+    }
+    Instructions commands= fromCommands(ast.getChild(0+offset), scopeVars);
+    i.add(commands);
+    i.add(output);
     return i;
+    
   }
 
   /*
-   * if(a + 3 / 2 == 4)
+   * 
    * 
    * 
    * b = a + 3
-   * c = b / 2
+   * c = b 22
    * d = c == 4
+   * 
    * ifz d goto end
    */
   private Instructions fromIf(Tree ast) {
