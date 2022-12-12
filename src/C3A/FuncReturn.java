@@ -1,14 +1,14 @@
 package C3A;
 
 public class FuncReturn extends Instruction {
-  private String arg;
+  private Variable var;
 
-  public FuncReturn(String arg) {
-    this.arg = arg;
+  public FuncReturn(Variable var) {
+    this.var = var;
   }
 
   @Override
   public String toString() {
-    return "return " + arg;
+    return "return " + var.getName();
   }
 }
