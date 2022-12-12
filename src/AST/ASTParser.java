@@ -1,9 +1,6 @@
-// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:11
+package AST;// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:11
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 import org.antlr.runtime.tree.*;
 
