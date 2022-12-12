@@ -26,6 +26,15 @@ public class Instructions {
     stack.addAll(i.getInstructions());
   }
 
+  public Variable getLastAssignedVariable() {
+    for (int i = stack.size() - 1; i >= 0; i--) {
+      if (stack.get(i) instanceof Assign) {
+        return ((Assign) stack.get(i)).getLeft();
+      }
+    }
+    return null;
+  }
+
   public String toString() {
     String s = "";
     for (Instruction i : stack) {
