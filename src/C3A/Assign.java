@@ -12,7 +12,9 @@ public class Assign extends Instruction {
     this.left = left;
     this.right = right;
   }
-
+  public Variable getLeft() {
+    return left;
+  }
   @Override
   public String toString() {
     return left + " = " + right;
