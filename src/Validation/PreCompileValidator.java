@@ -1,6 +1,5 @@
 package Validation;
 
-import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 
 import java.util.LinkedList;
@@ -14,11 +13,11 @@ public class PreCompileValidator {
         this.validators = validators;
     }
 
-    public PreCompileValidator(){
+    public PreCompileValidator() {
         this.validators = new LinkedList<>();
     }
 
-    public void addValidator(Validator validator){
+    public void addValidator(Validator validator) {
         validators.add(validator);
     }
 
