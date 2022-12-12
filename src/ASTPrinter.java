@@ -17,6 +17,12 @@ public class ASTPrinter {
 
     public void save(String fileName) throws IOException {
         if(this.UMLResult.equals("")) return;
+        // check if folder exists
+        // if not create it 
+        File folder = new File("ASTPrinted");
+        if(!folder.exists()){
+            folder.mkdir();
+        }
         File file = new File("ASTPrinted/"+fileName);
         file.createNewFile();
         FileOutputStream out = new FileOutputStream(file, false);
