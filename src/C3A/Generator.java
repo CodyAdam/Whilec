@@ -90,28 +90,23 @@ public class Generator {
     for (int j = 0; j < ast.getChildCount(); j++) {
       Tree child = ast.getChild(j);
       switch (AstNode.valueOf(child.getText())) {
-        case WHILE:
-          i.add(new Comment("While"));
-          i.add(fromWhile(child));
-          break;
         case IF:
-          i.add(new Comment("If"));
-          i.add(fromIf(child));
+          i.add(fromIf(child, scopeVars));
+          break;
+        case WHILE:
+          i.add(fromWhile(child, scopeVars));
           break;
         case FOR:
-          i.add(new Comment("For"));
-          i.add(fromFor(child));
-          break;
-        case ASSIGN:
-          i.add(new Comment("Assign"));
-          i.add(fromAssign(child));
+          i.add(fromFor(child, scopeVars));
           break;
         case FOREACH:
-          i.add(new Comment("Foreach"));
-          i.add(fromForeach(child));
+          i.add(fromForeach(child, scopeVars));
+          break;
+        case ASSIGN:
+          i.add(fromAssign(child, scopeVars));
           break;
         case NOP:
-          i.add(new Comment("Nope command here"));
+          i.add(new Comment("Nop :>"));
           break;
         default:
           assert (false) : child.getText() + " is not valid child of COMMANDS";
@@ -120,61 +115,75 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromForeach(Tree child) {
-    Instructions i = new Instructions();
-    return i;
-  }
-
   /*
-   * 
-   * 
-   * 
    * b = a + 3
    * c = b 22
    * d = c == 4
    * 
    * ifz d goto end
    */
-  private Instructions fromIf(Tree ast) {
-    Tree condition = ast.getChild(0);
-    Tree commandsIf = ast.getChild(1);
-    Label els = new Label("else");
-    Label end = new Label("end");
+  private Instructions fromIf(Tree ast, HashMap<String, Variable> scopeVars) {
+    Instructions i = new Instructions();
+
+    Tree exprConditionNode = ast.getChild(0);
+    Tree trueCommandsNode = ast.getChild(1);
+    Tree falseCommandsNode = null;
     if (ast.getChildCount() == 3) {
-      Tree commandsElse = ast.getChild(2);
-      assert (commandsElse.getText().equals(AstNode.COMMANDS.toString()));
-    } else {
-      els = end;
+      falseCommandsNode = ast.getChild(2);
     }
-    assert (condition.getText().equals(AstNode.EXPRESSION.toString()));
-    assert (commandsIf.getText().equals(AstNode.COMMANDS.toString()));
 
-    Instructions i = new Instructions();
-    // Instruction cond = fromExpression(condition);
-    // Variable lastVariable = cond.getLast();
+    // Parse condition
+    Instructions exprCondition = fromExpr(exprConditionNode, scopeVars);
+    i.add(exprCondition);
+    Variable conditionVar = exprCondition.getLastAssignedVariable();
 
-    // i.add(new IfGoto(els, IfEnum.NZ, lastVariable));
-    // i.add(fromCommands(commandsIf));
-    // I don't know what I am doing
+    // Labels
+    Label elseLabel = new Label("else");
+    Label endIfLabel = new Label("endif");
 
+    // Parse if == true commands
+    i.add(new IfzGoto(elseLabel, conditionVar));
+    i.add(fromCommands(trueCommandsNode, scopeVars));
+    i.add(new Goto(endIfLabel));
+
+    // Parse else commands
+    if (falseCommandsNode != null) {
+      i.add(elseLabel);
+      i.add(fromCommands(falseCommandsNode, scopeVars));
+    }
+    i.add(endIfLabel);
     return i;
   }
 
-  private Instructions fromWhile(Tree ast) {
+  private Instructions fromWhile(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
+    i.add(new Comment("While"));
     return i;
   }
 
-  private Instructions fromFor(Tree ast) {
+  private Instructions fromFor(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
+    i.add(new Comment("For"));
     return i;
   }
 
-  private Instructions fromAssign(Tree ast) {
+  private Instructions fromForeach(Tree child, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
-    // CANT BE DONE NOW BECAUSE GRAMMAR IS BROKEN
+    i.add(new Comment("Foreach"));
+    return i;
+  }
+
+  private Instructions fromAssign(Tree ast, HashMap<String, Variable> scopeVars) {
+    Instructions i = new Instructions();
+    i.add(new Comment("Assign"));
+    // CANT BE DONE NOW BECAUSE ASSIGN GRAMMAR IS BROKEN
     // TODO
+    return i;
+  }
 
+  private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) {
+    Instructions i = new Instructions();
+    i.add(new Comment("Expr"));
     return i;
   }
 
