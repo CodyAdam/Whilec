@@ -1,6 +1,5 @@
 package Validation;
 
-import java.awt.*;
 import java.util.HashMap;
 
 public class VPrinter {

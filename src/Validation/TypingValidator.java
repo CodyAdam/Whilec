@@ -1,6 +1,5 @@
 package Validation;
 
-import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 
 public class TypingValidator extends Validator{

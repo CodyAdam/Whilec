@@ -1,12 +1,9 @@
 package Validation;
 
-import C3A.Assign;
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.Tree;
-
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+
+import org.antlr.runtime.tree.Tree;
 
 public class VariableNameNUsageValidator extends Validator{
 

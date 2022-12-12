@@ -1,16 +1,15 @@
 
 // import Validation.*;
-import AST.ASTLexer;
-import AST.ASTParser;
-import AST.ASTPrinter;
+import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;
 
+import AST.ASTLexer;
+import AST.ASTParser;
+import AST.ASTPrinter;
 import C3A.Generator;
 import C3A.Instructions;
-
-import org.antlr.runtime.ANTLRFileStream;
 
 public class Main {
 
