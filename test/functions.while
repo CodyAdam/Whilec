@@ -13,3 +13,14 @@ read
 	A := true;
 %
 write A
+
+function ifs:
+read
+%
+  if (true) then
+    A := true
+  else
+    A := false
+  fi
+%
+write A
