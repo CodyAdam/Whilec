@@ -176,14 +176,79 @@ public class Generator {
   private Instructions fromAssign(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     i.add(new Comment("Assign"));
-    // CANT BE DONE NOW BECAUSE ASSIGN GRAMMAR IS BROKEN
-    // TODO
+    Tree left = ast.getChild(0);
+    Tree right = ast.getChild(1);
+
+    // Parse left (variable names)
+    int leftCount = left.getChildCount();
+    Variable[] names = new Variable[leftCount];
+    for (int j = 0; j < leftCount; j++) {
+      String varName = left.getChild(j).getText();
+      if (!scopeVars.containsKey(varName)) {
+        scopeVars.put(varName, new Variable(varName));
+      }
+      names[j] = scopeVars.get(varName);
+    }
+
+    // Parse right (expressions)
+    int rightCount = right.getChildCount();
+    if (leftCount != rightCount)
+      assert (false) : "Error during assign : left and right have different number of variables";
+
+    for (int j = 0; j < rightCount; j++) {
+      Tree exprNode = right.getChild(j).getChild(0); // EXPRESSION node
+      i.add(fromExpr(exprNode, scopeVars));
+      i.add(new Assign(names[j], i.getLastAssignedVariable()));
+    }
+
     return i;
   }
 
   private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     i.add(new Comment("Expr"));
+    Tree node = exprConditionNode;
+    Variable expr = new Variable("EXPR");
+    switch (AstNode.valueOf(node.getText())) {
+      case CONS:
+        i.add(new Comment("Expr Cons"));
+        int childCount = node.getChildCount();
+        for (int j = 0; j < childCount; j++) {
+          Tree exprNode = node.getChild(j); // EXPRESSION node
+          i.add(fromExpr(exprNode, scopeVars));
+          i.add(new AssignTab(expr, j, i.getLastAssignedVariable()));
+        }
+        break;
+      case TAIL:
+        i.add(new Comment("Expr Tail"));
+        break;
+      case HEAD:
+        i.add(new Comment("Expr Head"));
+        break;
+      case LIST:
+        i.add(new Comment("Expr List"));
+        break;
+      case FUNCTIONCALL:
+        i.add(new Comment("Expr FuncCall"));
+        break;
+      case NIL:
+        i.add(new Assign(expr, new Nil()));
+        break;
+      case VARIABLE:
+        // i.add(new Comment("Expr Variable"));
+        String name = node.getChild(0).getText();
+        Variable var = scopeVars.get(name);
+        if (var == null)
+          i.add(new Assign(expr, new Nil()));
+        else
+          i.add(new Assign(expr, var));
+        break;
+      case SYMBOL:
+        i.add(new Comment("Expr Symbol"));
+      default:
+        assert (false) : node.getText() + " is not valid child of EXPRESSION";
+    }
+    i.add(new Assign(expr, expr));
     return i;
   }
 
