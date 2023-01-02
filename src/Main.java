@@ -18,7 +18,7 @@ public class Main {
         if (args.length != 1) {
             // System.err.println("Wrong number of arguments, expected 1, got " +
             // args.length);
-            filepath = "test/functions.while";
+            filepath = "test/integers.while";
         } else {
             filepath = args[0];
         }
