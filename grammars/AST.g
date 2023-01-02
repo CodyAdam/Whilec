@@ -39,16 +39,16 @@ tokens  {
 
 program: WS* (function WS*)+ -> ^(ROOT function+);
 
-function: 'function' WS SYMBOL WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL definition));
+function: 'function' WS SYMBOL_LEX WS? ':' WS definition-> ^(FUNCTION ^(SYMBOL_LEX definition));
 
 definition:
 	'read' WS (input WS)? '%' WS commands WS '%' WS 'write' output -> ^(FUNCDEF input? ^(COMMANDS commands) ^(OUTPUT output)); //
 
 input: inputsub? -> ^(INPUT inputsub?);
 
-inputsub: (WS? VARIABLE WS? ',' inputsub) -> VARIABLE inputsub | WS? VARIABLE -> VARIABLE;
+inputsub: (WS? VARIABLE_LEX WS? ',' inputsub) -> VARIABLE_LEX inputsub | WS? VARIABLE_LEX -> VARIABLE_LEX;
 
-output: (WS? VARIABLE WS? ',' output) -> VARIABLE output | WS? VARIABLE -> VARIABLE; 
+output: (WS? VARIABLE_LEX WS? ',' output) -> VARIABLE_LEX output | WS? VARIABLE_LEX -> VARIABLE_LEX; 
 
 commands: 
 	   WS? command (WS? ';' WS? command)* (';')? -> command+;
@@ -59,11 +59,11 @@ command:
 	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
 	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
-	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE expression commands);
+	| ('foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE_LEX expression commands);
 
 vars 	:	 
-	  (VARIABLE WS? ',' WS? vars) -> VARIABLE vars
-	| VARIABLE -> VARIABLE;
+	  (VARIABLE_LEX WS? ',' WS? vars) -> VARIABLE_LEX vars
+	| VARIABLE_LEX -> VARIABLE_LEX;
 
 	
 exprs 	:	expression (WS? ',' WS? expression)* -> expression+;
@@ -75,25 +75,25 @@ expression
  	);
 
 exprbase
- : 	'('(
- 	SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
- 	| SYMBOL')' -> ^(FUNCTIONCALL SYMBOL)
- 	|'hd 'exprbase')' -> ^(HEAD exprbase)
- 	|'tl 'exprbase')' -> ^(TAIL exprbase)
+ : 	'(' WS? (
+ 	SYMBOL_LEX WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL_LEX lexpr))
+ 	| SYMBOL_LEX')' -> ^(FUNCTIONCALL SYMBOL_LEX)
+ 	|'hd 'exprbase WS?')' -> ^(HEAD exprbase)
+ 	|'tl 'exprbase WS?')' -> ^(TAIL exprbase)
  	|'cons 'lexpr')' -> ^(CONS lexpr)
  	|'list 'lexpr')' -> ^(LIST lexpr)
  	)
 	| 'nil' -> NIL
- 	| VARIABLE -> VARIABLE
- 	| SYMBOL -> SYMBOL; 
+ 	| VARIABLE_LEX -> ^(VARIABLE VARIABLE_LEX)
+ 	| SYMBOL_LEX -> ^(SYMBOL SYMBOL_LEX);
  
  lexpr
     : (WS? (exprbase WS?)*) -> exprbase*;
 // ------------------------- LEXEMES -------------------------
 
-SYMBOL: ('a' ..'z')(('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
+SYMBOL_LEX: ('a' ..'z')(('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
 
-VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
+VARIABLE_LEX: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 
 DIGIT: ('0' ..'9');
 
