@@ -2,26 +2,13 @@ package Validation;
 
 import org.antlr.runtime.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-public class TypingValidator extends Validator{
-
-    private List<Function> functions;
-    private List<FunctionCall> functionCalls;
-
+public class TypingValidator extends DeepValidator{
     private boolean debug = false;
 
     @Override
-    public void validate(Tree tree) {
-        this.functions = new ArrayList<>();
-        this.functionCalls = new ArrayList<>();
-
-        this.validateAllTree(tree);
-
+    protected void endValidation() {
         if(debug){
-            for (Function function : this.functions) {
+            for (Function function : this.functions.values()) {
                 System.out.println(function.functionName + " : ");
                 System.out.println("\tArguments : ");
                 for (String arg : function.args.keySet()) {
@@ -35,62 +22,13 @@ public class TypingValidator extends Validator{
         }
     }
 
-    private void validateAllTree(Tree tree) {
-        for (int i = 0; i < tree.getChildCount(); i++) {
-            String functionName = tree.getChild(i).getChild(0).getText();
-            Function function = new Function(functionName);
-            this.functions.add(function);
-            this.validateFunction(tree.getChild(i).getChild(0).getChild(0), function);
-        }
-    }
-
-    private void validateFunction(Tree tree, Function function) {
-        if(tree.getChildCount() == 0) return;
-
-        int outputInd = 1;
-
-        // INPUTS
-        if(tree.getChild(0).getText().equals("INPUT")) {
-            for (int i = 0; i < tree.getChild(0).getChildCount(); i++) {
-                function.args.put(tree.getChild(0).getChild(i).getText(), ExpType.UNKNOWN);
-            }
-            outputInd = 2;
-        }
-
-        // OUTPUTS
-        for (int i = 0; i < tree.getChild(outputInd).getChildCount(); i++) {
-            function.returnType.put(tree.getChild(outputInd).getChild(i).getText(), ExpType.UNKNOWN);
-        }
-
-        // COMMANDS
-        for(int i = 0; i < tree.getChild(outputInd-1).getChildCount(); i++) {
-            this.validateCommand(tree.getChild(outputInd-1).getChild(i), function);
-        }
-    }
-
-    private void validateCommand(Tree tree, Function function){
-        if(tree.getChildCount() == 0) return;
-
-        switch (tree.getText()) {
-            case "IF":
-                this.validateIF(tree, function);
-                break;
-            case "FOR":
-                this.validateFOR(tree, function);
-                break;
-            case "WHILE":
-                this.validateWHILE(tree, function);
-                break;
-            case "ASSIGN":
-                this.validateASSIGN(tree, function);
-                break;
-        }
-    }
-
-    private void validateASSIGN(Tree tree, Function function) {
-        if(tree.getChildCount() != 2) return;
-
+    @Override
+    protected void validateASSIGN(Tree tree, Function function) {
         if(tree.getChild(0).getChildCount() != tree.getChild(1).getChildCount()){
+            if(tree.getChild(0).getChildCount() >= 1 && tree.getChild(1).getChildCount() == 1 && tree.getChild(1).getChild(0).getChild(0).getText().equals("FUNCTIONCALL")){
+
+                return;
+            }
             VPrinter.getInstance().printError(
                     "The number of variables is not equals to the number of expressions in the assign statement.",
                     this.parent.getFilepath(),
@@ -100,73 +38,56 @@ public class TypingValidator extends Validator{
         }
     }
 
-    private void validateIF(Tree tree, Function function) {
-        if(tree.getChildCount() == 0) return;
+    @Override
+    protected void validateIF(Tree tree, Function function) {
+        checkBooleanExpression(tree.getChild(0));
+    }
 
-        for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
-            this.validateCommand(tree.getChild(1).getChild(i), function);
+    @Override
+    protected void validateFOR(Tree tree, Function function) {
+        checkIntExpression(tree.getChild(0));
+    }
+
+    @Override
+    protected void validateFOREACH(Tree tree, Function function) {
+    }
+
+    @Override
+    protected void validateWHILE(Tree tree, Function function) {
+        checkBooleanExpression(tree.getChild(0));
+    }
+
+    private void checkBooleanExpression(Tree tree){
+        if(tree.getChildCount() == 0) return;
+        if(tree.getChild(0).getText().equals("FUNCTIONCALL")){
+            String functionName = tree.getChild(0).getChild(0).getText();
+            Function f = functions.get(functionName);
+            if(f == null) return;
+            if(f.returnType.size() != 1) {
+                VPrinter.getInstance().printError(
+                        "Expected boolean expression. Got function call with multiple return values.",
+                        this.parent.getFilepath(),
+                        tree.getLine(),
+                        tree.getCharPositionInLine());
+                this.parent.incrementErrorCount();
+            }
         }
-        if(tree.getChildCount() == 3) {
-            for (int i = 0; i < tree.getChild(2).getChildCount(); i++) {
-                this.validateCommand(tree.getChild(2).getChild(i), function);
+    }
+    private void checkIntExpression(Tree tree){
+        if(tree.getChildCount() == 0) return;
+        if(tree.getChild(0).getText().equals("FUNCTIONCALL")){
+            String functionName = tree.getChild(0).getChild(0).getText();
+            Function f = functions.get(functionName);
+            if(f == null) return;
+            if(f.returnType.size() != 1) {
+                VPrinter.getInstance().printError(
+                        "Expected integer value. Got function call with multiple return values.",
+                        this.parent.getFilepath(),
+                        tree.getLine(),
+                        tree.getCharPositionInLine());
+                this.parent.incrementErrorCount();
             }
         }
     }
 
-    private void validateFOR(Tree tree, Function function) {
-        if(tree.getChildCount() == 0) return;
-
-        for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
-            this.validateCommand(tree.getChild(1).getChild(i), function);
-        }
-    }
-
-    private void validateWHILE(Tree tree, Function function) {
-        if(tree.getChildCount() == 0) return;
-
-        for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
-            this.validateCommand(tree.getChild(1).getChild(i), function);
-        }
-    }
-
-    private boolean validateExpression(Tree tree, ExpType ExpectedType, Function function){
-        return true;
-    }
-
-}
-
-class FunctionCall{
-    public String functionName;
-    public ArrayList<ExpType> args;
-
-    public FunctionCall(String functionName) {
-        this.functionName = functionName;
-        this.args = new ArrayList<>();
-    }
-}
-
-class Function{
-    public String functionName;
-    public HashMap<String, ExpType> args;
-    public HashMap<String, ExpType> returnType;
-
-    public Function(String functionName) {
-        this.functionName = functionName;
-        this.args = new HashMap<>();
-        this.returnType = new HashMap<>();
-    }
-}
-
-class Argument{
-    public String name;
-    public ExpType type;
-
-    public Argument(String name, ExpType type) {
-        this.name = name;
-        this.type = type;
-    }
-}
-
-enum ExpType{
-    UNKNOWN, ANY, INT, BOOL, LIST, NIL
 }

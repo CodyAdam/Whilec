@@ -34,6 +34,7 @@ public class PreCompileValidator {
 
         for (Validator validator : validators) {
             validator.validate(tree);
+            if(errorCount>0) break;
         }
 
         this.printReportBanner();
