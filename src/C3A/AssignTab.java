@@ -3,7 +3,7 @@ package C3A;
 /**
  * Correspond to a=b in C3A
  */
-public class AssignTab {
+public class AssignTab extends Instruction{
   private Variable left;
   private int index;
   private ToAssign right;

@@ -3,7 +3,7 @@ package C3A;
 /**
  * Correspond to (*a)=b in C3A
  */
-public class AssignContent {
+public class AssignContent extends Instruction {
   private Variable left;
   private ToAssign right;
 
