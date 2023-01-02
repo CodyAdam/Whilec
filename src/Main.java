@@ -1,13 +1,15 @@
 
 // import Validation.*;
+import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;
 
+import AST.ASTLexer;
+import AST.ASTParser;
+import AST.ASTPrinter;
 import C3A.Generator;
 import C3A.Instructions;
-
-import org.antlr.runtime.ANTLRFileStream;
 
 public class Main {
 
@@ -30,7 +32,6 @@ public class Main {
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
-
         // Print the AST to PlantUML
         ASTPrinter printer = new ASTPrinter();
         printer.printTree(tree);
@@ -46,7 +47,7 @@ public class Main {
         // Generate 3-address code
         Generator generator = new Generator(tree);
         Instructions code3adress = generator.getInstructions();
-        System.out.println(code3adress);
+        System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
     }
 }

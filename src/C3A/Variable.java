@@ -2,19 +2,15 @@ package C3A;
 
 public class Variable {
   private String name;
-  private int value;
+  static int count = 0;
 
-  public Variable(String name, int value) {
-    this.name = name;
-    this.value = value;
+  public Variable(String name) {
+    this.name = name + "_" + count;
+    count++;
   }
 
   public String getName() {
     return name;
-  }
-
-  public int getValue() {
-    return value;
   }
 
   @Override

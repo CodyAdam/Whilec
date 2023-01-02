@@ -12,7 +12,7 @@ tokens  {
 	COMMAND;
 	INPUT;
 	OUTPUT;
-	 VARS;
+	VARS;
 	VARIABLE;
 	SYMBOL;
 	IF;
@@ -31,6 +31,8 @@ tokens  {
 	TAIL;
 	CONS;
 	FUNCTIONCALL;
+	ELSECOMMANDS;
+	EXPRESSIONS;
 }
 
 // ------------------------- RULES -------------------------
@@ -52,19 +54,19 @@ commands:
 	   WS? command (WS? ';' WS? command)* (';')? -> command+;
 
 command:
-	  ('nop') -> 'nop'
-	| (vars WS ':=' WS exprs) -> ^(ASSIGN vars exprs)
-	| ('if' WS expression WS 'then' WS commands WS (WS? 'else' WS commands WS)? 'fi') -> ^(IF expression commands (commands)?)
+	  ('nop') -> NOP
+	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN ^(VARS vars) ^(EXPRESSIONS exprs))
+	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
 	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
 	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE expression commands);
 
 vars 	:	 
-	  (VARIABLE WS? ',' vars) -> VARIABLE 
+	  (VARIABLE WS? ',' WS? vars) -> VARIABLE vars
 	| VARIABLE -> VARIABLE;
 
 	
-exprs 	:	expression (WS? ','expression)* -> expression+;
+exprs 	:	expression (WS? ',' WS? expression)* -> expression+;
 	
 expression 
 	:	 e1=exprbase(
@@ -73,11 +75,14 @@ expression
  	);
 
 exprbase
- : '(hd 'exprbase')' -> ^(HEAD exprbase)
- 	|'(tl 'exprbase')' -> ^(TAIL exprbase)
- 	| '(cons ' lexpr')' -> ^(CONS lexpr)
- 	|'(list ' lexpr')' -> ^(LIST lexpr)
- 	|'('SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
+ : 	'('(
+ 	SYMBOL WS lexpr')' -> ^(FUNCTIONCALL ^(SYMBOL lexpr))
+ 	| SYMBOL')' -> ^(FUNCTIONCALL SYMBOL)
+ 	|'hd 'exprbase')' -> ^(HEAD exprbase)
+ 	|'tl 'exprbase')' -> ^(TAIL exprbase)
+ 	|'cons 'lexpr')' -> ^(CONS lexpr)
+ 	|'list 'lexpr')' -> ^(LIST lexpr)
+ 	)
 	| 'nil' -> NIL
  	| VARIABLE -> VARIABLE
  	| SYMBOL -> SYMBOL; 
@@ -86,7 +91,7 @@ exprbase
     : (WS? (exprbase WS?)*) -> exprbase*;
 // ------------------------- LEXEMES -------------------------
 
-SYMBOL: ('a' ..'z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
+SYMBOL: ('a' ..'z')(('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'|'?')?;
 
 VARIABLE: ('A' ..'Z') (('A' ..'Z') | ('a' ..'z') | DIGIT)* ('!'| '?')?;
 

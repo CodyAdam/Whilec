@@ -1,4 +1,5 @@
-// $ANTLR 3.5.3 ./grammars/AST.g 2022-12-07 09:29:12
+package AST;
+// $ANTLR 3.5.3 .\\grammars\\AST.g 2023-01-02 13:22:37
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -8,8 +9,6 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class ASTLexer extends Lexer {
 	public static final int EOF=-1;
-	public static final int T__33=33;
-	public static final int T__34=34;
 	public static final int T__35=35;
 	public static final int T__36=36;
 	public static final int T__37=37;
@@ -35,35 +34,39 @@ public class ASTLexer extends Lexer {
 	public static final int T__57=57;
 	public static final int T__58=58;
 	public static final int T__59=59;
+	public static final int T__60=60;
+	public static final int T__61=61;
 	public static final int ASSIGN=4;
 	public static final int COMMAND=5;
 	public static final int COMMANDS=6;
 	public static final int CONS=7;
 	public static final int DIGIT=8;
-	public static final int EQUALS=9;
-	public static final int EXPRESSION=10;
-	public static final int EXPRS=11;
-	public static final int EXPR_BASE=12;
-	public static final int FOR=13;
-	public static final int FOREACH=14;
-	public static final int FUNCDEF=15;
-	public static final int FUNCTION=16;
-	public static final int FUNCTIONCALL=17;
-	public static final int HEAD=18;
-	public static final int IF=19;
-	public static final int INPUT=20;
-	public static final int LIST=21;
-	public static final int NIL=22;
-	public static final int NOP=23;
-	public static final int OUTPUT=24;
-	public static final int ROOT=25;
-	public static final int SYMBOL=26;
-	public static final int TAIL=27;
-	public static final int TOKENS=28;
-	public static final int VARIABLE=29;
-	public static final int VARS=30;
-	public static final int WHILE=31;
-	public static final int WS=32;
+	public static final int ELSECOMMANDS=9;
+	public static final int EQUALS=10;
+	public static final int EXPRESSION=11;
+	public static final int EXPRESSIONS=12;
+	public static final int EXPRS=13;
+	public static final int EXPR_BASE=14;
+	public static final int FOR=15;
+	public static final int FOREACH=16;
+	public static final int FUNCDEF=17;
+	public static final int FUNCTION=18;
+	public static final int FUNCTIONCALL=19;
+	public static final int HEAD=20;
+	public static final int IF=21;
+	public static final int INPUT=22;
+	public static final int LIST=23;
+	public static final int NIL=24;
+	public static final int NOP=25;
+	public static final int OUTPUT=26;
+	public static final int ROOT=27;
+	public static final int SYMBOL=28;
+	public static final int TAIL=29;
+	public static final int TOKENS=30;
+	public static final int VARIABLE=31;
+	public static final int VARS=32;
+	public static final int WHILE=33;
+	public static final int WS=34;
 
 	// delegates
 	// delegators
@@ -78,58 +81,18 @@ public class ASTLexer extends Lexer {
 	public ASTLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "./grammars/AST.g"; }
-
-	// $ANTLR start "T__33"
-	public final void mT__33() throws RecognitionException {
-		try {
-			int _type = T__33;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:2:7: ( ' = ' )
-			// ./grammars/AST.g:2:9: ' = '
-			{
-			match(" = "); 
-
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__33"
-
-	// $ANTLR start "T__34"
-	public final void mT__34() throws RecognitionException {
-		try {
-			int _type = T__34;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:3:7: ( '%' )
-			// ./grammars/AST.g:3:9: '%'
-			{
-			match('%'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "T__34"
+	@Override public String getGrammarFileName() { return ".\\grammars\\AST.g"; }
 
 	// $ANTLR start "T__35"
 	public final void mT__35() throws RecognitionException {
 		try {
 			int _type = T__35;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:4:7: ( '(' )
-			// ./grammars/AST.g:4:9: '('
+			// .\\grammars\\AST.g:2:7: ( ' = ' )
+			// .\\grammars\\AST.g:2:9: ' = '
 			{
-			match('('); 
+			match(" = "); 
+
 			}
 
 			state.type = _type;
@@ -146,11 +109,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__36;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:5:7: ( '(cons ' )
-			// ./grammars/AST.g:5:9: '(cons '
+			// .\\grammars\\AST.g:3:7: ( '%' )
+			// .\\grammars\\AST.g:3:9: '%'
 			{
-			match("(cons "); 
-
+			match('%'); 
 			}
 
 			state.type = _type;
@@ -167,11 +129,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__37;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:6:7: ( '(hd ' )
-			// ./grammars/AST.g:6:9: '(hd '
+			// .\\grammars\\AST.g:4:7: ( '(' )
+			// .\\grammars\\AST.g:4:9: '('
 			{
-			match("(hd "); 
-
+			match('('); 
 			}
 
 			state.type = _type;
@@ -188,11 +149,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__38;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:7:7: ( '(list ' )
-			// ./grammars/AST.g:7:9: '(list '
+			// .\\grammars\\AST.g:5:7: ( ')' )
+			// .\\grammars\\AST.g:5:9: ')'
 			{
-			match("(list "); 
-
+			match(')'); 
 			}
 
 			state.type = _type;
@@ -209,11 +169,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__39;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:8:7: ( '(tl ' )
-			// ./grammars/AST.g:8:9: '(tl '
+			// .\\grammars\\AST.g:6:7: ( ',' )
+			// .\\grammars\\AST.g:6:9: ','
 			{
-			match("(tl "); 
-
+			match(','); 
 			}
 
 			state.type = _type;
@@ -230,10 +189,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__40;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:9:7: ( ')' )
-			// ./grammars/AST.g:9:9: ')'
+			// .\\grammars\\AST.g:7:7: ( ':' )
+			// .\\grammars\\AST.g:7:9: ':'
 			{
-			match(')'); 
+			match(':'); 
 			}
 
 			state.type = _type;
@@ -250,10 +209,11 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__41;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:10:7: ( ',' )
-			// ./grammars/AST.g:10:9: ','
+			// .\\grammars\\AST.g:8:7: ( ':=' )
+			// .\\grammars\\AST.g:8:9: ':='
 			{
-			match(','); 
+			match(":="); 
+
 			}
 
 			state.type = _type;
@@ -270,10 +230,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__42;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:11:7: ( ':' )
-			// ./grammars/AST.g:11:9: ':'
+			// .\\grammars\\AST.g:9:7: ( ';' )
+			// .\\grammars\\AST.g:9:9: ';'
 			{
-			match(':'); 
+			match(';'); 
 			}
 
 			state.type = _type;
@@ -290,10 +250,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__43;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:12:7: ( ':=' )
-			// ./grammars/AST.g:12:9: ':='
+			// .\\grammars\\AST.g:10:7: ( 'cons ' )
+			// .\\grammars\\AST.g:10:9: 'cons '
 			{
-			match(":="); 
+			match("cons "); 
 
 			}
 
@@ -311,10 +271,11 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__44;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:13:7: ( ';' )
-			// ./grammars/AST.g:13:9: ';'
+			// .\\grammars\\AST.g:11:7: ( 'do' )
+			// .\\grammars\\AST.g:11:9: 'do'
 			{
-			match(';'); 
+			match("do"); 
+
 			}
 
 			state.type = _type;
@@ -331,10 +292,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__45;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:14:7: ( 'do' )
-			// ./grammars/AST.g:14:9: 'do'
+			// .\\grammars\\AST.g:12:7: ( 'else' )
+			// .\\grammars\\AST.g:12:9: 'else'
 			{
-			match("do"); 
+			match("else"); 
 
 			}
 
@@ -352,10 +313,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__46;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:15:7: ( 'else' )
-			// ./grammars/AST.g:15:9: 'else'
+			// .\\grammars\\AST.g:13:7: ( 'fi' )
+			// .\\grammars\\AST.g:13:9: 'fi'
 			{
-			match("else"); 
+			match("fi"); 
 
 			}
 
@@ -373,10 +334,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__47;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:16:7: ( 'fi' )
-			// ./grammars/AST.g:16:9: 'fi'
+			// .\\grammars\\AST.g:14:7: ( 'for' )
+			// .\\grammars\\AST.g:14:9: 'for'
 			{
-			match("fi"); 
+			match("for"); 
 
 			}
 
@@ -394,10 +355,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__48;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:17:7: ( 'for' )
-			// ./grammars/AST.g:17:9: 'for'
+			// .\\grammars\\AST.g:15:7: ( 'foreach' )
+			// .\\grammars\\AST.g:15:9: 'foreach'
 			{
-			match("for"); 
+			match("foreach"); 
 
 			}
 
@@ -415,10 +376,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__49;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:18:7: ( 'foreach' )
-			// ./grammars/AST.g:18:9: 'foreach'
+			// .\\grammars\\AST.g:16:7: ( 'function' )
+			// .\\grammars\\AST.g:16:9: 'function'
 			{
-			match("foreach"); 
+			match("function"); 
 
 			}
 
@@ -436,10 +397,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__50;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:19:7: ( 'function' )
-			// ./grammars/AST.g:19:9: 'function'
+			// .\\grammars\\AST.g:17:7: ( 'hd ' )
+			// .\\grammars\\AST.g:17:9: 'hd '
 			{
-			match("function"); 
+			match("hd "); 
 
 			}
 
@@ -457,8 +418,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__51;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:20:7: ( 'if' )
-			// ./grammars/AST.g:20:9: 'if'
+			// .\\grammars\\AST.g:18:7: ( 'if' )
+			// .\\grammars\\AST.g:18:9: 'if'
 			{
 			match("if"); 
 
@@ -478,8 +439,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__52;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:21:7: ( 'in' )
-			// ./grammars/AST.g:21:9: 'in'
+			// .\\grammars\\AST.g:19:7: ( 'in' )
+			// .\\grammars\\AST.g:19:9: 'in'
 			{
 			match("in"); 
 
@@ -499,10 +460,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__53;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:22:7: ( 'nil' )
-			// ./grammars/AST.g:22:9: 'nil'
+			// .\\grammars\\AST.g:20:7: ( 'list ' )
+			// .\\grammars\\AST.g:20:9: 'list '
 			{
-			match("nil"); 
+			match("list "); 
 
 			}
 
@@ -520,10 +481,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__54;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:23:7: ( 'nop' )
-			// ./grammars/AST.g:23:9: 'nop'
+			// .\\grammars\\AST.g:21:7: ( 'nil' )
+			// .\\grammars\\AST.g:21:9: 'nil'
 			{
-			match("nop"); 
+			match("nil"); 
 
 			}
 
@@ -541,10 +502,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__55;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:24:7: ( 'od' )
-			// ./grammars/AST.g:24:9: 'od'
+			// .\\grammars\\AST.g:22:7: ( 'nop' )
+			// .\\grammars\\AST.g:22:9: 'nop'
 			{
-			match("od"); 
+			match("nop"); 
 
 			}
 
@@ -562,10 +523,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__56;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:25:7: ( 'read' )
-			// ./grammars/AST.g:25:9: 'read'
+			// .\\grammars\\AST.g:23:7: ( 'od' )
+			// .\\grammars\\AST.g:23:9: 'od'
 			{
-			match("read"); 
+			match("od"); 
 
 			}
 
@@ -583,10 +544,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__57;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:26:7: ( 'then' )
-			// ./grammars/AST.g:26:9: 'then'
+			// .\\grammars\\AST.g:24:7: ( 'read' )
+			// .\\grammars\\AST.g:24:9: 'read'
 			{
-			match("then"); 
+			match("read"); 
 
 			}
 
@@ -604,10 +565,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__58;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:27:7: ( 'while' )
-			// ./grammars/AST.g:27:9: 'while'
+			// .\\grammars\\AST.g:25:7: ( 'then' )
+			// .\\grammars\\AST.g:25:9: 'then'
 			{
-			match("while"); 
+			match("then"); 
 
 			}
 
@@ -625,10 +586,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = T__59;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:28:7: ( 'write' )
-			// ./grammars/AST.g:28:9: 'write'
+			// .\\grammars\\AST.g:26:7: ( 'tl ' )
+			// .\\grammars\\AST.g:26:9: 'tl '
 			{
-			match("write"); 
+			match("tl "); 
 
 			}
 
@@ -641,13 +602,55 @@ public class ASTLexer extends Lexer {
 	}
 	// $ANTLR end "T__59"
 
+	// $ANTLR start "T__60"
+	public final void mT__60() throws RecognitionException {
+		try {
+			int _type = T__60;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// .\\grammars\\AST.g:27:7: ( 'while' )
+			// .\\grammars\\AST.g:27:9: 'while'
+			{
+			match("while"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__60"
+
+	// $ANTLR start "T__61"
+	public final void mT__61() throws RecognitionException {
+		try {
+			int _type = T__61;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// .\\grammars\\AST.g:28:7: ( 'write' )
+			// .\\grammars\\AST.g:28:9: 'write'
+			{
+			match("write"); 
+
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "T__61"
+
 	// $ANTLR start "SYMBOL"
 	public final void mSYMBOL() throws RecognitionException {
 		try {
 			int _type = SYMBOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:90:7: ( ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
-			// ./grammars/AST.g:90:9: ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
+			// .\\grammars\\AST.g:94:7: ( ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
+			// .\\grammars\\AST.g:94:9: ( 'a' .. 'z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
 			{
 			if ( (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -657,7 +660,7 @@ public class ASTLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ./grammars/AST.g:90:21: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
+			// .\\grammars\\AST.g:94:20: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -668,7 +671,7 @@ public class ASTLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// ./grammars/AST.g:
+					// .\\grammars\\AST.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -686,7 +689,7 @@ public class ASTLexer extends Lexer {
 				}
 			}
 
-			// ./grammars/AST.g:90:58: ( '!' | '?' )?
+			// .\\grammars\\AST.g:94:57: ( '!' | '?' )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='!'||LA2_0=='?') ) {
@@ -694,7 +697,7 @@ public class ASTLexer extends Lexer {
 			}
 			switch (alt2) {
 				case 1 :
-					// ./grammars/AST.g:
+					// .\\grammars\\AST.g:
 					{
 					if ( input.LA(1)=='!'||input.LA(1)=='?' ) {
 						input.consume();
@@ -725,8 +728,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = VARIABLE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:92:9: ( ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
-			// ./grammars/AST.g:92:11: ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
+			// .\\grammars\\AST.g:96:9: ( ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )? )
+			// .\\grammars\\AST.g:96:11: ( 'A' .. 'Z' ) ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )* ( '!' | '?' )?
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
 				input.consume();
@@ -736,7 +739,7 @@ public class ASTLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// ./grammars/AST.g:92:23: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
+			// .\\grammars\\AST.g:96:23: ( ( 'A' .. 'Z' ) | ( 'a' .. 'z' ) | DIGIT )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -747,7 +750,7 @@ public class ASTLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// ./grammars/AST.g:
+					// .\\grammars\\AST.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -765,7 +768,7 @@ public class ASTLexer extends Lexer {
 				}
 			}
 
-			// ./grammars/AST.g:92:60: ( '!' | '?' )?
+			// .\\grammars\\AST.g:96:60: ( '!' | '?' )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='!'||LA4_0=='?') ) {
@@ -773,7 +776,7 @@ public class ASTLexer extends Lexer {
 			}
 			switch (alt4) {
 				case 1 :
-					// ./grammars/AST.g:
+					// .\\grammars\\AST.g:
 					{
 					if ( input.LA(1)=='!'||input.LA(1)=='?' ) {
 						input.consume();
@@ -804,8 +807,8 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = DIGIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:94:6: ( ( '0' .. '9' ) )
-			// ./grammars/AST.g:
+			// .\\grammars\\AST.g:98:6: ( ( '0' .. '9' ) )
+			// .\\grammars\\AST.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -831,10 +834,10 @@ public class ASTLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// ./grammars/AST.g:96:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' )+ )
-			// ./grammars/AST.g:96:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
+			// .\\grammars\\AST.g:100:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' )+ )
+			// .\\grammars\\AST.g:100:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
 			{
-			// ./grammars/AST.g:96:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
+			// .\\grammars\\AST.g:100:5: ( ' ' | '\\t' | ( '\\r' )? '\\n' )+
 			int cnt6=0;
 			loop6:
 			while (true) {
@@ -859,21 +862,21 @@ public class ASTLexer extends Lexer {
 				}
 				switch (alt6) {
 				case 1 :
-					// ./grammars/AST.g:96:6: ' '
+					// .\\grammars\\AST.g:100:6: ' '
 					{
 					match(' '); 
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:96:12: '\\t'
+					// .\\grammars\\AST.g:100:12: '\\t'
 					{
 					match('\t'); 
 					}
 					break;
 				case 3 :
-					// ./grammars/AST.g:96:19: ( '\\r' )? '\\n'
+					// .\\grammars\\AST.g:100:19: ( '\\r' )? '\\n'
 					{
-					// ./grammars/AST.g:96:19: ( '\\r' )?
+					// .\\grammars\\AST.g:100:19: ( '\\r' )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0=='\r') ) {
@@ -881,7 +884,7 @@ public class ASTLexer extends Lexer {
 					}
 					switch (alt5) {
 						case 1 :
-							// ./grammars/AST.g:96:19: '\\r'
+							// .\\grammars\\AST.g:100:19: '\\r'
 							{
 							match('\r'); 
 							}
@@ -914,222 +917,222 @@ public class ASTLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// ./grammars/AST.g:1:8: ( T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | SYMBOL | VARIABLE | DIGIT | WS )
+		// .\\grammars\\AST.g:1:8: ( T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | SYMBOL | VARIABLE | DIGIT | WS )
 		int alt7=31;
 		alt7 = dfa7.predict(input);
 		switch (alt7) {
 			case 1 :
-				// ./grammars/AST.g:1:10: T__33
-				{
-				mT__33(); 
-
-				}
-				break;
-			case 2 :
-				// ./grammars/AST.g:1:16: T__34
-				{
-				mT__34(); 
-
-				}
-				break;
-			case 3 :
-				// ./grammars/AST.g:1:22: T__35
+				// .\\grammars\\AST.g:1:10: T__35
 				{
 				mT__35(); 
 
 				}
 				break;
-			case 4 :
-				// ./grammars/AST.g:1:28: T__36
+			case 2 :
+				// .\\grammars\\AST.g:1:16: T__36
 				{
 				mT__36(); 
 
 				}
 				break;
-			case 5 :
-				// ./grammars/AST.g:1:34: T__37
+			case 3 :
+				// .\\grammars\\AST.g:1:22: T__37
 				{
 				mT__37(); 
 
 				}
 				break;
-			case 6 :
-				// ./grammars/AST.g:1:40: T__38
+			case 4 :
+				// .\\grammars\\AST.g:1:28: T__38
 				{
 				mT__38(); 
 
 				}
 				break;
-			case 7 :
-				// ./grammars/AST.g:1:46: T__39
+			case 5 :
+				// .\\grammars\\AST.g:1:34: T__39
 				{
 				mT__39(); 
 
 				}
 				break;
-			case 8 :
-				// ./grammars/AST.g:1:52: T__40
+			case 6 :
+				// .\\grammars\\AST.g:1:40: T__40
 				{
 				mT__40(); 
 
 				}
 				break;
-			case 9 :
-				// ./grammars/AST.g:1:58: T__41
+			case 7 :
+				// .\\grammars\\AST.g:1:46: T__41
 				{
 				mT__41(); 
 
 				}
 				break;
-			case 10 :
-				// ./grammars/AST.g:1:64: T__42
+			case 8 :
+				// .\\grammars\\AST.g:1:52: T__42
 				{
 				mT__42(); 
 
 				}
 				break;
-			case 11 :
-				// ./grammars/AST.g:1:70: T__43
+			case 9 :
+				// .\\grammars\\AST.g:1:58: T__43
 				{
 				mT__43(); 
 
 				}
 				break;
-			case 12 :
-				// ./grammars/AST.g:1:76: T__44
+			case 10 :
+				// .\\grammars\\AST.g:1:64: T__44
 				{
 				mT__44(); 
 
 				}
 				break;
-			case 13 :
-				// ./grammars/AST.g:1:82: T__45
+			case 11 :
+				// .\\grammars\\AST.g:1:70: T__45
 				{
 				mT__45(); 
 
 				}
 				break;
-			case 14 :
-				// ./grammars/AST.g:1:88: T__46
+			case 12 :
+				// .\\grammars\\AST.g:1:76: T__46
 				{
 				mT__46(); 
 
 				}
 				break;
-			case 15 :
-				// ./grammars/AST.g:1:94: T__47
+			case 13 :
+				// .\\grammars\\AST.g:1:82: T__47
 				{
 				mT__47(); 
 
 				}
 				break;
-			case 16 :
-				// ./grammars/AST.g:1:100: T__48
+			case 14 :
+				// .\\grammars\\AST.g:1:88: T__48
 				{
 				mT__48(); 
 
 				}
 				break;
-			case 17 :
-				// ./grammars/AST.g:1:106: T__49
+			case 15 :
+				// .\\grammars\\AST.g:1:94: T__49
 				{
 				mT__49(); 
 
 				}
 				break;
-			case 18 :
-				// ./grammars/AST.g:1:112: T__50
+			case 16 :
+				// .\\grammars\\AST.g:1:100: T__50
 				{
 				mT__50(); 
 
 				}
 				break;
-			case 19 :
-				// ./grammars/AST.g:1:118: T__51
+			case 17 :
+				// .\\grammars\\AST.g:1:106: T__51
 				{
 				mT__51(); 
 
 				}
 				break;
-			case 20 :
-				// ./grammars/AST.g:1:124: T__52
+			case 18 :
+				// .\\grammars\\AST.g:1:112: T__52
 				{
 				mT__52(); 
 
 				}
 				break;
-			case 21 :
-				// ./grammars/AST.g:1:130: T__53
+			case 19 :
+				// .\\grammars\\AST.g:1:118: T__53
 				{
 				mT__53(); 
 
 				}
 				break;
-			case 22 :
-				// ./grammars/AST.g:1:136: T__54
+			case 20 :
+				// .\\grammars\\AST.g:1:124: T__54
 				{
 				mT__54(); 
 
 				}
 				break;
-			case 23 :
-				// ./grammars/AST.g:1:142: T__55
+			case 21 :
+				// .\\grammars\\AST.g:1:130: T__55
 				{
 				mT__55(); 
 
 				}
 				break;
-			case 24 :
-				// ./grammars/AST.g:1:148: T__56
+			case 22 :
+				// .\\grammars\\AST.g:1:136: T__56
 				{
 				mT__56(); 
 
 				}
 				break;
-			case 25 :
-				// ./grammars/AST.g:1:154: T__57
+			case 23 :
+				// .\\grammars\\AST.g:1:142: T__57
 				{
 				mT__57(); 
 
 				}
 				break;
-			case 26 :
-				// ./grammars/AST.g:1:160: T__58
+			case 24 :
+				// .\\grammars\\AST.g:1:148: T__58
 				{
 				mT__58(); 
 
 				}
 				break;
-			case 27 :
-				// ./grammars/AST.g:1:166: T__59
+			case 25 :
+				// .\\grammars\\AST.g:1:154: T__59
 				{
 				mT__59(); 
 
 				}
 				break;
+			case 26 :
+				// .\\grammars\\AST.g:1:160: T__60
+				{
+				mT__60(); 
+
+				}
+				break;
+			case 27 :
+				// .\\grammars\\AST.g:1:166: T__61
+				{
+				mT__61(); 
+
+				}
+				break;
 			case 28 :
-				// ./grammars/AST.g:1:172: SYMBOL
+				// .\\grammars\\AST.g:1:172: SYMBOL
 				{
 				mSYMBOL(); 
 
 				}
 				break;
 			case 29 :
-				// ./grammars/AST.g:1:179: VARIABLE
+				// .\\grammars\\AST.g:1:179: VARIABLE
 				{
 				mVARIABLE(); 
 
 				}
 				break;
 			case 30 :
-				// ./grammars/AST.g:1:188: DIGIT
+				// .\\grammars\\AST.g:1:188: DIGIT
 				{
 				mDIGIT(); 
 
 				}
 				break;
 			case 31 :
-				// ./grammars/AST.g:1:194: WS
+				// .\\grammars\\AST.g:1:194: WS
 				{
 				mWS(); 
 
@@ -1142,54 +1145,59 @@ public class ASTLexer extends Lexer {
 
 	protected DFA7 dfa7 = new DFA7(this);
 	static final String DFA7_eotS =
-		"\1\uffff\1\24\1\uffff\1\32\2\uffff\1\34\1\uffff\11\21\14\uffff\1\53\1"+
-		"\21\1\55\2\21\1\60\1\61\2\21\1\64\4\21\1\uffff\1\21\1\uffff\1\73\1\21"+
-		"\2\uffff\1\75\1\76\1\uffff\4\21\1\103\1\21\1\uffff\1\21\2\uffff\1\106"+
-		"\1\107\2\21\1\uffff\2\21\2\uffff\1\114\1\115\2\21\2\uffff\1\120\1\21\1"+
-		"\uffff\1\122\1\uffff";
+		"\1\uffff\1\27\4\uffff\1\32\1\uffff\14\24\7\uffff\1\24\1\56\1\24\1\60\3"+
+		"\24\1\64\1\65\3\24\1\71\6\24\1\uffff\1\24\1\uffff\1\102\1\24\3\uffff\1"+
+		"\24\1\105\1\106\1\uffff\2\24\1\uffff\3\24\1\114\1\24\1\uffff\2\24\2\uffff"+
+		"\1\120\1\121\2\24\2\uffff\2\24\3\uffff\1\126\1\127\2\24\2\uffff\1\132"+
+		"\1\24\1\uffff\1\134\1\uffff";
 	static final String DFA7_eofS =
-		"\123\uffff";
+		"\135\uffff";
 	static final String DFA7_minS =
-		"\1\11\1\75\1\uffff\1\143\2\uffff\1\75\1\uffff\1\157\1\154\1\151\1\146"+
-		"\1\151\1\144\1\145\2\150\14\uffff\1\41\1\163\1\41\1\162\1\156\2\41\1\154"+
-		"\1\160\1\41\1\141\1\145\2\151\1\uffff\1\145\1\uffff\1\41\1\143\2\uffff"+
-		"\2\41\1\uffff\1\144\1\156\1\154\1\164\1\41\1\141\1\uffff\1\164\2\uffff"+
-		"\2\41\2\145\1\uffff\1\143\1\151\2\uffff\2\41\1\150\1\157\2\uffff\1\41"+
-		"\1\156\1\uffff\1\41\1\uffff";
+		"\1\11\1\75\4\uffff\1\75\1\uffff\2\157\1\154\1\151\1\144\1\146\2\151\1"+
+		"\144\1\145\2\150\7\uffff\1\156\1\41\1\163\1\41\1\162\1\156\1\40\2\41\1"+
+		"\163\1\154\1\160\1\41\1\141\1\145\1\40\2\151\1\163\1\uffff\1\145\1\uffff"+
+		"\1\41\1\143\3\uffff\1\164\2\41\1\uffff\1\144\1\156\1\uffff\1\154\1\164"+
+		"\1\40\1\41\1\141\1\uffff\1\164\1\40\2\uffff\2\41\2\145\2\uffff\1\143\1"+
+		"\151\3\uffff\2\41\1\150\1\157\2\uffff\1\41\1\156\1\uffff\1\41\1\uffff";
 	static final String DFA7_maxS =
-		"\1\172\1\75\1\uffff\1\164\2\uffff\1\75\1\uffff\1\157\1\154\1\165\1\156"+
-		"\1\157\1\144\1\145\1\150\1\162\14\uffff\1\172\1\163\1\172\1\162\1\156"+
-		"\2\172\1\154\1\160\1\172\1\141\1\145\2\151\1\uffff\1\145\1\uffff\1\172"+
-		"\1\143\2\uffff\2\172\1\uffff\1\144\1\156\1\154\1\164\1\172\1\141\1\uffff"+
-		"\1\164\2\uffff\2\172\2\145\1\uffff\1\143\1\151\2\uffff\2\172\1\150\1\157"+
-		"\2\uffff\1\172\1\156\1\uffff\1\172\1\uffff";
+		"\1\172\1\75\4\uffff\1\75\1\uffff\2\157\1\154\1\165\1\144\1\156\1\151\1"+
+		"\157\1\144\1\145\1\154\1\162\7\uffff\1\156\1\172\1\163\1\172\1\162\1\156"+
+		"\1\40\2\172\1\163\1\154\1\160\1\172\1\141\1\145\1\40\2\151\1\163\1\uffff"+
+		"\1\145\1\uffff\1\172\1\143\3\uffff\1\164\2\172\1\uffff\1\144\1\156\1\uffff"+
+		"\1\154\1\164\1\40\1\172\1\141\1\uffff\1\164\1\40\2\uffff\2\172\2\145\2"+
+		"\uffff\1\143\1\151\3\uffff\2\172\1\150\1\157\2\uffff\1\172\1\156\1\uffff"+
+		"\1\172\1\uffff";
 	static final String DFA7_acceptS =
-		"\2\uffff\1\2\1\uffff\1\10\1\11\1\uffff\1\14\11\uffff\1\34\1\35\1\36\1"+
-		"\37\1\1\1\4\1\5\1\6\1\7\1\3\1\13\1\12\16\uffff\1\15\1\uffff\1\17\2\uffff"+
-		"\1\23\1\24\2\uffff\1\27\6\uffff\1\20\1\uffff\1\25\1\26\4\uffff\1\16\2"+
-		"\uffff\1\30\1\31\4\uffff\1\32\1\33\2\uffff\1\21\1\uffff\1\22";
+		"\2\uffff\1\2\1\3\1\4\1\5\1\uffff\1\10\14\uffff\1\34\1\35\1\36\1\37\1\1"+
+		"\1\7\1\6\23\uffff\1\12\1\uffff\1\14\2\uffff\1\20\1\21\1\22\3\uffff\1\26"+
+		"\2\uffff\1\31\5\uffff\1\15\2\uffff\1\24\1\25\4\uffff\1\11\1\13\2\uffff"+
+		"\1\23\1\27\1\30\4\uffff\1\32\1\33\2\uffff\1\16\1\uffff\1\17";
 	static final String DFA7_specialS =
-		"\123\uffff}>";
+		"\135\uffff}>";
 	static final String[] DFA7_transitionS = {
-			"\2\24\2\uffff\1\24\22\uffff\1\1\4\uffff\1\2\2\uffff\1\3\1\4\2\uffff\1"+
-			"\5\3\uffff\12\23\1\6\1\7\5\uffff\32\22\6\uffff\3\21\1\10\1\11\1\12\2"+
-			"\21\1\13\4\21\1\14\1\15\2\21\1\16\1\21\1\17\2\21\1\20\3\21",
-			"\1\25",
+			"\2\27\2\uffff\1\27\22\uffff\1\1\4\uffff\1\2\2\uffff\1\3\1\4\2\uffff\1"+
+			"\5\3\uffff\12\26\1\6\1\7\5\uffff\32\25\6\uffff\2\24\1\10\1\11\1\12\1"+
+			"\13\1\24\1\14\1\15\2\24\1\16\1\24\1\17\1\20\2\24\1\21\1\24\1\22\2\24"+
+			"\1\23\3\24",
+			"\1\30",
 			"",
-			"\1\26\4\uffff\1\27\3\uffff\1\30\7\uffff\1\31",
 			"",
+			"",
+			"",
+			"\1\31",
 			"",
 			"\1\33",
-			"",
+			"\1\34",
 			"\1\35",
-			"\1\36",
-			"\1\37\5\uffff\1\40\5\uffff\1\41",
+			"\1\36\5\uffff\1\37\5\uffff\1\40",
+			"\1\41",
 			"\1\42\7\uffff\1\43",
-			"\1\44\5\uffff\1\45",
-			"\1\46",
+			"\1\44",
+			"\1\45\5\uffff\1\46",
 			"\1\47",
 			"\1\50",
-			"\1\51\11\uffff\1\52",
+			"\1\51\3\uffff\1\52",
+			"\1\53\11\uffff\1\54",
 			"",
 			"",
 			"",
@@ -1197,65 +1205,72 @@ public class ASTLexer extends Lexer {
 			"",
 			"",
 			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\54",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\56",
+			"\1\55",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
 			"\1\57",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\61",
 			"\1\62",
 			"\1\63",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\65",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
 			"\1\66",
 			"\1\67",
 			"\1\70",
-			"",
-			"\1\71",
-			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\4\21\1\72\25"+
-			"\21",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\72",
+			"\1\73",
 			"\1\74",
-			"",
-			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"",
+			"\1\75",
+			"\1\76",
 			"\1\77",
+			"",
 			"\1\100",
-			"\1\101",
-			"\1\102",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
+			"",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\4\24\1\101\25"+
+			"\24",
+			"\1\103",
+			"",
+			"",
+			"",
 			"\1\104",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
 			"",
-			"\1\105",
-			"",
-			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
+			"\1\107",
 			"\1\110",
-			"\1\111",
 			"",
+			"\1\111",
 			"\1\112",
 			"\1\113",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\115",
 			"",
-			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
 			"\1\116",
 			"\1\117",
 			"",
 			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
-			"\1\121",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\122",
+			"\1\123",
 			"",
-			"\1\21\16\uffff\12\21\5\uffff\1\21\1\uffff\32\21\6\uffff\32\21",
+			"",
+			"\1\124",
+			"\1\125",
+			"",
+			"",
+			"",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\130",
+			"\1\131",
+			"",
+			"",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
+			"\1\133",
+			"",
+			"\1\24\16\uffff\12\24\5\uffff\1\24\1\uffff\32\24\6\uffff\32\24",
 			""
 	};
 
@@ -1290,7 +1305,7 @@ public class ASTLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | SYMBOL | VARIABLE | DIGIT | WS );";
+			return "1:1: Tokens : ( T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | SYMBOL | VARIABLE | DIGIT | WS );";
 		}
 	}
 

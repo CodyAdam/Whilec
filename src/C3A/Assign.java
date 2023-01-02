@@ -4,7 +4,7 @@ package C3A;
 /**
  * Correspond to a=b in C3A
  */
-public class Assign {
+public class Assign extends Instruction {
   private Variable left;
   private ToAssign right;
 
@@ -12,7 +12,9 @@ public class Assign {
     this.left = left;
     this.right = right;
   }
-
+  public Variable getLeft() {
+    return left;
+  }
   @Override
   public String toString() {
     return left + " = " + right;
