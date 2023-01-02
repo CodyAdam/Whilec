@@ -19,7 +19,13 @@ public enum AstNode {
   SYMBOL("SYMBOL"),
   VARIABLE("VARIABLE"),
   VARS("VARS"),
-  WHILE("WHILE");
+  WHILE("WHILE"),
+  HEAD("HEAD"),
+  TAIL("TAIL"),
+  CONS("CONS"),
+  LIST("LIST"),
+  NIL("NIL"),
+  FUNCTIONCALL("FUNCTIONCALL");
 
   private final String name;
 
