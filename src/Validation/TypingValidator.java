@@ -24,11 +24,24 @@ public class TypingValidator extends DeepValidator{
 
     @Override
     protected void validateASSIGN(Tree tree, Function function) {
-        if(tree.getChild(0).getChildCount() != tree.getChild(1).getChildCount()){
-            if(tree.getChild(0).getChildCount() >= 1 && tree.getChild(1).getChildCount() == 1 && tree.getChild(1).getChild(0).getChild(0).getText().equals("FUNCTIONCALL")){
-
-                return;
+        if(tree.getChild(1).getChildCount() == 1 && tree.getChild(1).getChild(0).getChild(0).getText().equals("FUNCTIONCALL")){
+            Function f = this.functions.get(tree.getChild(1).getChild(0).getChild(0).getChild(0).getText());
+            if(f != null) {
+                int nbArgs = f.returnType.size();
+                if (nbArgs != tree.getChild(0).getChildCount()) {
+                    VPrinter.getInstance().printError(
+                            "The number of variable(s) is not equals to the number of value(s) that the function called returns. " +
+                                    "Function " + f.functionName + " returns " + nbArgs + " value(s), but " + tree.getChild(0).getChildCount() + " variable(s) are given.",
+                            this.parent.getFilepath(),
+                            tree.getChild(1).getChild(0).getChild(0).getChild(0).getLine(),
+                            tree.getChild(1).getChild(0).getChild(0).getChild(0).getCharPositionInLine());
+                    this.parent.incrementErrorCount();
+                }
             }
+            return;
+        }
+
+        if(tree.getChild(0).getChildCount() != tree.getChild(1).getChildCount()){
             VPrinter.getInstance().printError(
                     "The number of variables is not equals to the number of expressions in the assign statement.",
                     this.parent.getFilepath(),
