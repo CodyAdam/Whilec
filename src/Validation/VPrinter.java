@@ -61,5 +61,10 @@ public class VPrinter {
     public void println(String message, FontDetail font) {
         System.out.println(fontDetailToCode.get(font) + message + RESET);
     }
+
+    public void printError(String message, String path, int line, int charPositionInLine) {
+        println("ERROR : "+message, new FontDetail(Color.RED, true, false));
+        println("Error found at ("+path+":"+line+":"+charPositionInLine+")\n", new FontDetail(Color.RED, false, false));
+    }
 }
 

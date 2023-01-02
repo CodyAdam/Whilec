@@ -45,7 +45,7 @@ public class FunctionNameNUsageValidator extends Validator {
         prog.getStart();
         CommonTree tree = (CommonTree) prog.getTree();
 
-        PreCompileValidator validator = new PreCompileValidator();
+        PreCompileValidator validator = new PreCompileValidator(filepath);
         validator.addValidator(new FunctionNameNUsageValidator());
         //validator.addValidator(new VariableNameNUsageValidator());
         //validator.addValidator(new TypingValidator());
