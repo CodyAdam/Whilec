@@ -12,7 +12,7 @@ tokens  {
 	COMMAND;
 	INPUT;
 	OUTPUT;
-	 VARS;
+	VARS;
 	VARIABLE;
 	SYMBOL;
 	IF;
@@ -32,6 +32,7 @@ tokens  {
 	CONS;
 	FUNCTIONCALL;
 	ELSECOMMANDS;
+	EXPRESSIONS;
 }
 
 // ------------------------- RULES -------------------------
@@ -54,18 +55,18 @@ commands:
 
 command:
 	  ('nop') -> NOP
-	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN vars exprs)
+	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN ^(VARS vars) ^(EXPRESSIONS exprs))
 	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
 	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
 	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
 	| ('foreach' WS VARIABLE WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE expression commands);
 
 vars 	:	 
-	  (VARIABLE WS? ',' vars) -> VARIABLE 
+	  (VARIABLE WS? ',' WS? vars) -> VARIABLE vars
 	| VARIABLE -> VARIABLE;
 
 	
-exprs 	:	expression (WS? ','expression)* -> expression+;
+exprs 	:	expression (WS? ',' WS? expression)* -> expression+;
 	
 expression 
 	:	 e1=exprbase(
