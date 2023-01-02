@@ -1,0 +1,20 @@
+function one :
+  read
+  %
+    Result := (cons nil nil)
+  %
+write Result
+
+function two :
+  read
+  %
+    Result := (cons nil (cons nil nil))
+  %
+write Result
+
+function three :
+  read
+  %
+    Result := (cons nil (cons nil (cons nil nil)))
+  %
+write Result
