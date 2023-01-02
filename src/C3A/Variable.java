@@ -1,6 +1,6 @@
 package C3A;
 
-public class Variable {
+public class Variable extends ToAssign {
   private String name;
   static int count = 0;
 
