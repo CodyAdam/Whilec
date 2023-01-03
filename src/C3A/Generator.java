@@ -206,12 +206,10 @@ public class Generator {
 
   private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
-    i.add(new Comment("Expr"));
     Tree node = exprConditionNode;
     Variable expr = new Variable("EXPR");
     switch (AstNode.valueOf(node.getText())) {
       case CONS:
-        i.add(new Comment("Expr Cons"));
         int childCount = node.getChildCount();
         for (int j = 0; j < childCount; j++) {
           Tree exprNode = node.getChild(j); // EXPRESSION node
@@ -235,7 +233,6 @@ public class Generator {
         i.add(new Assign(expr, new Nil()));
         break;
       case VARIABLE:
-        // i.add(new Comment("Expr Variable"));
         String name = node.getChild(0).getText();
         Variable var = scopeVars.get(name);
         if (var == null)
