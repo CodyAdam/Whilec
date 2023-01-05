@@ -11,7 +11,7 @@ public abstract class DeepValidator extends Validator {
 
     @Override
     public void validate(Tree tree) throws Exception {
-        this.functions = new HashMap();
+        this.functions = new HashMap<String, Function>();
 
         this.validateAllTree(tree);
         this.endValidation();
