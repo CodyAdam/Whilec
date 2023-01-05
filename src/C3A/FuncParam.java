@@ -1,9 +1,9 @@
 package C3A;
 
 public class FuncParam extends Instruction{
-  private String arg;
+  private Variable arg;
 
-  public FuncParam(String arg) {
+  public FuncParam(Variable arg) {
     this.arg = arg;
   }
 
