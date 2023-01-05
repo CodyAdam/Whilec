@@ -12,6 +12,13 @@ function two :
   %
 write Result
 
+function twobis :
+  read
+  %
+    Result := (cons nil nil nil)
+  %
+write Result
+
 function three :
   read
   %

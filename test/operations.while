@@ -1,19 +1,15 @@
-function add : 
+function add1 : 
 read Op1, Op2 
 % 
-  Result := Op1 ; 
-  for Op2 do 
-    Result := ( cons nil Result )  
-  od 
+  Result := ( cons nil Result )  
 % 
 write Result 
  
-function sub : 
+function sub1 : 
 read Op1, Op2  
 % 
-  for Op2 do 
-    Result := (tl Result) 
-  od 
+  Result := Op1 ;
+  Result := (tl Result) 
 % 
 write Result 
  
@@ -25,3 +21,10 @@ read Op1, Op2
   od 
 % 
 write Result
+
+function test : 
+read A
+%
+  Result := (tl A)
+% 
+write Result 
