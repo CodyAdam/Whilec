@@ -9,6 +9,6 @@ public class FuncEnd extends Instruction {
 
   @Override
   public String toString() {
-    return "func end";
+    return "func end\n";
   }
 }
