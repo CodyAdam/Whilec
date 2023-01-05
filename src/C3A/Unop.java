@@ -19,8 +19,11 @@ public class Unop extends ToAssign {
       case NOT:
         opString = "!";
         break;
-      case SUB:
-        opString = "-";
+      case TAIL:
+        opString = "tl ";
+        break;
+      case HEAD:
+        opString = "hd ";
         break;
       case ADRESS:
         opString = "&";
