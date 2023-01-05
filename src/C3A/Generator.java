@@ -45,7 +45,7 @@ public class Generator {
         commandsNode = funcDef.getChild(1);
         outputNode = funcDef.getChild(2);
         // Parse input
-        for (int j = 0; j < inputNode.getChildCount(); j++) {
+        for (int j = inputNode.getChildCount() - 1; j >= 0; j--) {
           String varName = inputNode.getChild(j).getText();
           Variable var = new Variable(varName);
           i.add(new Assign(var, new Pop()));
@@ -142,7 +142,7 @@ public class Generator {
     Label endIfLabel = new Label("endif");
 
     // Parse if == true commands
-    i.add(new IfzGoto(elseLabel, conditionVar));
+    i.add(new IfzGoto(elseLabel, endIfLabel, conditionVar));
     i.add(fromCommands(trueCommandsNode, scopeVars));
     i.add(new Goto(endIfLabel));
 
@@ -207,32 +207,97 @@ public class Generator {
   private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     Tree node = exprConditionNode;
-    Variable expr = new Variable("EXPR");
+    Variable expr;
+    int childCount = node.getChildCount();
     switch (AstNode.valueOf(node.getText())) {
       case CONS:
-        int childCount = node.getChildCount();
+        expr = new Variable("CONS");
         for (int j = 0; j < childCount; j++) {
           Tree exprNode = node.getChild(j); // EXPRESSION node
           i.add(fromExpr(exprNode, scopeVars));
           i.add(new AssignTab(expr, j, i.getLastAssignedVariable()));
         }
-        break;
-      case TAIL:
-        i.add(new Comment("Expr Tail"));
+        i.add(new Assign(expr, expr));
         break;
       case HEAD:
-        i.add(new Comment("Expr Head"));
+        expr = new Variable("HEAD");
+        Tree childHead = node.getChild(0);
+        boolean invalid = false;
+        switch (AstNode.valueOf(childHead.getText())) {
+          case CONS:
+            if (childHead.getChildCount() < 2)
+              invalid = true;
+            i.add(fromExpr(childHead.getChild(0), scopeVars));
+            i.add(new Assign(expr, i.getLastAssignedVariable()));
+            break;
+          case VARIABLE:
+            String varName = childHead.getChild(0).getText();
+            Variable var = scopeVars.get(varName);
+            i.add(new Assign(expr, new Unop(UnopEnum.HEAD, var)));
+            break;
+          default:
+            invalid = true;
+            break;
+        }
+        if (invalid) {
+          i.add(new Assign(expr, new Nil()));
+        }
         break;
+      case TAIL:
+        expr = new Variable("TAIL");
+        Tree childTail = node.getChild(0);
+        boolean invalidHead = false;
+        switch (AstNode.valueOf(childTail.getText())) {
+          case CONS:
+            if (childTail.getChildCount() < 2)
+              invalidHead = true;
+            i.add(fromExpr(childTail.getChild(1), scopeVars));
+            i.add(new Assign(expr, i.getLastAssignedVariable()));
+            break;
+          case VARIABLE:
+            String varName = childTail.getChild(0).getText();
+            Variable var = scopeVars.get(varName);
+            i.add(new Assign(expr, new Unop(UnopEnum.TAIL, var)));
+            break;
+          default:
+            invalidHead = true;
+            break;
+        }
+        if (invalidHead) {
+          i.add(new Assign(expr, new Nil()));
+        }
+        break;
+
       case LIST:
-        i.add(new Comment("Expr List"));
+        expr = new Variable("CONS");
+        for (int j = 0; j < childCount; j++) {
+          Tree exprNode = node.getChild(j); // EXPRESSION node
+          i.add(fromExpr(exprNode, scopeVars));
+          i.add(new AssignTab(expr, j, i.getLastAssignedVariable()));
+        }
+        // append a nill at the end
+        i.add(new AssignTab(expr, childCount, new Nil()));
+        i.add(new Assign(expr, expr));
         break;
       case FUNCTIONCALL:
-        i.add(new Comment("Expr FuncCall"));
+        expr = new Variable("FUNCTIONCALL");
+        Tree funcNode = node.getChild(0);
+        String funcName = funcNode.getText();
+        int funcChildCount = funcNode.getChildCount();
+
+        for (int j = 0; j < funcChildCount; j++) {
+          Tree exprNode = funcNode.getChild(j); // EXPRESSION node
+          i.add(fromExpr(exprNode, scopeVars));
+          i.add(new FuncParam(i.getLastAssignedVariable()));
+        }
+        i.add(new Assign(expr, new FuncCall(funcName, funcChildCount)));
         break;
       case NIL:
+        expr = new Variable("NIL");
         i.add(new Assign(expr, new Nil()));
         break;
       case VARIABLE:
+        expr = new Variable("VARIABLE");
         String name = node.getChild(0).getText();
         Variable var = scopeVars.get(name);
         if (var == null)
@@ -241,11 +306,12 @@ public class Generator {
           i.add(new Assign(expr, var));
         break;
       case SYMBOL:
-        i.add(new Comment("Expr Symbol"));
+        expr = new Variable("SYMBOL");
+        String symbolValue = node.getChild(0).getText();
+        i.add(new Assign(expr, new Symbol(symbolValue)));
       default:
         assert (false) : node.getText() + " is not valid child of EXPRESSION";
     }
-    i.add(new Assign(expr, expr));
     return i;
   }
 
