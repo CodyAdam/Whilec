@@ -57,9 +57,9 @@ command:
 	  ('nop') -> NOP
 	| (vars WS? ':=' WS? exprs) -> ^(ASSIGN ^(VARS vars) ^(EXPRESSIONS exprs))
 	| ('if' WS expression WS 'then' WS commands WS(WS? 'else'WS commands WS)? 'fi') -> ^(IF expression ^(COMMANDS commands) ^(ELSECOMMANDS commands)?)
-	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression commands)
-	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression commands)
-	| ('foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE_LEX expression commands);
+	| ('while' WS expression WS 'do' WS commands WS 'od') -> ^(WHILE expression ^(COMMANDS commands))
+	| ('for' WS expression WS 'do' WS commands WS 'od') -> ^(FOR expression ^(COMMANDS commands))
+	| ('foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od') -> ^(FOREACH VARIABLE_LEX expression ^(COMMANDS commands));
 
 vars 	:	 
 	  (VARIABLE_LEX WS? ',' WS? vars) -> VARIABLE_LEX vars
