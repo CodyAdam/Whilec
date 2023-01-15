@@ -1,5 +1,5 @@
 package AST;
-// $ANTLR 3.5.3 ./grammars/AST.g 2023-01-03 00:28:53
+// $ANTLR 3.5.3 ./grammars/AST.g 2023-01-15 21:12:34
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -1503,7 +1503,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "command"
-	// ./grammars/AST.g:56:1: command : ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression commands ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression commands ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression commands ) );
+	// ./grammars/AST.g:56:1: command : ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) );
 	public final ASTParser.command_return command() throws RecognitionException {
 		ASTParser.command_return retval = new ASTParser.command_return();
 		retval.start = input.LT(1);
@@ -1622,7 +1622,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_commands=new RewriteRuleSubtreeStream(adaptor,"rule commands");
 
 		try {
-			// ./grammars/AST.g:56:8: ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression commands ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression commands ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression commands ) )
+			// ./grammars/AST.g:56:8: ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) )
 			int alt24=6;
 			switch ( input.LA(1) ) {
 			case 57:
@@ -1982,14 +1982,21 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 60:56: -> ^( WHILE expression commands )
+					// 60:56: -> ^( WHILE expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:60:59: ^( WHILE expression commands )
+						// ./grammars/AST.g:60:59: ^( WHILE expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(WHILE, "WHILE"), root_1);
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						adaptor.addChild(root_1, stream_commands.nextTree());
+						// ./grammars/AST.g:60:78: ^( COMMANDS commands )
+						{
+						Object root_2 = (Object)adaptor.nil();
+						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
+						adaptor.addChild(root_2, stream_commands.nextTree());
+						adaptor.addChild(root_1, root_2);
+						}
+
 						adaptor.addChild(root_0, root_1);
 						}
 
@@ -2006,35 +2013,35 @@ public class ASTParser extends Parser {
 					// ./grammars/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
 					// ./grammars/AST.g:61:5: 'for' WS expression WS 'do' WS commands WS 'od'
 					{
-					string_literal74=(Token)match(input,49,FOLLOW_49_in_command522);  
+					string_literal74=(Token)match(input,49,FOLLOW_49_in_command526);  
 					stream_49.add(string_literal74);
 
-					WS75=(Token)match(input,WS,FOLLOW_WS_in_command524);  
+					WS75=(Token)match(input,WS,FOLLOW_WS_in_command528);  
 					stream_WS.add(WS75);
 
-					pushFollow(FOLLOW_expression_in_command526);
+					pushFollow(FOLLOW_expression_in_command530);
 					expression76=expression();
 					state._fsp--;
 
 					stream_expression.add(expression76.getTree());
-					WS77=(Token)match(input,WS,FOLLOW_WS_in_command528);  
+					WS77=(Token)match(input,WS,FOLLOW_WS_in_command532);  
 					stream_WS.add(WS77);
 
-					string_literal78=(Token)match(input,46,FOLLOW_46_in_command530);  
+					string_literal78=(Token)match(input,46,FOLLOW_46_in_command534);  
 					stream_46.add(string_literal78);
 
-					WS79=(Token)match(input,WS,FOLLOW_WS_in_command532);  
+					WS79=(Token)match(input,WS,FOLLOW_WS_in_command536);  
 					stream_WS.add(WS79);
 
-					pushFollow(FOLLOW_commands_in_command534);
+					pushFollow(FOLLOW_commands_in_command538);
 					commands80=commands();
 					state._fsp--;
 
 					stream_commands.add(commands80.getTree());
-					WS81=(Token)match(input,WS,FOLLOW_WS_in_command536);  
+					WS81=(Token)match(input,WS,FOLLOW_WS_in_command540);  
 					stream_WS.add(WS81);
 
-					string_literal82=(Token)match(input,58,FOLLOW_58_in_command538);  
+					string_literal82=(Token)match(input,58,FOLLOW_58_in_command542);  
 					stream_58.add(string_literal82);
 
 					}
@@ -2051,14 +2058,21 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 61:54: -> ^( FOR expression commands )
+					// 61:54: -> ^( FOR expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:61:57: ^( FOR expression commands )
+						// ./grammars/AST.g:61:57: ^( FOR expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FOR, "FOR"), root_1);
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						adaptor.addChild(root_1, stream_commands.nextTree());
+						// ./grammars/AST.g:61:74: ^( COMMANDS commands )
+						{
+						Object root_2 = (Object)adaptor.nil();
+						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
+						adaptor.addChild(root_2, stream_commands.nextTree());
+						adaptor.addChild(root_1, root_2);
+						}
+
 						adaptor.addChild(root_0, root_1);
 						}
 
@@ -2075,47 +2089,47 @@ public class ASTParser extends Parser {
 					// ./grammars/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
 					// ./grammars/AST.g:62:5: 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od'
 					{
-					string_literal83=(Token)match(input,50,FOLLOW_50_in_command555);  
+					string_literal83=(Token)match(input,50,FOLLOW_50_in_command563);  
 					stream_50.add(string_literal83);
 
-					WS84=(Token)match(input,WS,FOLLOW_WS_in_command557);  
+					WS84=(Token)match(input,WS,FOLLOW_WS_in_command565);  
 					stream_WS.add(WS84);
 
-					VARIABLE_LEX85=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_command559);  
+					VARIABLE_LEX85=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_command567);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX85);
 
-					WS86=(Token)match(input,WS,FOLLOW_WS_in_command561);  
+					WS86=(Token)match(input,WS,FOLLOW_WS_in_command569);  
 					stream_WS.add(WS86);
 
-					string_literal87=(Token)match(input,54,FOLLOW_54_in_command563);  
+					string_literal87=(Token)match(input,54,FOLLOW_54_in_command571);  
 					stream_54.add(string_literal87);
 
-					WS88=(Token)match(input,WS,FOLLOW_WS_in_command565);  
+					WS88=(Token)match(input,WS,FOLLOW_WS_in_command573);  
 					stream_WS.add(WS88);
 
-					pushFollow(FOLLOW_expression_in_command567);
+					pushFollow(FOLLOW_expression_in_command575);
 					expression89=expression();
 					state._fsp--;
 
 					stream_expression.add(expression89.getTree());
-					WS90=(Token)match(input,WS,FOLLOW_WS_in_command569);  
+					WS90=(Token)match(input,WS,FOLLOW_WS_in_command577);  
 					stream_WS.add(WS90);
 
-					string_literal91=(Token)match(input,46,FOLLOW_46_in_command571);  
+					string_literal91=(Token)match(input,46,FOLLOW_46_in_command579);  
 					stream_46.add(string_literal91);
 
-					WS92=(Token)match(input,WS,FOLLOW_WS_in_command573);  
+					WS92=(Token)match(input,WS,FOLLOW_WS_in_command581);  
 					stream_WS.add(WS92);
 
-					pushFollow(FOLLOW_commands_in_command575);
+					pushFollow(FOLLOW_commands_in_command583);
 					commands93=commands();
 					state._fsp--;
 
 					stream_commands.add(commands93.getTree());
-					WS94=(Token)match(input,WS,FOLLOW_WS_in_command577);  
+					WS94=(Token)match(input,WS,FOLLOW_WS_in_command585);  
 					stream_WS.add(WS94);
 
-					string_literal95=(Token)match(input,58,FOLLOW_58_in_command579);  
+					string_literal95=(Token)match(input,58,FOLLOW_58_in_command587);  
 					stream_58.add(string_literal95);
 
 					}
@@ -2132,15 +2146,22 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 62:82: -> ^( FOREACH VARIABLE_LEX expression commands )
+					// 62:82: -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:62:85: ^( FOREACH VARIABLE_LEX expression commands )
+						// ./grammars/AST.g:62:85: ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FOREACH, "FOREACH"), root_1);
 						adaptor.addChild(root_1, stream_VARIABLE_LEX.nextNode());
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						adaptor.addChild(root_1, stream_commands.nextTree());
+						// ./grammars/AST.g:62:119: ^( COMMANDS commands )
+						{
+						Object root_2 = (Object)adaptor.nil();
+						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
+						adaptor.addChild(root_2, stream_commands.nextTree());
+						adaptor.addChild(root_1, root_2);
+						}
+
 						adaptor.addChild(root_0, root_1);
 						}
 
@@ -2272,7 +2293,7 @@ public class ASTParser extends Parser {
 					// ./grammars/AST.g:65:4: ( VARIABLE_LEX ( WS )? ',' ( WS )? vars )
 					// ./grammars/AST.g:65:5: VARIABLE_LEX ( WS )? ',' ( WS )? vars
 					{
-					VARIABLE_LEX96=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars607);  
+					VARIABLE_LEX96=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars619);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX96);
 
 					// ./grammars/AST.g:65:18: ( WS )?
@@ -2285,7 +2306,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:65:18: WS
 							{
-							WS97=(Token)match(input,WS,FOLLOW_WS_in_vars609);  
+							WS97=(Token)match(input,WS,FOLLOW_WS_in_vars621);  
 							stream_WS.add(WS97);
 
 							}
@@ -2293,7 +2314,7 @@ public class ASTParser extends Parser {
 
 					}
 
-					char_literal98=(Token)match(input,41,FOLLOW_41_in_vars612);  
+					char_literal98=(Token)match(input,41,FOLLOW_41_in_vars624);  
 					stream_41.add(char_literal98);
 
 					// ./grammars/AST.g:65:26: ( WS )?
@@ -2306,7 +2327,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:65:26: WS
 							{
-							WS99=(Token)match(input,WS,FOLLOW_WS_in_vars614);  
+							WS99=(Token)match(input,WS,FOLLOW_WS_in_vars626);  
 							stream_WS.add(WS99);
 
 							}
@@ -2314,7 +2335,7 @@ public class ASTParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_vars_in_vars617);
+					pushFollow(FOLLOW_vars_in_vars629);
 					vars100=vars();
 					state._fsp--;
 
@@ -2347,7 +2368,7 @@ public class ASTParser extends Parser {
 				case 2 :
 					// ./grammars/AST.g:66:4: VARIABLE_LEX
 					{
-					VARIABLE_LEX101=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars629);  
+					VARIABLE_LEX101=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars641);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX101);
 
 
@@ -2425,7 +2446,7 @@ public class ASTParser extends Parser {
 			// ./grammars/AST.g:69:8: ( expression ( ( WS )? ',' ( WS )? expression )* -> ( expression )+ )
 			// ./grammars/AST.g:69:10: expression ( ( WS )? ',' ( WS )? expression )*
 			{
-			pushFollow(FOLLOW_expression_in_exprs644);
+			pushFollow(FOLLOW_expression_in_exprs656);
 			expression102=expression();
 			state._fsp--;
 
@@ -2460,7 +2481,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:69:22: WS
 							{
-							WS103=(Token)match(input,WS,FOLLOW_WS_in_exprs647);  
+							WS103=(Token)match(input,WS,FOLLOW_WS_in_exprs659);  
 							stream_WS.add(WS103);
 
 							}
@@ -2468,7 +2489,7 @@ public class ASTParser extends Parser {
 
 					}
 
-					char_literal104=(Token)match(input,41,FOLLOW_41_in_exprs650);  
+					char_literal104=(Token)match(input,41,FOLLOW_41_in_exprs662);  
 					stream_41.add(char_literal104);
 
 					// ./grammars/AST.g:69:30: ( WS )?
@@ -2481,7 +2502,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:69:30: WS
 							{
-							WS105=(Token)match(input,WS,FOLLOW_WS_in_exprs652);  
+							WS105=(Token)match(input,WS,FOLLOW_WS_in_exprs664);  
 							stream_WS.add(WS105);
 
 							}
@@ -2489,7 +2510,7 @@ public class ASTParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_expression_in_exprs655);
+					pushFollow(FOLLOW_expression_in_exprs667);
 					expression106=expression();
 					state._fsp--;
 
@@ -2577,7 +2598,7 @@ public class ASTParser extends Parser {
 			// ./grammars/AST.g:72:2: (e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) ) )
 			// ./grammars/AST.g:72:5: e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) )
 			{
-			pushFollow(FOLLOW_exprbase_in_expression676);
+			pushFollow(FOLLOW_exprbase_in_expression688);
 			e1=exprbase();
 			state._fsp--;
 
@@ -2602,10 +2623,10 @@ public class ASTParser extends Parser {
 				case 1 :
 					// ./grammars/AST.g:73:3: ' = ' e2= exprbase
 					{
-					string_literal107=(Token)match(input,37,FOLLOW_37_in_expression681);  
+					string_literal107=(Token)match(input,37,FOLLOW_37_in_expression693);  
 					stream_37.add(string_literal107);
 
-					pushFollow(FOLLOW_exprbase_in_expression684);
+					pushFollow(FOLLOW_exprbase_in_expression696);
 					e2=exprbase();
 					state._fsp--;
 
@@ -2813,7 +2834,7 @@ public class ASTParser extends Parser {
 				case 1 :
 					// ./grammars/AST.g:78:5: '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
 					{
-					char_literal108=(Token)match(input,39,FOLLOW_39_in_exprbase727);  
+					char_literal108=(Token)match(input,39,FOLLOW_39_in_exprbase739);  
 					stream_39.add(char_literal108);
 
 					// ./grammars/AST.g:78:9: ( WS )?
@@ -2826,7 +2847,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:78:9: WS
 							{
-							WS109=(Token)match(input,WS,FOLLOW_WS_in_exprbase729);  
+							WS109=(Token)match(input,WS,FOLLOW_WS_in_exprbase741);  
 							stream_WS.add(WS109);
 
 							}
@@ -2890,18 +2911,18 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:79:3: SYMBOL_LEX WS lexpr ')'
 							{
-							SYMBOL_LEX110=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase736);  
+							SYMBOL_LEX110=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase748);  
 							stream_SYMBOL_LEX.add(SYMBOL_LEX110);
 
-							WS111=(Token)match(input,WS,FOLLOW_WS_in_exprbase738);  
+							WS111=(Token)match(input,WS,FOLLOW_WS_in_exprbase750);  
 							stream_WS.add(WS111);
 
-							pushFollow(FOLLOW_lexpr_in_exprbase740);
+							pushFollow(FOLLOW_lexpr_in_exprbase752);
 							lexpr112=lexpr();
 							state._fsp--;
 
 							stream_lexpr.add(lexpr112.getTree());
-							char_literal113=(Token)match(input,40,FOLLOW_40_in_exprbase741);  
+							char_literal113=(Token)match(input,40,FOLLOW_40_in_exprbase753);  
 							stream_40.add(char_literal113);
 
 
@@ -2943,10 +2964,10 @@ public class ASTParser extends Parser {
 						case 2 :
 							// ./grammars/AST.g:80:5: SYMBOL_LEX ')'
 							{
-							SYMBOL_LEX114=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase759);  
+							SYMBOL_LEX114=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase771);  
 							stream_SYMBOL_LEX.add(SYMBOL_LEX114);
 
-							char_literal115=(Token)match(input,40,FOLLOW_40_in_exprbase760);  
+							char_literal115=(Token)match(input,40,FOLLOW_40_in_exprbase772);  
 							stream_40.add(char_literal115);
 
 
@@ -2981,10 +3002,10 @@ public class ASTParser extends Parser {
 						case 3 :
 							// ./grammars/AST.g:81:4: 'hd ' exprbase ( WS )? ')'
 							{
-							string_literal116=(Token)match(input,52,FOLLOW_52_in_exprbase773);  
+							string_literal116=(Token)match(input,52,FOLLOW_52_in_exprbase785);  
 							stream_52.add(string_literal116);
 
-							pushFollow(FOLLOW_exprbase_in_exprbase774);
+							pushFollow(FOLLOW_exprbase_in_exprbase786);
 							exprbase117=exprbase();
 							state._fsp--;
 
@@ -2999,7 +3020,7 @@ public class ASTParser extends Parser {
 								case 1 :
 									// ./grammars/AST.g:81:18: WS
 									{
-									WS118=(Token)match(input,WS,FOLLOW_WS_in_exprbase776);  
+									WS118=(Token)match(input,WS,FOLLOW_WS_in_exprbase788);  
 									stream_WS.add(WS118);
 
 									}
@@ -3007,7 +3028,7 @@ public class ASTParser extends Parser {
 
 							}
 
-							char_literal119=(Token)match(input,40,FOLLOW_40_in_exprbase778);  
+							char_literal119=(Token)match(input,40,FOLLOW_40_in_exprbase790);  
 							stream_40.add(char_literal119);
 
 
@@ -3042,10 +3063,10 @@ public class ASTParser extends Parser {
 						case 4 :
 							// ./grammars/AST.g:82:4: 'tl ' exprbase ( WS )? ')'
 							{
-							string_literal120=(Token)match(input,61,FOLLOW_61_in_exprbase791);  
+							string_literal120=(Token)match(input,61,FOLLOW_61_in_exprbase803);  
 							stream_61.add(string_literal120);
 
-							pushFollow(FOLLOW_exprbase_in_exprbase792);
+							pushFollow(FOLLOW_exprbase_in_exprbase804);
 							exprbase121=exprbase();
 							state._fsp--;
 
@@ -3060,7 +3081,7 @@ public class ASTParser extends Parser {
 								case 1 :
 									// ./grammars/AST.g:82:18: WS
 									{
-									WS122=(Token)match(input,WS,FOLLOW_WS_in_exprbase794);  
+									WS122=(Token)match(input,WS,FOLLOW_WS_in_exprbase806);  
 									stream_WS.add(WS122);
 
 									}
@@ -3068,7 +3089,7 @@ public class ASTParser extends Parser {
 
 							}
 
-							char_literal123=(Token)match(input,40,FOLLOW_40_in_exprbase796);  
+							char_literal123=(Token)match(input,40,FOLLOW_40_in_exprbase808);  
 							stream_40.add(char_literal123);
 
 
@@ -3103,15 +3124,15 @@ public class ASTParser extends Parser {
 						case 5 :
 							// ./grammars/AST.g:83:4: 'cons ' lexpr ')'
 							{
-							string_literal124=(Token)match(input,45,FOLLOW_45_in_exprbase809);  
+							string_literal124=(Token)match(input,45,FOLLOW_45_in_exprbase821);  
 							stream_45.add(string_literal124);
 
-							pushFollow(FOLLOW_lexpr_in_exprbase810);
+							pushFollow(FOLLOW_lexpr_in_exprbase822);
 							lexpr125=lexpr();
 							state._fsp--;
 
 							stream_lexpr.add(lexpr125.getTree());
-							char_literal126=(Token)match(input,40,FOLLOW_40_in_exprbase811);  
+							char_literal126=(Token)match(input,40,FOLLOW_40_in_exprbase823);  
 							stream_40.add(char_literal126);
 
 
@@ -3146,15 +3167,15 @@ public class ASTParser extends Parser {
 						case 6 :
 							// ./grammars/AST.g:84:4: 'list ' lexpr ')'
 							{
-							string_literal127=(Token)match(input,55,FOLLOW_55_in_exprbase824);  
+							string_literal127=(Token)match(input,55,FOLLOW_55_in_exprbase836);  
 							stream_55.add(string_literal127);
 
-							pushFollow(FOLLOW_lexpr_in_exprbase825);
+							pushFollow(FOLLOW_lexpr_in_exprbase837);
 							lexpr128=lexpr();
 							state._fsp--;
 
 							stream_lexpr.add(lexpr128.getTree());
-							char_literal129=(Token)match(input,40,FOLLOW_40_in_exprbase826);  
+							char_literal129=(Token)match(input,40,FOLLOW_40_in_exprbase838);  
 							stream_40.add(char_literal129);
 
 
@@ -3194,7 +3215,7 @@ public class ASTParser extends Parser {
 				case 2 :
 					// ./grammars/AST.g:86:4: 'nil'
 					{
-					string_literal130=(Token)match(input,56,FOLLOW_56_in_exprbase843);  
+					string_literal130=(Token)match(input,56,FOLLOW_56_in_exprbase855);  
 					stream_56.add(string_literal130);
 
 
@@ -3222,7 +3243,7 @@ public class ASTParser extends Parser {
 				case 3 :
 					// ./grammars/AST.g:87:5: VARIABLE_LEX
 					{
-					VARIABLE_LEX131=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_exprbase853);  
+					VARIABLE_LEX131=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_exprbase865);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX131);
 
 
@@ -3257,7 +3278,7 @@ public class ASTParser extends Parser {
 				case 4 :
 					// ./grammars/AST.g:88:5: SYMBOL_LEX
 					{
-					SYMBOL_LEX132=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase867);  
+					SYMBOL_LEX132=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase879);  
 					stream_SYMBOL_LEX.add(SYMBOL_LEX132);
 
 
@@ -3351,7 +3372,7 @@ public class ASTParser extends Parser {
 				case 1 :
 					// ./grammars/AST.g:91:8: WS
 					{
-					WS133=(Token)match(input,WS,FOLLOW_WS_in_lexpr890);  
+					WS133=(Token)match(input,WS,FOLLOW_WS_in_lexpr902);  
 					stream_WS.add(WS133);
 
 					}
@@ -3372,7 +3393,7 @@ public class ASTParser extends Parser {
 				case 1 :
 					// ./grammars/AST.g:91:13: exprbase ( WS )?
 					{
-					pushFollow(FOLLOW_exprbase_in_lexpr894);
+					pushFollow(FOLLOW_exprbase_in_lexpr906);
 					exprbase134=exprbase();
 					state._fsp--;
 
@@ -3387,7 +3408,7 @@ public class ASTParser extends Parser {
 						case 1 :
 							// ./grammars/AST.g:91:22: WS
 							{
-							WS135=(Token)match(input,WS,FOLLOW_WS_in_lexpr896);  
+							WS135=(Token)match(input,WS,FOLLOW_WS_in_lexpr908);  
 							stream_WS.add(WS135);
 
 							}
@@ -3527,68 +3548,68 @@ public class ASTParser extends Parser {
 	public static final BitSet FOLLOW_commands_in_command501 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_command503 = new BitSet(new long[]{0x0400000000000000L});
 	public static final BitSet FOLLOW_58_in_command505 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_49_in_command522 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command524 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_expression_in_command526 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command528 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_46_in_command530 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command532 = new BitSet(new long[]{0x4226001200000000L});
-	public static final BitSet FOLLOW_commands_in_command534 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command536 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_58_in_command538 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_50_in_command555 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command557 = new BitSet(new long[]{0x0000000200000000L});
-	public static final BitSet FOLLOW_VARIABLE_LEX_in_command559 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command561 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_command563 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command565 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_expression_in_command567 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command569 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_46_in_command571 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command573 = new BitSet(new long[]{0x4226001200000000L});
-	public static final BitSet FOLLOW_commands_in_command575 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command577 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_58_in_command579 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars607 = new BitSet(new long[]{0x0000021000000000L});
-	public static final BitSet FOLLOW_WS_in_vars609 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_41_in_vars612 = new BitSet(new long[]{0x0000001200000000L});
-	public static final BitSet FOLLOW_WS_in_vars614 = new BitSet(new long[]{0x0000000200000000L});
-	public static final BitSet FOLLOW_vars_in_vars617 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars629 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_in_exprs644 = new BitSet(new long[]{0x0000021000000002L});
-	public static final BitSet FOLLOW_WS_in_exprs647 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_41_in_exprs650 = new BitSet(new long[]{0x0100009220000000L});
-	public static final BitSet FOLLOW_WS_in_exprs652 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_expression_in_exprs655 = new BitSet(new long[]{0x0000021000000002L});
-	public static final BitSet FOLLOW_exprbase_in_expression676 = new BitSet(new long[]{0x0000002000000002L});
-	public static final BitSet FOLLOW_37_in_expression681 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_exprbase_in_expression684 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_39_in_exprbase727 = new BitSet(new long[]{0x2090201020000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase729 = new BitSet(new long[]{0x2090200020000000L});
-	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase736 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase738 = new BitSet(new long[]{0x0100019220000000L});
-	public static final BitSet FOLLOW_lexpr_in_exprbase740 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase741 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase759 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase760 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_52_in_exprbase773 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_exprbase_in_exprbase774 = new BitSet(new long[]{0x0000011000000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase776 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase778 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_61_in_exprbase791 = new BitSet(new long[]{0x0100008220000000L});
-	public static final BitSet FOLLOW_exprbase_in_exprbase792 = new BitSet(new long[]{0x0000011000000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase794 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase796 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_45_in_exprbase809 = new BitSet(new long[]{0x0100019220000000L});
-	public static final BitSet FOLLOW_lexpr_in_exprbase810 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase811 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_55_in_exprbase824 = new BitSet(new long[]{0x0100019220000000L});
-	public static final BitSet FOLLOW_lexpr_in_exprbase825 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase826 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_56_in_exprbase843 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VARIABLE_LEX_in_exprbase853 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase867 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WS_in_lexpr890 = new BitSet(new long[]{0x0100008220000002L});
-	public static final BitSet FOLLOW_exprbase_in_lexpr894 = new BitSet(new long[]{0x0100009220000002L});
-	public static final BitSet FOLLOW_WS_in_lexpr896 = new BitSet(new long[]{0x0100008220000002L});
+	public static final BitSet FOLLOW_49_in_command526 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command528 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_expression_in_command530 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command532 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_46_in_command534 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command536 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_commands_in_command538 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command540 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_58_in_command542 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_50_in_command563 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command565 = new BitSet(new long[]{0x0000000200000000L});
+	public static final BitSet FOLLOW_VARIABLE_LEX_in_command567 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command569 = new BitSet(new long[]{0x0040000000000000L});
+	public static final BitSet FOLLOW_54_in_command571 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command573 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_expression_in_command575 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command577 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_46_in_command579 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command581 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_commands_in_command583 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command585 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_58_in_command587 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars619 = new BitSet(new long[]{0x0000021000000000L});
+	public static final BitSet FOLLOW_WS_in_vars621 = new BitSet(new long[]{0x0000020000000000L});
+	public static final BitSet FOLLOW_41_in_vars624 = new BitSet(new long[]{0x0000001200000000L});
+	public static final BitSet FOLLOW_WS_in_vars626 = new BitSet(new long[]{0x0000000200000000L});
+	public static final BitSet FOLLOW_vars_in_vars629 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars641 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_in_exprs656 = new BitSet(new long[]{0x0000021000000002L});
+	public static final BitSet FOLLOW_WS_in_exprs659 = new BitSet(new long[]{0x0000020000000000L});
+	public static final BitSet FOLLOW_41_in_exprs662 = new BitSet(new long[]{0x0100009220000000L});
+	public static final BitSet FOLLOW_WS_in_exprs664 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_expression_in_exprs667 = new BitSet(new long[]{0x0000021000000002L});
+	public static final BitSet FOLLOW_exprbase_in_expression688 = new BitSet(new long[]{0x0000002000000002L});
+	public static final BitSet FOLLOW_37_in_expression693 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_exprbase_in_expression696 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_39_in_exprbase739 = new BitSet(new long[]{0x2090201020000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase741 = new BitSet(new long[]{0x2090200020000000L});
+	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase748 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase750 = new BitSet(new long[]{0x0100019220000000L});
+	public static final BitSet FOLLOW_lexpr_in_exprbase752 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase753 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase771 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase772 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_52_in_exprbase785 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_exprbase_in_exprbase786 = new BitSet(new long[]{0x0000011000000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase788 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase790 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_61_in_exprbase803 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_exprbase_in_exprbase804 = new BitSet(new long[]{0x0000011000000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase806 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase808 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_45_in_exprbase821 = new BitSet(new long[]{0x0100019220000000L});
+	public static final BitSet FOLLOW_lexpr_in_exprbase822 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase823 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_55_in_exprbase836 = new BitSet(new long[]{0x0100019220000000L});
+	public static final BitSet FOLLOW_lexpr_in_exprbase837 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase838 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_56_in_exprbase855 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VARIABLE_LEX_in_exprbase865 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase879 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WS_in_lexpr902 = new BitSet(new long[]{0x0100008220000002L});
+	public static final BitSet FOLLOW_exprbase_in_lexpr906 = new BitSet(new long[]{0x0100009220000002L});
+	public static final BitSet FOLLOW_WS_in_lexpr908 = new BitSet(new long[]{0x0100008220000002L});
 }
