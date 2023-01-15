@@ -1,0 +1,31 @@
+function add : 
+read Op1, Op2 
+% 
+  Result := Op1 ; 
+  for Op2 do 
+    Result := ( cons nil Result )  ;
+    Result := ( cons nil Result )  ;
+    Result := ( cons nil Result )  
+  od 
+% 
+write Result
+
+function whileFunc:
+read
+%
+  Cond := (true);
+  while Cond do 
+    Cond := (false)
+  od;
+%
+write A
+
+function addForeach : 
+read Op1, Op2 
+% 
+  Result := Op1 ; 
+  foreach Index in Op2 do 
+    Result := ( cons nil Result )  
+  od 
+% 
+write Result
