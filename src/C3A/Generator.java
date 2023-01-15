@@ -16,6 +16,10 @@ public class Generator {
     return instructions;
   }
 
+  public String generateTargetCode(){
+    return "TODO";
+  }
+
   private Instructions fromRoot(Tree ast) {
     Instructions i = new Instructions();
     for (int j = 0; j < ast.getChildCount(); j++) {

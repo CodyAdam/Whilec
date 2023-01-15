@@ -1,5 +1,12 @@
 
 // import Validation.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -49,5 +56,18 @@ public class Main {
         Instructions code3adress = generator.getInstructions();
         System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
+        // Generate target code from 3-address code
+        String file = "src/base.py";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        String base = reader.lines().reduce("", (a, b) -> a + b + "\n");
+        reader.close();
+        ;
+        String output = base.replaceFirst("# CODE INSERTED HERE", generator.generateTargetCode());
+        System.out.println(output);
+
+        // Write output to file
+        Path path = Paths.get("output.py");
+        Files.write(path, output.getBytes());
+        
     }
 }

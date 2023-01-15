@@ -1,3 +1,4 @@
-class Tree:
-    def __init__(self, root):
-        self.root = root
+# CODE INSERTED HERE
+
+if __name__ == "__main__":
+    print(main())
