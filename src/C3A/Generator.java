@@ -158,18 +158,91 @@ public class Generator {
   private Instructions fromWhile(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     i.add(new Comment("While"));
+    Tree expression = ast.getChild(0).getChild(0);
+    Tree commands = ast.getChild(1);
+
+    String name = expression.getChild(0).getText();
+    Variable condition;
+    if (scopeVars.containsKey(name)) {
+      condition = scopeVars.get(name);
+    } else {
+      condition = new Variable(name);
+      scopeVars.put(name, condition);
+    }
+    i.add(fromExpr(expression, scopeVars));
+    i.add(new Assign(condition, i.getLastAssignedVariable()));
+
+    // Labels
+    Label startWhileLabel = new Label("startwhile");
+    Label endWhileLabel = new Label("endwhile");
+    Label startIfLabel = new Label("startif");
+
+    i.add(startWhileLabel);
+    i.add(new IfzGoto(startIfLabel, endWhileLabel, condition));
+    i.add(new Goto(endWhileLabel));
+    i.add(startIfLabel);
+    i.add(fromCommands(commands, scopeVars));
+    i.add(new Goto(startWhileLabel));
+    i.add(endWhileLabel);
     return i;
   }
 
   private Instructions fromFor(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     i.add(new Comment("For"));
+    Tree expression = ast.getChild(0).getChild(0);
+    Tree commands = ast.getChild(1);
+
+    i.add(fromExpr(expression, scopeVars));
+    Variable index = i.getLastAssignedVariable();
+
+    // For Labels
+    Label startForLabel = new Label("startfor");
+    Label endForLabel = new Label("endfor");
+    Label startIfLabel = new Label("startif");
+
+    i.add(startForLabel);
+    i.add(new IfzGoto(startIfLabel, endForLabel, index));
+    i.add(new Goto(endForLabel));
+    i.add(startIfLabel);
+    i.add(fromCommands(commands, scopeVars));
+    i.add(new Assign(index, new Unop(UnopEnum.TAIL, index))); // decrement index
+    i.add(new Goto(startForLabel));
+    i.add(endForLabel);
     return i;
   }
 
-  private Instructions fromForeach(Tree child, HashMap<String, Variable> scopeVars) {
+  private Instructions fromForeach(Tree ast, HashMap<String, Variable> scopeVars) {
     Instructions i = new Instructions();
     i.add(new Comment("Foreach"));
+    Tree indexNode = ast.getChild(0);
+    Tree expression = ast.getChild(1).getChild(0);
+    Tree commands = ast.getChild(2);
+
+    String name = indexNode.getText();
+    Variable index;
+    if (scopeVars.containsKey(name)) {
+      index = scopeVars.get(name);
+    } else {
+      index = new Variable(name);
+      scopeVars.put(name, index);
+    }
+    i.add(fromExpr(expression, scopeVars));
+    i.add(new Assign(index, i.getLastAssignedVariable()));
+
+    // Labels
+    Label startForLabel = new Label("startfor");
+    Label endForLabel = new Label("endfor");
+    Label startIfLabel = new Label("startif");
+
+    i.add(startForLabel);
+    i.add(new IfzGoto(startIfLabel, endForLabel, index));
+    i.add(new Goto(endForLabel));
+    i.add(startIfLabel);
+    i.add(fromCommands(commands, scopeVars));
+    i.add(new Assign(index, new Unop(UnopEnum.TAIL, index))); // decrement index
+    i.add(new Goto(startForLabel));
+    i.add(endForLabel);
     return i;
   }
 
