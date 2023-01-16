@@ -61,9 +61,7 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
         String base = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
-        ;
         String output = base.replaceFirst("# CODE INSERTED HERE", generator.getTargetCode());
-        System.out.println(output);
 
         // Write output to file
         Path path = Paths.get("output.py");
