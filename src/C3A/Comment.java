@@ -11,4 +11,9 @@ public class Comment extends Instruction {
     return "// " + comment;
   }
 
+  @Override
+  public String toPython(Indent indent) {
+    return indent + "# " + comment;
+  } 
+
 }

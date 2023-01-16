@@ -19,4 +19,8 @@ public class Assign extends Instruction {
   public String toString() {
     return left + " = " + right;
   }
+  @Override
+  public String toPython(Indent indent) {
+    return indent + left.getName() + " = " + right.toPython();
+  }
 }

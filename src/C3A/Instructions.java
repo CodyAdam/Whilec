@@ -44,4 +44,18 @@ public class Instructions {
     s = s.substring(0, s.length() - 1);
     return s;
   }
+
+  public String toTargetCode(){
+    return this.toPython(new Indent());
+  }
+
+  private String toPython(Indent indent) {
+    String s = "";
+    for (Instruction i : stack) {
+      s += i.toPython(indent) + "\n";
+    }
+    // remove last \n
+    s = s.substring(0, s.length() - 1);
+    return s;
+  }
 }

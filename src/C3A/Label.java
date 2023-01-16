@@ -13,4 +13,10 @@ public class Label extends Instruction {
   public String toString() {
     return label + ":";
   }
+
+  @Override
+  public String toPython(Indent indent) {
+    // TODO Auto-generated method stub
+    return "";
+  }
 }

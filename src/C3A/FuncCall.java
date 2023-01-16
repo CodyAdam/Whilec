@@ -14,4 +14,10 @@ public class FuncCall extends ToAssign {
     return "call " + funcName + " " + argsCount;
   }
 
+  @Override
+  public String toPython() {
+
+    return funcName + "()";
+  }
+
 }

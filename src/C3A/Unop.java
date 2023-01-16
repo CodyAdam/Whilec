@@ -36,4 +36,30 @@ public class Unop extends ToAssign {
     }
     return opString + arg;
   }
+
+  @Override
+  public String toPython() {
+    String opString;
+    switch (op) {
+      case NOT:
+        opString = "!";
+        break;
+      case TAIL:
+        opString = "tl ";
+        break;
+      case HEAD:
+        opString = "hd ";
+        break;
+      case ADRESS:
+        opString = "&";
+        break;
+      case CONTENT:
+        opString = "*";
+        break;
+      default:
+        opString = "UNKNOWN_UNOP";
+    }
+    return opString + arg;
+    // TODO fix
+  }
 }

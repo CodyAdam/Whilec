@@ -8,4 +8,9 @@ public class Pop extends ToAssign {
   public String toString() {
     return "pop";
   }
+
+  @Override
+  public String toPython() {
+    return this.stack + ".pop()";
+  }
 }

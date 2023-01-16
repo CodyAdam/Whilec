@@ -2,7 +2,13 @@ function nope:
 read
 %
 	nop;
-	A := true;
+	A := (cons nil nil);
 %
 write A
 
+function main:
+read
+%
+	A:= (nope)
+%
+write A
