@@ -56,5 +56,21 @@ https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687232/How+do+I+use+
 
 ## ?. Validation du langage :
 
-Liste des erreurs validées par le compilateur :
-- 
+Liste des erreurs vérifiées par le compilateur :
+- TODO Foreach : ERROR : la variable qu'on itère n'est pas une liste
+- TODO Foreach : WARNING : la variable qui stocke la valeur de l'itération n'est pas utilisée
+- While : ERROR : la condition n'est pas un booléen
+- If : ERROR : la condition n'est pas un booléen
+- For : ERROR : l'expression de départ n'est pas un entier
+- Assign : ERROR : une variable est assignée à un appel de fonction qui retourne plusieurs valeurs
+- Assign : ERROR : le nombre de variables à assigner est différent du nombre de valeurs assignées
+- TODO Variable : WARNING : une variable en input n'est pas utilisée dans la fonction
+- TODO Variable : WARNING : une variable en output n'est pas assignée dans la fonction
+- TODO Variable : ERROR : plusieurs variables de l'input ont le même nom
+- TODO Variable : ERROR : plusieurs variables de l'output ont le même nom
+- TODO Variable : ERROR : le nom d'une variable n'est pas valide
+- TODO Function : ERROR : plusieurs fonctions ont le même nom
+- TODO Function : ERROR : le nom d'une fonction n'est pas valide
+- TODO Function : ERROR : une fonction utilisée dans un appel n'est pas définie
+- TODO Function : ERROR : une fonction appelées avec le mauvais nombre d'input
+- TODO Program : ERROR : le programme doit avoir une fonction main
