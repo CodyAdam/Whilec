@@ -11,5 +11,10 @@ public class Symbol extends ToAssign{
   public String toString() {
     return "\"" + value + "\"";
   }
+
+  @Override
+  public String toPython() {
+    return value;
+  }
   
 }

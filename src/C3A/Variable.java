@@ -17,4 +17,11 @@ public class Variable extends ToAssign {
   public String toString() {
     return getName();
   }
+
+  @Override
+  public String toPython() {
+    return getName();
+  }
+
+  
 }

@@ -11,5 +11,11 @@ public class Goto extends Instruction{
   public String toString() {
     return "goto " + label;
   }
+
+  @Override
+  public String toPython(Indent indent) {
+    // TODO Auto-generated method stub
+    return "";
+  }
   
 }

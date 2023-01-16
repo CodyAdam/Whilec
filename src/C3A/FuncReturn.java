@@ -11,4 +11,9 @@ public class FuncReturn extends Instruction {
   public String toString() {
     return "return " + var.getName();
   }
+
+  @Override
+  public String toPython(Indent indent) {
+    return indent + "return " + var.getName();
+  }
 }

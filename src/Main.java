@@ -25,7 +25,7 @@ public class Main {
         if (args.length != 1) {
             // System.err.println("Wrong number of arguments, expected 1, got " +
             // args.length);
-            filepath = "test/for.while";
+            filepath = "test/nop.while";
         } else {
             filepath = args[0];
         }
@@ -62,7 +62,7 @@ public class Main {
         String base = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
         ;
-        String output = base.replaceFirst("# CODE INSERTED HERE", generator.generateTargetCode());
+        String output = base.replaceFirst("# CODE INSERTED HERE", generator.getTargetCode());
         System.out.println(output);
 
         // Write output to file

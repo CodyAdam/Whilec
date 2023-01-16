@@ -5,4 +5,10 @@ public class Nil extends ToAssign {
   public String toString() {
     return "nil";
   }
+
+  @Override
+  public String toPython() {
+    return this.binTree + "(key= \"NIL\")";
+  }
+
 }

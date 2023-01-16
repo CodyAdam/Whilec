@@ -16,8 +16,8 @@ public class Generator {
     return instructions;
   }
 
-  public String generateTargetCode(){
-    return "TODO";
+  public String getTargetCode(){
+    return instructions.toTargetCode();
   }
 
   private Instructions fromRoot(Tree ast) {
@@ -110,7 +110,7 @@ public class Generator {
           i.add(fromAssign(child, scopeVars));
           break;
         case NOP:
-          i.add(new Comment("Nop :>"));
+          i.add(new Nop());
           break;
         default:
           assert (false) : child.getText() + " is not valid child of COMMANDS";
@@ -365,7 +365,7 @@ public class Generator {
         for (int j = 0; j < funcChildCount; j++) {
           Tree exprNode = funcNode.getChild(j); // EXPRESSION node
           i.add(fromExpr(exprNode, scopeVars));
-          i.add(new FuncParam(i.getLastAssignedVariable()));
+          i.add(new Push(i.getLastAssignedVariable()));
         }
         i.add(new Assign(expr, new FuncCall(funcName, funcChildCount)));
         break;

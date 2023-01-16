@@ -14,4 +14,8 @@ public class TabValue extends ToAssign {
     return tab + "[" + index + "]";
   }
 
+  @Override
+  public String toPython() {
+    return tab + ".get(" + index + ")";
+  }
 }

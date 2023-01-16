@@ -11,4 +11,12 @@ public class FuncBegin extends Instruction {
   public String toString() {
     return "func begin " + funcName;
   }
+
+  @Override
+  public String toPython(Indent indent) {
+    String s = indent + "def " + funcName + "():\n";
+    indent.inc();
+    s += indent + "global stack";
+    return s;
+  }
 }
