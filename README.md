@@ -72,3 +72,5 @@ Liste des erreurs vérifiées par le compilateur :
 - TODO Function : ERROR : plusieurs fonctions ont le même nom
 - TODO Function : ERROR : le nom d'une fonction n'est pas valide
 - TODO Function : ERROR : une fonction utilisée dans un appel n'est pas définie
+- TODO Function : ERROR : une fonction appelées avec le mauvais nombre d'input
+- TODO Program : ERROR : le programme doit avoir une fonction main
