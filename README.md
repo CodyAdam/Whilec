@@ -53,3 +53,8 @@ Les listes sont représentées par des arbres binaires. Une liste contient des �
 
 https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687087/Interfacing+AST+with+Java
 https://theantlrguy.atlassian.net/wiki/spaces/ANTLR3/pages/2687232/How+do+I+use+ANTLR+v3+generated+Lexer+and+Parser+from+Java
+
+## ?. Validation du langage :
+
+Liste des erreurs validées par le compilateur :
+- 

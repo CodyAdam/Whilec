@@ -32,8 +32,10 @@ public class PreCompileValidator {
     public void validate(Tree tree) throws Exception {
         this.printBanner();
 
+        SymbolsCreator symbols = new SymbolsCreator();
+
         for (Validator validator : validators) {
-            validator.validate(tree);
+            validator.validate(tree, symbols.getFunctionsSymbols(tree));
             if(errorCount>0) break;
         }
 
