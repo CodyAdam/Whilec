@@ -1,9 +1,6 @@
 package Validation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
@@ -19,7 +16,7 @@ public class FunctionNameNUsageValidator extends Validator {
     HashSet<String> notVariable = new HashSet<>(Arrays.asList("cons", "hd", "tl", "list", "nil", "nop", "if", "then", "fi", "while", "do", "od", "foreach", "in", "function", "read", "write", "true", "false"));
 
     @Override
-    public void validate(Tree tree) throws Exception {
+    public void validate(Tree tree, HashMap<String, Function> functions) throws Exception {
         List<String> functionNames = new ArrayList<>();
         for (int i = 0; i < tree.getChildCount(); i++) {
             String functionName = tree.getChild(i).getChild(0).getText();

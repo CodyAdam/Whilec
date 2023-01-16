@@ -23,6 +23,11 @@ public class TypingValidator extends DeepValidator{
     }
 
     @Override
+    protected void validateFUNCTION(Tree tree, Function function) {
+
+    }
+
+    @Override
     protected void validateASSIGN(Tree tree, Function function) {
         if(tree.getChild(1).getChildCount() == 1 && tree.getChild(1).getChild(0).getChild(0).getText().equals("FUNCTIONCALL")){
             Function f = this.functions.get(tree.getChild(1).getChild(0).getChild(0).getChild(0).getText());
