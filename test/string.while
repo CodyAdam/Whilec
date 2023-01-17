@@ -18,3 +18,10 @@ function stringtest2:
     A := (cons nil liste une est ceci)
   %
 write A
+
+function main:
+read
+%
+  Out := (stringtest)
+%
+write Out

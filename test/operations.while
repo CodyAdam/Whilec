@@ -1,6 +1,7 @@
 function add1 : 
-read Op1, Op2 
+read Op1
 % 
+  Result := Op1 ;
   Result := ( cons nil Result )  
 % 
 write Result 
@@ -12,15 +13,6 @@ read Op1, Op2
   Result := (tl Result) 
 % 
 write Result 
- 
-function mul : 
-read Op1, Op2 
-% 
-  for Op1 do 
-    Result := (add Result Op2) 
-  od 
-% 
-write Result
 
 function test : 
 read A
@@ -28,3 +20,13 @@ read A
   Result := (tl A)
 % 
 write Result 
+
+function main:
+read
+%
+  Two := (cons nil (cons nil nil)) ;
+  Result := (add1 Two);
+  Result := (add1 Result)
+%
+write Result
+
