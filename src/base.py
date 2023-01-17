@@ -7,7 +7,44 @@ class BinTree:
 
     def __str__(self) -> str:
         lines, *_ = self._display_aux()
-        return "\n" + "\n".join(lines) + "\n"
+        graph = "\n".join(lines)
+        as_int = "{:>15}  {:<5}".format("as Integer:", self.toInt())
+        as_bool = "{:>15}  {:<5}".format("as Boolean:", self.toBool())
+        as_string = "{:>15}  {:<5}".format("as String:",
+                                           f"\"{self.toString()}\"")
+        return f"\n{graph}\n\n{as_int}\n{as_bool}\n{as_string}\n"
+
+    def toInt(self):
+        value = 0
+        cursor = self
+        if cursor.key == "CONS":
+            value += 1
+        while cursor.right:
+            cursor = cursor.right
+            if cursor.key == "CONS":
+                value += 1
+        return value
+
+    def toBool(self):
+        value = False
+        cursor = self
+        if cursor.key == "CONS":
+            value = True
+        return "True" if value else "False"
+
+    def toString(self):
+        value = ""
+        cursor = self
+
+        if cursor.key == "CONS":
+            if cursor.left:
+                value += cursor.left.toString()
+            if cursor.right:
+                value += cursor.right.toString()
+        else:
+            if cursor.key != "NIL":
+                value += cursor.key
+        return f"{value}"
 
     def _display_aux(self):
         """Returns list of strings, width, height, and horizontal coordinate of the root."""
