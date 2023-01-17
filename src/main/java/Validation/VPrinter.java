@@ -1,6 +1,5 @@
 package Validation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VPrinter {
@@ -66,18 +65,6 @@ public class VPrinter {
     public void printError(String message, String path, int line, int charPositionInLine) {
         println("ERROR : "+message, new FontDetail(Color.RED, true, false));
         println("Error found at ("+path+":"+line+":"+charPositionInLine+")\n", new FontDetail(Color.RED, false, false));
-    }
-
-    public void printWarning(String message, String path, int line, int charPositionInLine, ArrayList<String> tips) {
-        println("WARNING : "+message, new FontDetail(Color.YELLOW, true, false));
-        println("Warning found at ("+path+":"+line+":"+charPositionInLine+")", new FontDetail(Color.YELLOW, false, false));
-        if(tips != null && tips.size() > 0) {
-            println("Fixing tips:", new FontDetail(Color.YELLOW, true, false));
-            for(String tip : tips){
-                println("   - "+tip, new FontDetail(Color.YELLOW, false, false));
-            }
-            System.out.print("\n");
-        }
     }
 }
 

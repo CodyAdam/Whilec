@@ -1,5 +1,5 @@
 package AST;
-// $ANTLR 3.5.3 ./grammars/AST.g 2023-01-15 21:12:34
+// $ANTLR 3.5.3 ./grammar/AST.g 2023-01-17 17:27:22
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -108,7 +108,7 @@ public class ASTParser extends Parser {
 		return adaptor;
 	}
 	@Override public String[] getTokenNames() { return ASTParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "./grammars/AST.g"; }
+	@Override public String getGrammarFileName() { return "./grammar/AST.g"; }
 
 
 	public static class program_return extends ParserRuleReturnScope {
@@ -119,7 +119,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "program"
-	// ./grammars/AST.g:40:1: program : ( WS )* ( function ( WS )* )+ -> ^( ROOT ( function )+ ) ;
+	// ./grammar/AST.g:40:1: program : ( WS )* ( function ( WS )* )+ -> ^( ROOT ( function )+ ) ;
 	public final ASTParser.program_return program() throws RecognitionException {
 		ASTParser.program_return retval = new ASTParser.program_return();
 		retval.start = input.LT(1);
@@ -136,10 +136,10 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_function=new RewriteRuleSubtreeStream(adaptor,"rule function");
 
 		try {
-			// ./grammars/AST.g:40:8: ( ( WS )* ( function ( WS )* )+ -> ^( ROOT ( function )+ ) )
-			// ./grammars/AST.g:40:10: ( WS )* ( function ( WS )* )+
+			// ./grammar/AST.g:40:8: ( ( WS )* ( function ( WS )* )+ -> ^( ROOT ( function )+ ) )
+			// ./grammar/AST.g:40:10: ( WS )* ( function ( WS )* )+
 			{
-			// ./grammars/AST.g:40:10: ( WS )*
+			// ./grammar/AST.g:40:10: ( WS )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -150,7 +150,7 @@ public class ASTParser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// ./grammars/AST.g:40:10: WS
+					// ./grammar/AST.g:40:10: WS
 					{
 					WS1=(Token)match(input,WS,FOLLOW_WS_in_program144);  
 					stream_WS.add(WS1);
@@ -163,7 +163,7 @@ public class ASTParser extends Parser {
 				}
 			}
 
-			// ./grammars/AST.g:40:14: ( function ( WS )* )+
+			// ./grammar/AST.g:40:14: ( function ( WS )* )+
 			int cnt3=0;
 			loop3:
 			while (true) {
@@ -175,14 +175,14 @@ public class ASTParser extends Parser {
 
 				switch (alt3) {
 				case 1 :
-					// ./grammars/AST.g:40:15: function ( WS )*
+					// ./grammar/AST.g:40:15: function ( WS )*
 					{
 					pushFollow(FOLLOW_function_in_program148);
 					function2=function();
 					state._fsp--;
 
 					stream_function.add(function2.getTree());
-					// ./grammars/AST.g:40:24: ( WS )*
+					// ./grammar/AST.g:40:24: ( WS )*
 					loop2:
 					while (true) {
 						int alt2=2;
@@ -193,7 +193,7 @@ public class ASTParser extends Parser {
 
 						switch (alt2) {
 						case 1 :
-							// ./grammars/AST.g:40:24: WS
+							// ./grammar/AST.g:40:24: WS
 							{
 							WS3=(Token)match(input,WS,FOLLOW_WS_in_program150);  
 							stream_WS.add(WS3);
@@ -231,7 +231,7 @@ public class ASTParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 40:30: -> ^( ROOT ( function )+ )
 			{
-				// ./grammars/AST.g:40:33: ^( ROOT ( function )+ )
+				// ./grammar/AST.g:40:33: ^( ROOT ( function )+ )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(ROOT, "ROOT"), root_1);
@@ -280,7 +280,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "function"
-	// ./grammars/AST.g:42:1: function : 'function' WS SYMBOL_LEX ( WS )? ':' WS definition -> ^( FUNCTION ^( SYMBOL_LEX definition ) ) ;
+	// ./grammar/AST.g:42:1: function : 'function' WS SYMBOL_LEX ( WS )? ':' WS definition -> ^( FUNCTION ^( SYMBOL_LEX definition ) ) ;
 	public final ASTParser.function_return function() throws RecognitionException {
 		ASTParser.function_return retval = new ASTParser.function_return();
 		retval.start = input.LT(1);
@@ -308,8 +308,8 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_definition=new RewriteRuleSubtreeStream(adaptor,"rule definition");
 
 		try {
-			// ./grammars/AST.g:42:9: ( 'function' WS SYMBOL_LEX ( WS )? ':' WS definition -> ^( FUNCTION ^( SYMBOL_LEX definition ) ) )
-			// ./grammars/AST.g:42:11: 'function' WS SYMBOL_LEX ( WS )? ':' WS definition
+			// ./grammar/AST.g:42:9: ( 'function' WS SYMBOL_LEX ( WS )? ':' WS definition -> ^( FUNCTION ^( SYMBOL_LEX definition ) ) )
+			// ./grammar/AST.g:42:11: 'function' WS SYMBOL_LEX ( WS )? ':' WS definition
 			{
 			string_literal4=(Token)match(input,51,FOLLOW_51_in_function169);  
 			stream_51.add(string_literal4);
@@ -320,7 +320,7 @@ public class ASTParser extends Parser {
 			SYMBOL_LEX6=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_function173);  
 			stream_SYMBOL_LEX.add(SYMBOL_LEX6);
 
-			// ./grammars/AST.g:42:36: ( WS )?
+			// ./grammar/AST.g:42:36: ( WS )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0==WS) ) {
@@ -328,7 +328,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt4) {
 				case 1 :
-					// ./grammars/AST.g:42:36: WS
+					// ./grammar/AST.g:42:36: WS
 					{
 					WS7=(Token)match(input,WS,FOLLOW_WS_in_function175);  
 					stream_WS.add(WS7);
@@ -363,11 +363,11 @@ public class ASTParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 42:57: -> ^( FUNCTION ^( SYMBOL_LEX definition ) )
 			{
-				// ./grammars/AST.g:42:60: ^( FUNCTION ^( SYMBOL_LEX definition ) )
+				// ./grammar/AST.g:42:60: ^( FUNCTION ^( SYMBOL_LEX definition ) )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FUNCTION, "FUNCTION"), root_1);
-				// ./grammars/AST.g:42:71: ^( SYMBOL_LEX definition )
+				// ./grammar/AST.g:42:71: ^( SYMBOL_LEX definition )
 				{
 				Object root_2 = (Object)adaptor.nil();
 				root_2 = (Object)adaptor.becomeRoot(stream_SYMBOL_LEX.nextNode(), root_2);
@@ -412,7 +412,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "definition"
-	// ./grammars/AST.g:44:1: definition : 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) ) ;
+	// ./grammar/AST.g:44:1: definition : 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) ) ;
 	public final ASTParser.definition_return definition() throws RecognitionException {
 		ASTParser.definition_return retval = new ASTParser.definition_return();
 		retval.start = input.LT(1);
@@ -450,8 +450,8 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_commands=new RewriteRuleSubtreeStream(adaptor,"rule commands");
 
 		try {
-			// ./grammars/AST.g:44:11: ( 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) ) )
-			// ./grammars/AST.g:45:2: 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output
+			// ./grammar/AST.g:44:11: ( 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) ) )
+			// ./grammar/AST.g:45:2: 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output
 			{
 			string_literal11=(Token)match(input,59,FOLLOW_59_in_definition201);  
 			stream_59.add(string_literal11);
@@ -459,7 +459,7 @@ public class ASTParser extends Parser {
 			WS12=(Token)match(input,WS,FOLLOW_WS_in_definition203);  
 			stream_WS.add(WS12);
 
-			// ./grammars/AST.g:45:12: ( input WS )?
+			// ./grammar/AST.g:45:12: ( input WS )?
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0==VARIABLE_LEX||LA5_0==WS) ) {
@@ -467,7 +467,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt5) {
 				case 1 :
-					// ./grammars/AST.g:45:13: input WS
+					// ./grammar/AST.g:45:13: input WS
 					{
 					pushFollow(FOLLOW_input_in_definition206);
 					input13=input();
@@ -524,17 +524,17 @@ public class ASTParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 45:65: -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) )
 			{
-				// ./grammars/AST.g:45:68: ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) )
+				// ./grammar/AST.g:45:68: ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FUNCDEF, "FUNCDEF"), root_1);
-				// ./grammars/AST.g:45:78: ( input )?
+				// ./grammar/AST.g:45:78: ( input )?
 				if ( stream_input.hasNext() ) {
 					adaptor.addChild(root_1, stream_input.nextTree());
 				}
 				stream_input.reset();
 
-				// ./grammars/AST.g:45:85: ^( COMMANDS commands )
+				// ./grammar/AST.g:45:85: ^( COMMANDS commands )
 				{
 				Object root_2 = (Object)adaptor.nil();
 				root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
@@ -542,7 +542,7 @@ public class ASTParser extends Parser {
 				adaptor.addChild(root_1, root_2);
 				}
 
-				// ./grammars/AST.g:45:106: ^( OUTPUT output )
+				// ./grammar/AST.g:45:106: ^( OUTPUT output )
 				{
 				Object root_2 = (Object)adaptor.nil();
 				root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(OUTPUT, "OUTPUT"), root_2);
@@ -587,7 +587,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "input"
-	// ./grammars/AST.g:47:1: input : ( inputsub )? -> ^( INPUT ( inputsub )? ) ;
+	// ./grammar/AST.g:47:1: input : ( inputsub )? -> ^( INPUT ( inputsub )? ) ;
 	public final ASTParser.input_return input() throws RecognitionException {
 		ASTParser.input_return retval = new ASTParser.input_return();
 		retval.start = input.LT(1);
@@ -599,10 +599,10 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_inputsub=new RewriteRuleSubtreeStream(adaptor,"rule inputsub");
 
 		try {
-			// ./grammars/AST.g:47:6: ( ( inputsub )? -> ^( INPUT ( inputsub )? ) )
-			// ./grammars/AST.g:47:8: ( inputsub )?
+			// ./grammar/AST.g:47:6: ( ( inputsub )? -> ^( INPUT ( inputsub )? ) )
+			// ./grammar/AST.g:47:8: ( inputsub )?
 			{
-			// ./grammars/AST.g:47:8: ( inputsub )?
+			// ./grammar/AST.g:47:8: ( inputsub )?
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0==WS) ) {
@@ -616,7 +616,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt6) {
 				case 1 :
-					// ./grammars/AST.g:47:8: inputsub
+					// ./grammar/AST.g:47:8: inputsub
 					{
 					pushFollow(FOLLOW_inputsub_in_input255);
 					inputsub23=inputsub();
@@ -642,11 +642,11 @@ public class ASTParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 47:18: -> ^( INPUT ( inputsub )? )
 			{
-				// ./grammars/AST.g:47:21: ^( INPUT ( inputsub )? )
+				// ./grammar/AST.g:47:21: ^( INPUT ( inputsub )? )
 				{
 				Object root_1 = (Object)adaptor.nil();
 				root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(INPUT, "INPUT"), root_1);
-				// ./grammars/AST.g:47:29: ( inputsub )?
+				// ./grammar/AST.g:47:29: ( inputsub )?
 				if ( stream_inputsub.hasNext() ) {
 					adaptor.addChild(root_1, stream_inputsub.nextTree());
 				}
@@ -689,7 +689,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "inputsub"
-	// ./grammars/AST.g:49:1: inputsub : ( ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub ) -> VARIABLE_LEX inputsub | ( WS )? VARIABLE_LEX -> VARIABLE_LEX );
+	// ./grammar/AST.g:49:1: inputsub : ( ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub ) -> VARIABLE_LEX inputsub | ( WS )? VARIABLE_LEX -> VARIABLE_LEX );
 	public final ASTParser.inputsub_return inputsub() throws RecognitionException {
 		ASTParser.inputsub_return retval = new ASTParser.inputsub_return();
 		retval.start = input.LT(1);
@@ -716,7 +716,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_inputsub=new RewriteRuleSubtreeStream(adaptor,"rule inputsub");
 
 		try {
-			// ./grammars/AST.g:49:9: ( ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub ) -> VARIABLE_LEX inputsub | ( WS )? VARIABLE_LEX -> VARIABLE_LEX )
+			// ./grammar/AST.g:49:9: ( ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub ) -> VARIABLE_LEX inputsub | ( WS )? VARIABLE_LEX -> VARIABLE_LEX )
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==WS) ) {
@@ -832,12 +832,12 @@ public class ASTParser extends Parser {
 
 			switch (alt10) {
 				case 1 :
-					// ./grammars/AST.g:49:11: ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub )
+					// ./grammar/AST.g:49:11: ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub )
 					{
-					// ./grammars/AST.g:49:11: ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub )
-					// ./grammars/AST.g:49:12: ( WS )? VARIABLE_LEX ( WS )? ',' inputsub
+					// ./grammar/AST.g:49:11: ( ( WS )? VARIABLE_LEX ( WS )? ',' inputsub )
+					// ./grammar/AST.g:49:12: ( WS )? VARIABLE_LEX ( WS )? ',' inputsub
 					{
-					// ./grammars/AST.g:49:12: ( WS )?
+					// ./grammar/AST.g:49:12: ( WS )?
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0==WS) ) {
@@ -845,7 +845,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt7) {
 						case 1 :
-							// ./grammars/AST.g:49:12: WS
+							// ./grammar/AST.g:49:12: WS
 							{
 							WS24=(Token)match(input,WS,FOLLOW_WS_in_inputsub273);  
 							stream_WS.add(WS24);
@@ -858,7 +858,7 @@ public class ASTParser extends Parser {
 					VARIABLE_LEX25=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_inputsub276);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX25);
 
-					// ./grammars/AST.g:49:29: ( WS )?
+					// ./grammar/AST.g:49:29: ( WS )?
 					int alt8=2;
 					int LA8_0 = input.LA(1);
 					if ( (LA8_0==WS) ) {
@@ -866,7 +866,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt8) {
 						case 1 :
-							// ./grammars/AST.g:49:29: WS
+							// ./grammar/AST.g:49:29: WS
 							{
 							WS26=(Token)match(input,WS,FOLLOW_WS_in_inputsub278);  
 							stream_WS.add(WS26);
@@ -910,9 +910,9 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:49:74: ( WS )? VARIABLE_LEX
+					// ./grammar/AST.g:49:74: ( WS )? VARIABLE_LEX
 					{
-					// ./grammars/AST.g:49:74: ( WS )?
+					// ./grammar/AST.g:49:74: ( WS )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0==WS) ) {
@@ -920,7 +920,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt9) {
 						case 1 :
-							// ./grammars/AST.g:49:74: WS
+							// ./grammar/AST.g:49:74: WS
 							{
 							WS29=(Token)match(input,WS,FOLLOW_WS_in_inputsub294);  
 							stream_WS.add(WS29);
@@ -984,7 +984,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "output"
-	// ./grammars/AST.g:51:1: output : ( ( ( WS )? VARIABLE_LEX ( WS )? ',' output ) -> VARIABLE_LEX output | ( WS )? VARIABLE_LEX -> VARIABLE_LEX );
+	// ./grammar/AST.g:51:1: output : ( ( ( WS )? VARIABLE_LEX ( WS )? ',' output ) -> VARIABLE_LEX output | ( WS )? VARIABLE_LEX -> VARIABLE_LEX );
 	public final ASTParser.output_return output() throws RecognitionException {
 		ASTParser.output_return retval = new ASTParser.output_return();
 		retval.start = input.LT(1);
@@ -1011,7 +1011,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_output=new RewriteRuleSubtreeStream(adaptor,"rule output");
 
 		try {
-			// ./grammars/AST.g:51:7: ( ( ( WS )? VARIABLE_LEX ( WS )? ',' output ) -> VARIABLE_LEX output | ( WS )? VARIABLE_LEX -> VARIABLE_LEX )
+			// ./grammar/AST.g:51:7: ( ( ( WS )? VARIABLE_LEX ( WS )? ',' output ) -> VARIABLE_LEX output | ( WS )? VARIABLE_LEX -> VARIABLE_LEX )
 			int alt14=2;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0==WS) ) {
@@ -1143,12 +1143,12 @@ public class ASTParser extends Parser {
 
 			switch (alt14) {
 				case 1 :
-					// ./grammars/AST.g:51:9: ( ( WS )? VARIABLE_LEX ( WS )? ',' output )
+					// ./grammar/AST.g:51:9: ( ( WS )? VARIABLE_LEX ( WS )? ',' output )
 					{
-					// ./grammars/AST.g:51:9: ( ( WS )? VARIABLE_LEX ( WS )? ',' output )
-					// ./grammars/AST.g:51:10: ( WS )? VARIABLE_LEX ( WS )? ',' output
+					// ./grammar/AST.g:51:9: ( ( WS )? VARIABLE_LEX ( WS )? ',' output )
+					// ./grammar/AST.g:51:10: ( WS )? VARIABLE_LEX ( WS )? ',' output
 					{
-					// ./grammars/AST.g:51:10: ( WS )?
+					// ./grammar/AST.g:51:10: ( WS )?
 					int alt11=2;
 					int LA11_0 = input.LA(1);
 					if ( (LA11_0==WS) ) {
@@ -1156,7 +1156,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt11) {
 						case 1 :
-							// ./grammars/AST.g:51:10: WS
+							// ./grammar/AST.g:51:10: WS
 							{
 							WS31=(Token)match(input,WS,FOLLOW_WS_in_output309);  
 							stream_WS.add(WS31);
@@ -1169,7 +1169,7 @@ public class ASTParser extends Parser {
 					VARIABLE_LEX32=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_output312);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX32);
 
-					// ./grammars/AST.g:51:27: ( WS )?
+					// ./grammar/AST.g:51:27: ( WS )?
 					int alt12=2;
 					int LA12_0 = input.LA(1);
 					if ( (LA12_0==WS) ) {
@@ -1177,7 +1177,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt12) {
 						case 1 :
-							// ./grammars/AST.g:51:27: WS
+							// ./grammar/AST.g:51:27: WS
 							{
 							WS33=(Token)match(input,WS,FOLLOW_WS_in_output314);  
 							stream_WS.add(WS33);
@@ -1221,9 +1221,9 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:51:68: ( WS )? VARIABLE_LEX
+					// ./grammar/AST.g:51:68: ( WS )? VARIABLE_LEX
 					{
-					// ./grammars/AST.g:51:68: ( WS )?
+					// ./grammar/AST.g:51:68: ( WS )?
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0==WS) ) {
@@ -1231,7 +1231,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt13) {
 						case 1 :
-							// ./grammars/AST.g:51:68: WS
+							// ./grammar/AST.g:51:68: WS
 							{
 							WS36=(Token)match(input,WS,FOLLOW_WS_in_output330);  
 							stream_WS.add(WS36);
@@ -1295,7 +1295,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "commands"
-	// ./grammars/AST.g:53:1: commands : ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )? -> ( command )+ ;
+	// ./grammar/AST.g:53:1: commands : ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )? -> ( command )+ ;
 	public final ASTParser.commands_return commands() throws RecognitionException {
 		ASTParser.commands_return retval = new ASTParser.commands_return();
 		retval.start = input.LT(1);
@@ -1320,10 +1320,10 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_command=new RewriteRuleSubtreeStream(adaptor,"rule command");
 
 		try {
-			// ./grammars/AST.g:53:9: ( ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )? -> ( command )+ )
-			// ./grammars/AST.g:54:5: ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )?
+			// ./grammar/AST.g:53:9: ( ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )? -> ( command )+ )
+			// ./grammar/AST.g:54:5: ( WS )? command ( ( WS )? ';' ( WS )? command )* ( ';' )?
 			{
-			// ./grammars/AST.g:54:5: ( WS )?
+			// ./grammar/AST.g:54:5: ( WS )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==WS) ) {
@@ -1331,7 +1331,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt15) {
 				case 1 :
-					// ./grammars/AST.g:54:5: WS
+					// ./grammar/AST.g:54:5: WS
 					{
 					WS38=(Token)match(input,WS,FOLLOW_WS_in_commands350);  
 					stream_WS.add(WS38);
@@ -1346,7 +1346,7 @@ public class ASTParser extends Parser {
 			state._fsp--;
 
 			stream_command.add(command39.getTree());
-			// ./grammars/AST.g:54:17: ( ( WS )? ';' ( WS )? command )*
+			// ./grammar/AST.g:54:17: ( ( WS )? ';' ( WS )? command )*
 			loop18:
 			while (true) {
 				int alt18=2;
@@ -1375,9 +1375,9 @@ public class ASTParser extends Parser {
 
 				switch (alt18) {
 				case 1 :
-					// ./grammars/AST.g:54:18: ( WS )? ';' ( WS )? command
+					// ./grammar/AST.g:54:18: ( WS )? ';' ( WS )? command
 					{
-					// ./grammars/AST.g:54:18: ( WS )?
+					// ./grammar/AST.g:54:18: ( WS )?
 					int alt16=2;
 					int LA16_0 = input.LA(1);
 					if ( (LA16_0==WS) ) {
@@ -1385,7 +1385,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt16) {
 						case 1 :
-							// ./grammars/AST.g:54:18: WS
+							// ./grammar/AST.g:54:18: WS
 							{
 							WS40=(Token)match(input,WS,FOLLOW_WS_in_commands356);  
 							stream_WS.add(WS40);
@@ -1398,7 +1398,7 @@ public class ASTParser extends Parser {
 					char_literal41=(Token)match(input,44,FOLLOW_44_in_commands359);  
 					stream_44.add(char_literal41);
 
-					// ./grammars/AST.g:54:26: ( WS )?
+					// ./grammar/AST.g:54:26: ( WS )?
 					int alt17=2;
 					int LA17_0 = input.LA(1);
 					if ( (LA17_0==WS) ) {
@@ -1406,7 +1406,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt17) {
 						case 1 :
-							// ./grammars/AST.g:54:26: WS
+							// ./grammar/AST.g:54:26: WS
 							{
 							WS42=(Token)match(input,WS,FOLLOW_WS_in_commands361);  
 							stream_WS.add(WS42);
@@ -1429,7 +1429,7 @@ public class ASTParser extends Parser {
 				}
 			}
 
-			// ./grammars/AST.g:54:40: ( ';' )?
+			// ./grammar/AST.g:54:40: ( ';' )?
 			int alt19=2;
 			int LA19_0 = input.LA(1);
 			if ( (LA19_0==44) ) {
@@ -1437,7 +1437,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt19) {
 				case 1 :
-					// ./grammars/AST.g:54:41: ';'
+					// ./grammar/AST.g:54:41: ';'
 					{
 					char_literal44=(Token)match(input,44,FOLLOW_44_in_commands369);  
 					stream_44.add(char_literal44);
@@ -1503,7 +1503,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "command"
-	// ./grammars/AST.g:56:1: command : ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) );
+	// ./grammar/AST.g:56:1: command : ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) );
 	public final ASTParser.command_return command() throws RecognitionException {
 		ASTParser.command_return retval = new ASTParser.command_return();
 		retval.start = input.LT(1);
@@ -1622,7 +1622,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_commands=new RewriteRuleSubtreeStream(adaptor,"rule commands");
 
 		try {
-			// ./grammars/AST.g:56:8: ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) )
+			// ./grammar/AST.g:56:8: ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) )
 			int alt24=6;
 			switch ( input.LA(1) ) {
 			case 57:
@@ -1662,10 +1662,10 @@ public class ASTParser extends Parser {
 			}
 			switch (alt24) {
 				case 1 :
-					// ./grammars/AST.g:57:4: ( 'nop' )
+					// ./grammar/AST.g:57:4: ( 'nop' )
 					{
-					// ./grammars/AST.g:57:4: ( 'nop' )
-					// ./grammars/AST.g:57:5: 'nop'
+					// ./grammar/AST.g:57:4: ( 'nop' )
+					// ./grammar/AST.g:57:5: 'nop'
 					{
 					string_literal45=(Token)match(input,57,FOLLOW_57_in_command387);  
 					stream_57.add(string_literal45);
@@ -1695,17 +1695,17 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:58:4: ( vars ( WS )? ':=' ( WS )? exprs )
+					// ./grammar/AST.g:58:4: ( vars ( WS )? ':=' ( WS )? exprs )
 					{
-					// ./grammars/AST.g:58:4: ( vars ( WS )? ':=' ( WS )? exprs )
-					// ./grammars/AST.g:58:5: vars ( WS )? ':=' ( WS )? exprs
+					// ./grammar/AST.g:58:4: ( vars ( WS )? ':=' ( WS )? exprs )
+					// ./grammar/AST.g:58:5: vars ( WS )? ':=' ( WS )? exprs
 					{
 					pushFollow(FOLLOW_vars_in_command398);
 					vars46=vars();
 					state._fsp--;
 
 					stream_vars.add(vars46.getTree());
-					// ./grammars/AST.g:58:10: ( WS )?
+					// ./grammar/AST.g:58:10: ( WS )?
 					int alt20=2;
 					int LA20_0 = input.LA(1);
 					if ( (LA20_0==WS) ) {
@@ -1713,7 +1713,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt20) {
 						case 1 :
-							// ./grammars/AST.g:58:10: WS
+							// ./grammar/AST.g:58:10: WS
 							{
 							WS47=(Token)match(input,WS,FOLLOW_WS_in_command400);  
 							stream_WS.add(WS47);
@@ -1726,7 +1726,7 @@ public class ASTParser extends Parser {
 					string_literal48=(Token)match(input,43,FOLLOW_43_in_command403);  
 					stream_43.add(string_literal48);
 
-					// ./grammars/AST.g:58:19: ( WS )?
+					// ./grammar/AST.g:58:19: ( WS )?
 					int alt21=2;
 					int LA21_0 = input.LA(1);
 					if ( (LA21_0==WS) ) {
@@ -1734,7 +1734,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt21) {
 						case 1 :
-							// ./grammars/AST.g:58:19: WS
+							// ./grammar/AST.g:58:19: WS
 							{
 							WS49=(Token)match(input,WS,FOLLOW_WS_in_command405);  
 							stream_WS.add(WS49);
@@ -1765,11 +1765,11 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 58:30: -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) )
 					{
-						// ./grammars/AST.g:58:33: ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) )
+						// ./grammar/AST.g:58:33: ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(ASSIGN, "ASSIGN"), root_1);
-						// ./grammars/AST.g:58:42: ^( VARS vars )
+						// ./grammar/AST.g:58:42: ^( VARS vars )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(VARS, "VARS"), root_2);
@@ -1777,7 +1777,7 @@ public class ASTParser extends Parser {
 						adaptor.addChild(root_1, root_2);
 						}
 
-						// ./grammars/AST.g:58:55: ^( EXPRESSIONS exprs )
+						// ./grammar/AST.g:58:55: ^( EXPRESSIONS exprs )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(EXPRESSIONS, "EXPRESSIONS"), root_2);
@@ -1796,10 +1796,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ./grammars/AST.g:59:4: ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' )
+					// ./grammar/AST.g:59:4: ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' )
 					{
-					// ./grammars/AST.g:59:4: ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' )
-					// ./grammars/AST.g:59:5: 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi'
+					// ./grammar/AST.g:59:4: ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' )
+					// ./grammar/AST.g:59:5: 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi'
 					{
 					string_literal51=(Token)match(input,53,FOLLOW_53_in_command433);  
 					stream_53.add(string_literal51);
@@ -1829,7 +1829,7 @@ public class ASTParser extends Parser {
 					WS58=(Token)match(input,WS,FOLLOW_WS_in_command447);  
 					stream_WS.add(WS58);
 
-					// ./grammars/AST.g:59:48: ( ( WS )? 'else' WS commands WS )?
+					// ./grammar/AST.g:59:48: ( ( WS )? 'else' WS commands WS )?
 					int alt23=2;
 					int LA23_0 = input.LA(1);
 					if ( (LA23_0==WS||LA23_0==47) ) {
@@ -1837,9 +1837,9 @@ public class ASTParser extends Parser {
 					}
 					switch (alt23) {
 						case 1 :
-							// ./grammars/AST.g:59:49: ( WS )? 'else' WS commands WS
+							// ./grammar/AST.g:59:49: ( WS )? 'else' WS commands WS
 							{
-							// ./grammars/AST.g:59:49: ( WS )?
+							// ./grammar/AST.g:59:49: ( WS )?
 							int alt22=2;
 							int LA22_0 = input.LA(1);
 							if ( (LA22_0==WS) ) {
@@ -1847,7 +1847,7 @@ public class ASTParser extends Parser {
 							}
 							switch (alt22) {
 								case 1 :
-									// ./grammars/AST.g:59:49: WS
+									// ./grammar/AST.g:59:49: WS
 									{
 									WS59=(Token)match(input,WS,FOLLOW_WS_in_command449);  
 									stream_WS.add(WS59);
@@ -1895,12 +1895,12 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 59:82: -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? )
 					{
-						// ./grammars/AST.g:59:85: ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? )
+						// ./grammar/AST.g:59:85: ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(IF, "IF"), root_1);
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						// ./grammars/AST.g:59:101: ^( COMMANDS commands )
+						// ./grammar/AST.g:59:101: ^( COMMANDS commands )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
@@ -1908,9 +1908,9 @@ public class ASTParser extends Parser {
 						adaptor.addChild(root_1, root_2);
 						}
 
-						// ./grammars/AST.g:59:122: ( ^( ELSECOMMANDS commands ) )?
+						// ./grammar/AST.g:59:122: ( ^( ELSECOMMANDS commands ) )?
 						if ( stream_commands.hasNext() ) {
-							// ./grammars/AST.g:59:122: ^( ELSECOMMANDS commands )
+							// ./grammar/AST.g:59:122: ^( ELSECOMMANDS commands )
 							{
 							Object root_2 = (Object)adaptor.nil();
 							root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(ELSECOMMANDS, "ELSECOMMANDS"), root_2);
@@ -1932,10 +1932,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ./grammars/AST.g:60:4: ( 'while' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:60:4: ( 'while' WS expression WS 'do' WS commands WS 'od' )
 					{
-					// ./grammars/AST.g:60:4: ( 'while' WS expression WS 'do' WS commands WS 'od' )
-					// ./grammars/AST.g:60:5: 'while' WS expression WS 'do' WS commands WS 'od'
+					// ./grammar/AST.g:60:4: ( 'while' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:60:5: 'while' WS expression WS 'do' WS commands WS 'od'
 					{
 					string_literal65=(Token)match(input,62,FOLLOW_62_in_command489);  
 					stream_62.add(string_literal65);
@@ -1984,12 +1984,12 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 60:56: -> ^( WHILE expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:60:59: ^( WHILE expression ^( COMMANDS commands ) )
+						// ./grammar/AST.g:60:59: ^( WHILE expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(WHILE, "WHILE"), root_1);
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						// ./grammars/AST.g:60:78: ^( COMMANDS commands )
+						// ./grammar/AST.g:60:78: ^( COMMANDS commands )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
@@ -2008,10 +2008,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 5 :
-					// ./grammars/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
 					{
-					// ./grammars/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
-					// ./grammars/AST.g:61:5: 'for' WS expression WS 'do' WS commands WS 'od'
+					// ./grammar/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:61:5: 'for' WS expression WS 'do' WS commands WS 'od'
 					{
 					string_literal74=(Token)match(input,49,FOLLOW_49_in_command526);  
 					stream_49.add(string_literal74);
@@ -2060,12 +2060,12 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 61:54: -> ^( FOR expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:61:57: ^( FOR expression ^( COMMANDS commands ) )
+						// ./grammar/AST.g:61:57: ^( FOR expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FOR, "FOR"), root_1);
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						// ./grammars/AST.g:61:74: ^( COMMANDS commands )
+						// ./grammar/AST.g:61:74: ^( COMMANDS commands )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
@@ -2084,10 +2084,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 6 :
-					// ./grammars/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
 					{
-					// ./grammars/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
-					// ./grammars/AST.g:62:5: 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od'
+					// ./grammar/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
+					// ./grammar/AST.g:62:5: 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od'
 					{
 					string_literal83=(Token)match(input,50,FOLLOW_50_in_command563);  
 					stream_50.add(string_literal83);
@@ -2148,13 +2148,13 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 62:82: -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) )
 					{
-						// ./grammars/AST.g:62:85: ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) )
+						// ./grammar/AST.g:62:85: ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FOREACH, "FOREACH"), root_1);
 						adaptor.addChild(root_1, stream_VARIABLE_LEX.nextNode());
 						adaptor.addChild(root_1, stream_expression.nextTree());
-						// ./grammars/AST.g:62:119: ^( COMMANDS commands )
+						// ./grammar/AST.g:62:119: ^( COMMANDS commands )
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(COMMANDS, "COMMANDS"), root_2);
@@ -2201,7 +2201,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "vars"
-	// ./grammars/AST.g:64:1: vars : ( ( VARIABLE_LEX ( WS )? ',' ( WS )? vars ) -> VARIABLE_LEX vars | VARIABLE_LEX -> VARIABLE_LEX );
+	// ./grammar/AST.g:64:1: vars : ( ( VARIABLE_LEX ( WS )? ',' ( WS )? vars ) -> VARIABLE_LEX vars | VARIABLE_LEX -> VARIABLE_LEX );
 	public final ASTParser.vars_return vars() throws RecognitionException {
 		ASTParser.vars_return retval = new ASTParser.vars_return();
 		retval.start = input.LT(1);
@@ -2226,7 +2226,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_vars=new RewriteRuleSubtreeStream(adaptor,"rule vars");
 
 		try {
-			// ./grammars/AST.g:64:7: ( ( VARIABLE_LEX ( WS )? ',' ( WS )? vars ) -> VARIABLE_LEX vars | VARIABLE_LEX -> VARIABLE_LEX )
+			// ./grammar/AST.g:64:7: ( ( VARIABLE_LEX ( WS )? ',' ( WS )? vars ) -> VARIABLE_LEX vars | VARIABLE_LEX -> VARIABLE_LEX )
 			int alt27=2;
 			int LA27_0 = input.LA(1);
 			if ( (LA27_0==VARIABLE_LEX) ) {
@@ -2288,15 +2288,15 @@ public class ASTParser extends Parser {
 
 			switch (alt27) {
 				case 1 :
-					// ./grammars/AST.g:65:4: ( VARIABLE_LEX ( WS )? ',' ( WS )? vars )
+					// ./grammar/AST.g:65:4: ( VARIABLE_LEX ( WS )? ',' ( WS )? vars )
 					{
-					// ./grammars/AST.g:65:4: ( VARIABLE_LEX ( WS )? ',' ( WS )? vars )
-					// ./grammars/AST.g:65:5: VARIABLE_LEX ( WS )? ',' ( WS )? vars
+					// ./grammar/AST.g:65:4: ( VARIABLE_LEX ( WS )? ',' ( WS )? vars )
+					// ./grammar/AST.g:65:5: VARIABLE_LEX ( WS )? ',' ( WS )? vars
 					{
 					VARIABLE_LEX96=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars619);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX96);
 
-					// ./grammars/AST.g:65:18: ( WS )?
+					// ./grammar/AST.g:65:18: ( WS )?
 					int alt25=2;
 					int LA25_0 = input.LA(1);
 					if ( (LA25_0==WS) ) {
@@ -2304,7 +2304,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt25) {
 						case 1 :
-							// ./grammars/AST.g:65:18: WS
+							// ./grammar/AST.g:65:18: WS
 							{
 							WS97=(Token)match(input,WS,FOLLOW_WS_in_vars621);  
 							stream_WS.add(WS97);
@@ -2317,7 +2317,7 @@ public class ASTParser extends Parser {
 					char_literal98=(Token)match(input,41,FOLLOW_41_in_vars624);  
 					stream_41.add(char_literal98);
 
-					// ./grammars/AST.g:65:26: ( WS )?
+					// ./grammar/AST.g:65:26: ( WS )?
 					int alt26=2;
 					int LA26_0 = input.LA(1);
 					if ( (LA26_0==WS) ) {
@@ -2325,7 +2325,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt26) {
 						case 1 :
-							// ./grammars/AST.g:65:26: WS
+							// ./grammar/AST.g:65:26: WS
 							{
 							WS99=(Token)match(input,WS,FOLLOW_WS_in_vars626);  
 							stream_WS.add(WS99);
@@ -2366,7 +2366,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:66:4: VARIABLE_LEX
+					// ./grammar/AST.g:66:4: VARIABLE_LEX
 					{
 					VARIABLE_LEX101=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_vars641);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX101);
@@ -2422,7 +2422,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "exprs"
-	// ./grammars/AST.g:69:1: exprs : expression ( ( WS )? ',' ( WS )? expression )* -> ( expression )+ ;
+	// ./grammar/AST.g:69:1: exprs : expression ( ( WS )? ',' ( WS )? expression )* -> ( expression )+ ;
 	public final ASTParser.exprs_return exprs() throws RecognitionException {
 		ASTParser.exprs_return retval = new ASTParser.exprs_return();
 		retval.start = input.LT(1);
@@ -2443,15 +2443,15 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
 
 		try {
-			// ./grammars/AST.g:69:8: ( expression ( ( WS )? ',' ( WS )? expression )* -> ( expression )+ )
-			// ./grammars/AST.g:69:10: expression ( ( WS )? ',' ( WS )? expression )*
+			// ./grammar/AST.g:69:8: ( expression ( ( WS )? ',' ( WS )? expression )* -> ( expression )+ )
+			// ./grammar/AST.g:69:10: expression ( ( WS )? ',' ( WS )? expression )*
 			{
 			pushFollow(FOLLOW_expression_in_exprs656);
 			expression102=expression();
 			state._fsp--;
 
 			stream_expression.add(expression102.getTree());
-			// ./grammars/AST.g:69:21: ( ( WS )? ',' ( WS )? expression )*
+			// ./grammar/AST.g:69:21: ( ( WS )? ',' ( WS )? expression )*
 			loop30:
 			while (true) {
 				int alt30=2;
@@ -2469,9 +2469,9 @@ public class ASTParser extends Parser {
 
 				switch (alt30) {
 				case 1 :
-					// ./grammars/AST.g:69:22: ( WS )? ',' ( WS )? expression
+					// ./grammar/AST.g:69:22: ( WS )? ',' ( WS )? expression
 					{
-					// ./grammars/AST.g:69:22: ( WS )?
+					// ./grammar/AST.g:69:22: ( WS )?
 					int alt28=2;
 					int LA28_0 = input.LA(1);
 					if ( (LA28_0==WS) ) {
@@ -2479,7 +2479,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt28) {
 						case 1 :
-							// ./grammars/AST.g:69:22: WS
+							// ./grammar/AST.g:69:22: WS
 							{
 							WS103=(Token)match(input,WS,FOLLOW_WS_in_exprs659);  
 							stream_WS.add(WS103);
@@ -2492,7 +2492,7 @@ public class ASTParser extends Parser {
 					char_literal104=(Token)match(input,41,FOLLOW_41_in_exprs662);  
 					stream_41.add(char_literal104);
 
-					// ./grammars/AST.g:69:30: ( WS )?
+					// ./grammar/AST.g:69:30: ( WS )?
 					int alt29=2;
 					int LA29_0 = input.LA(1);
 					if ( (LA29_0==WS) ) {
@@ -2500,7 +2500,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt29) {
 						case 1 :
-							// ./grammars/AST.g:69:30: WS
+							// ./grammar/AST.g:69:30: WS
 							{
 							WS105=(Token)match(input,WS,FOLLOW_WS_in_exprs664);  
 							stream_WS.add(WS105);
@@ -2579,7 +2579,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "expression"
-	// ./grammars/AST.g:71:1: expression : e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) ) ;
+	// ./grammar/AST.g:71:1: expression : e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) ) ;
 	public final ASTParser.expression_return expression() throws RecognitionException {
 		ASTParser.expression_return retval = new ASTParser.expression_return();
 		retval.start = input.LT(1);
@@ -2595,15 +2595,15 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_exprbase=new RewriteRuleSubtreeStream(adaptor,"rule exprbase");
 
 		try {
-			// ./grammars/AST.g:72:2: (e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) ) )
-			// ./grammars/AST.g:72:5: e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) )
+			// ./grammar/AST.g:72:2: (e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) ) )
+			// ./grammar/AST.g:72:5: e1= exprbase ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) )
 			{
 			pushFollow(FOLLOW_exprbase_in_expression688);
 			e1=exprbase();
 			state._fsp--;
 
 			stream_exprbase.add(e1.getTree());
-			// ./grammars/AST.g:72:16: ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) )
+			// ./grammar/AST.g:72:16: ( ' = ' e2= exprbase -> ^( EXPRESSION ^( EQUALS $e1 $e2) ) | -> ^( EXPRESSION $e1) )
 			int alt31=2;
 			int LA31_0 = input.LA(1);
 			if ( (LA31_0==37) ) {
@@ -2621,7 +2621,7 @@ public class ASTParser extends Parser {
 
 			switch (alt31) {
 				case 1 :
-					// ./grammars/AST.g:73:3: ' = ' e2= exprbase
+					// ./grammar/AST.g:73:3: ' = ' e2= exprbase
 					{
 					string_literal107=(Token)match(input,37,FOLLOW_37_in_expression693);  
 					stream_37.add(string_literal107);
@@ -2647,11 +2647,11 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 73:20: -> ^( EXPRESSION ^( EQUALS $e1 $e2) )
 					{
-						// ./grammars/AST.g:73:23: ^( EXPRESSION ^( EQUALS $e1 $e2) )
+						// ./grammar/AST.g:73:23: ^( EXPRESSION ^( EQUALS $e1 $e2) )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(EXPRESSION, "EXPRESSION"), root_1);
-						// ./grammars/AST.g:73:36: ^( EQUALS $e1 $e2)
+						// ./grammar/AST.g:73:36: ^( EQUALS $e1 $e2)
 						{
 						Object root_2 = (Object)adaptor.nil();
 						root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(EQUALS, "EQUALS"), root_2);
@@ -2671,7 +2671,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:74:5: 
+					// ./grammar/AST.g:74:5: 
 					{
 
 					// AST REWRITE
@@ -2688,7 +2688,7 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 74:5: -> ^( EXPRESSION $e1)
 					{
-						// ./grammars/AST.g:74:8: ^( EXPRESSION $e1)
+						// ./grammar/AST.g:74:8: ^( EXPRESSION $e1)
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(EXPRESSION, "EXPRESSION"), root_1);
@@ -2735,7 +2735,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "exprbase"
-	// ./grammars/AST.g:77:1: exprbase : ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) );
+	// ./grammar/AST.g:77:1: exprbase : ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) );
 	public final ASTParser.exprbase_return exprbase() throws RecognitionException {
 		ASTParser.exprbase_return retval = new ASTParser.exprbase_return();
 		retval.start = input.LT(1);
@@ -2802,7 +2802,7 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_exprbase=new RewriteRuleSubtreeStream(adaptor,"rule exprbase");
 
 		try {
-			// ./grammars/AST.g:78:2: ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) )
+			// ./grammar/AST.g:78:2: ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) )
 			int alt36=4;
 			switch ( input.LA(1) ) {
 			case 39:
@@ -2832,12 +2832,12 @@ public class ASTParser extends Parser {
 			}
 			switch (alt36) {
 				case 1 :
-					// ./grammars/AST.g:78:5: '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
+					// ./grammar/AST.g:78:5: '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
 					{
 					char_literal108=(Token)match(input,39,FOLLOW_39_in_exprbase739);  
 					stream_39.add(char_literal108);
 
-					// ./grammars/AST.g:78:9: ( WS )?
+					// ./grammar/AST.g:78:9: ( WS )?
 					int alt32=2;
 					int LA32_0 = input.LA(1);
 					if ( (LA32_0==WS) ) {
@@ -2845,7 +2845,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt32) {
 						case 1 :
-							// ./grammars/AST.g:78:9: WS
+							// ./grammar/AST.g:78:9: WS
 							{
 							WS109=(Token)match(input,WS,FOLLOW_WS_in_exprbase741);  
 							stream_WS.add(WS109);
@@ -2855,7 +2855,7 @@ public class ASTParser extends Parser {
 
 					}
 
-					// ./grammars/AST.g:78:13: ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
+					// ./grammar/AST.g:78:13: ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
 					int alt35=6;
 					switch ( input.LA(1) ) {
 					case SYMBOL_LEX:
@@ -2909,7 +2909,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt35) {
 						case 1 :
-							// ./grammars/AST.g:79:3: SYMBOL_LEX WS lexpr ')'
+							// ./grammar/AST.g:79:3: SYMBOL_LEX WS lexpr ')'
 							{
 							SYMBOL_LEX110=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase748);  
 							stream_SYMBOL_LEX.add(SYMBOL_LEX110);
@@ -2939,11 +2939,11 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 79:26: -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) )
 							{
-								// ./grammars/AST.g:79:29: ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) )
+								// ./grammar/AST.g:79:29: ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FUNCTIONCALL, "FUNCTIONCALL"), root_1);
-								// ./grammars/AST.g:79:44: ^( SYMBOL_LEX lexpr )
+								// ./grammar/AST.g:79:44: ^( SYMBOL_LEX lexpr )
 								{
 								Object root_2 = (Object)adaptor.nil();
 								root_2 = (Object)adaptor.becomeRoot(stream_SYMBOL_LEX.nextNode(), root_2);
@@ -2962,7 +2962,7 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 2 :
-							// ./grammars/AST.g:80:5: SYMBOL_LEX ')'
+							// ./grammar/AST.g:80:5: SYMBOL_LEX ')'
 							{
 							SYMBOL_LEX114=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase771);  
 							stream_SYMBOL_LEX.add(SYMBOL_LEX114);
@@ -2984,7 +2984,7 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 80:19: -> ^( FUNCTIONCALL SYMBOL_LEX )
 							{
-								// ./grammars/AST.g:80:22: ^( FUNCTIONCALL SYMBOL_LEX )
+								// ./grammar/AST.g:80:22: ^( FUNCTIONCALL SYMBOL_LEX )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FUNCTIONCALL, "FUNCTIONCALL"), root_1);
@@ -3000,7 +3000,7 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 3 :
-							// ./grammars/AST.g:81:4: 'hd ' exprbase ( WS )? ')'
+							// ./grammar/AST.g:81:4: 'hd ' exprbase ( WS )? ')'
 							{
 							string_literal116=(Token)match(input,52,FOLLOW_52_in_exprbase785);  
 							stream_52.add(string_literal116);
@@ -3010,7 +3010,7 @@ public class ASTParser extends Parser {
 							state._fsp--;
 
 							stream_exprbase.add(exprbase117.getTree());
-							// ./grammars/AST.g:81:18: ( WS )?
+							// ./grammar/AST.g:81:18: ( WS )?
 							int alt33=2;
 							int LA33_0 = input.LA(1);
 							if ( (LA33_0==WS) ) {
@@ -3018,7 +3018,7 @@ public class ASTParser extends Parser {
 							}
 							switch (alt33) {
 								case 1 :
-									// ./grammars/AST.g:81:18: WS
+									// ./grammar/AST.g:81:18: WS
 									{
 									WS118=(Token)match(input,WS,FOLLOW_WS_in_exprbase788);  
 									stream_WS.add(WS118);
@@ -3045,7 +3045,7 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 81:25: -> ^( HEAD exprbase )
 							{
-								// ./grammars/AST.g:81:28: ^( HEAD exprbase )
+								// ./grammar/AST.g:81:28: ^( HEAD exprbase )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(HEAD, "HEAD"), root_1);
@@ -3061,7 +3061,7 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 4 :
-							// ./grammars/AST.g:82:4: 'tl ' exprbase ( WS )? ')'
+							// ./grammar/AST.g:82:4: 'tl ' exprbase ( WS )? ')'
 							{
 							string_literal120=(Token)match(input,61,FOLLOW_61_in_exprbase803);  
 							stream_61.add(string_literal120);
@@ -3071,7 +3071,7 @@ public class ASTParser extends Parser {
 							state._fsp--;
 
 							stream_exprbase.add(exprbase121.getTree());
-							// ./grammars/AST.g:82:18: ( WS )?
+							// ./grammar/AST.g:82:18: ( WS )?
 							int alt34=2;
 							int LA34_0 = input.LA(1);
 							if ( (LA34_0==WS) ) {
@@ -3079,7 +3079,7 @@ public class ASTParser extends Parser {
 							}
 							switch (alt34) {
 								case 1 :
-									// ./grammars/AST.g:82:18: WS
+									// ./grammar/AST.g:82:18: WS
 									{
 									WS122=(Token)match(input,WS,FOLLOW_WS_in_exprbase806);  
 									stream_WS.add(WS122);
@@ -3106,7 +3106,7 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 82:25: -> ^( TAIL exprbase )
 							{
-								// ./grammars/AST.g:82:28: ^( TAIL exprbase )
+								// ./grammar/AST.g:82:28: ^( TAIL exprbase )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(TAIL, "TAIL"), root_1);
@@ -3122,7 +3122,7 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 5 :
-							// ./grammars/AST.g:83:4: 'cons ' lexpr ')'
+							// ./grammar/AST.g:83:4: 'cons ' lexpr ')'
 							{
 							string_literal124=(Token)match(input,45,FOLLOW_45_in_exprbase821);  
 							stream_45.add(string_literal124);
@@ -3149,7 +3149,7 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 83:20: -> ^( CONS lexpr )
 							{
-								// ./grammars/AST.g:83:23: ^( CONS lexpr )
+								// ./grammar/AST.g:83:23: ^( CONS lexpr )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(CONS, "CONS"), root_1);
@@ -3165,7 +3165,7 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 6 :
-							// ./grammars/AST.g:84:4: 'list ' lexpr ')'
+							// ./grammar/AST.g:84:4: 'list ' lexpr ')'
 							{
 							string_literal127=(Token)match(input,55,FOLLOW_55_in_exprbase836);  
 							stream_55.add(string_literal127);
@@ -3192,7 +3192,7 @@ public class ASTParser extends Parser {
 							root_0 = (Object)adaptor.nil();
 							// 84:20: -> ^( LIST lexpr )
 							{
-								// ./grammars/AST.g:84:23: ^( LIST lexpr )
+								// ./grammar/AST.g:84:23: ^( LIST lexpr )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(LIST, "LIST"), root_1);
@@ -3213,7 +3213,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammars/AST.g:86:4: 'nil'
+					// ./grammar/AST.g:86:4: 'nil'
 					{
 					string_literal130=(Token)match(input,56,FOLLOW_56_in_exprbase855);  
 					stream_56.add(string_literal130);
@@ -3241,7 +3241,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ./grammars/AST.g:87:5: VARIABLE_LEX
+					// ./grammar/AST.g:87:5: VARIABLE_LEX
 					{
 					VARIABLE_LEX131=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_exprbase865);  
 					stream_VARIABLE_LEX.add(VARIABLE_LEX131);
@@ -3260,7 +3260,7 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 87:18: -> ^( VARIABLE VARIABLE_LEX )
 					{
-						// ./grammars/AST.g:87:21: ^( VARIABLE VARIABLE_LEX )
+						// ./grammar/AST.g:87:21: ^( VARIABLE VARIABLE_LEX )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(VARIABLE, "VARIABLE"), root_1);
@@ -3276,7 +3276,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ./grammars/AST.g:88:5: SYMBOL_LEX
+					// ./grammar/AST.g:88:5: SYMBOL_LEX
 					{
 					SYMBOL_LEX132=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase879);  
 					stream_SYMBOL_LEX.add(SYMBOL_LEX132);
@@ -3295,7 +3295,7 @@ public class ASTParser extends Parser {
 					root_0 = (Object)adaptor.nil();
 					// 88:16: -> ^( SYMBOL SYMBOL_LEX )
 					{
-						// ./grammars/AST.g:88:19: ^( SYMBOL SYMBOL_LEX )
+						// ./grammar/AST.g:88:19: ^( SYMBOL SYMBOL_LEX )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(SYMBOL, "SYMBOL"), root_1);
@@ -3339,7 +3339,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "lexpr"
-	// ./grammars/AST.g:90:2: lexpr : ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* ;
+	// ./grammar/AST.g:90:2: lexpr : ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* ;
 	public final ASTParser.lexpr_return lexpr() throws RecognitionException {
 		ASTParser.lexpr_return retval = new ASTParser.lexpr_return();
 		retval.start = input.LT(1);
@@ -3356,13 +3356,13 @@ public class ASTParser extends Parser {
 		RewriteRuleSubtreeStream stream_exprbase=new RewriteRuleSubtreeStream(adaptor,"rule exprbase");
 
 		try {
-			// ./grammars/AST.g:91:5: ( ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* )
-			// ./grammars/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
+			// ./grammar/AST.g:91:5: ( ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* )
+			// ./grammar/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
 			{
-			// ./grammars/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
-			// ./grammars/AST.g:91:8: ( WS )? ( exprbase ( WS )? )*
+			// ./grammar/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
+			// ./grammar/AST.g:91:8: ( WS )? ( exprbase ( WS )? )*
 			{
-			// ./grammars/AST.g:91:8: ( WS )?
+			// ./grammar/AST.g:91:8: ( WS )?
 			int alt37=2;
 			int LA37_0 = input.LA(1);
 			if ( (LA37_0==WS) ) {
@@ -3370,7 +3370,7 @@ public class ASTParser extends Parser {
 			}
 			switch (alt37) {
 				case 1 :
-					// ./grammars/AST.g:91:8: WS
+					// ./grammar/AST.g:91:8: WS
 					{
 					WS133=(Token)match(input,WS,FOLLOW_WS_in_lexpr902);  
 					stream_WS.add(WS133);
@@ -3380,7 +3380,7 @@ public class ASTParser extends Parser {
 
 			}
 
-			// ./grammars/AST.g:91:12: ( exprbase ( WS )? )*
+			// ./grammar/AST.g:91:12: ( exprbase ( WS )? )*
 			loop39:
 			while (true) {
 				int alt39=2;
@@ -3391,14 +3391,14 @@ public class ASTParser extends Parser {
 
 				switch (alt39) {
 				case 1 :
-					// ./grammars/AST.g:91:13: exprbase ( WS )?
+					// ./grammar/AST.g:91:13: exprbase ( WS )?
 					{
 					pushFollow(FOLLOW_exprbase_in_lexpr906);
 					exprbase134=exprbase();
 					state._fsp--;
 
 					stream_exprbase.add(exprbase134.getTree());
-					// ./grammars/AST.g:91:22: ( WS )?
+					// ./grammar/AST.g:91:22: ( WS )?
 					int alt38=2;
 					int LA38_0 = input.LA(1);
 					if ( (LA38_0==WS) ) {
@@ -3406,7 +3406,7 @@ public class ASTParser extends Parser {
 					}
 					switch (alt38) {
 						case 1 :
-							// ./grammars/AST.g:91:22: WS
+							// ./grammar/AST.g:91:22: WS
 							{
 							WS135=(Token)match(input,WS,FOLLOW_WS_in_lexpr908);  
 							stream_WS.add(WS135);
@@ -3440,7 +3440,7 @@ public class ASTParser extends Parser {
 			root_0 = (Object)adaptor.nil();
 			// 91:29: -> ( exprbase )*
 			{
-				// ./grammars/AST.g:91:32: ( exprbase )*
+				// ./grammar/AST.g:91:32: ( exprbase )*
 				while ( stream_exprbase.hasNext() ) {
 					adaptor.addChild(root_0, stream_exprbase.nextTree());
 				}

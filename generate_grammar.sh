@@ -1,6 +1,8 @@
 #!/bin/bash
-java -jar "./lib/antlr3.jar" "./grammars/AST.g"  -o "./src"
-mv ./src/grammars/* ./src/AST
-rmdir ./src/grammars
-sed -i "1ipackage AST;" ./src/AST/ASTLexer.java
-sed -i "1ipackage AST;" ./src/AST/ASTParser.java
+java -jar "./lib/antlr3.jar" "./grammar/AST.g"  -o "./grammar/java"
+mv ./grammar/java/grammar/* ./src/main/java/AST -f
+rmdir ./grammar/java/grammar
+rm ./grammar/java/AST.tokens
+rmdir ./grammar/java
+sed -i "1ipackage AST;" ./src/main/java/AST/ASTLexer.java
+sed -i "1ipackage AST;" ./src/main/java/AST/ASTParser.java

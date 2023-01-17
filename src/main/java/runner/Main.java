@@ -1,4 +1,4 @@
-
+package runner;
 // import Validation.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -62,7 +62,7 @@ public class Main {
         // Adress Code End ---\n");
 
         // Generate target code from 3-address code
-        String basePythonFilePath = "src/base.py";
+        String basePythonFilePath = "resources/base.py";
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(basePythonFilePath), "UTF-8"));
         String basePythonFile = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
