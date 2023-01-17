@@ -39,27 +39,14 @@ public class Unop extends ToAssign {
 
   @Override
   public String toPython() {
-    String opString;
     switch (op) {
-      case NOT:
-        opString = "!";
-        break;
       case TAIL:
-        opString = "tl ";
-        break;
+        return arg.getName()+".left";
       case HEAD:
-        opString = "hd ";
-        break;
-      case ADRESS:
-        opString = "&";
-        break;
-      case CONTENT:
-        opString = "*";
-        break;
+        return arg.getName()+".right";
       default:
-        opString = "UNKNOWN_UNOP";
+        assert false : "Unop not implemented in python";
+        return null;
     }
-    return opString + arg;
-    // TODO fix
   }
 }

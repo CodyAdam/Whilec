@@ -1,6 +1,6 @@
 package C3A;
 
-public class Symbol extends ToAssign{
+public class Symbol extends ToAssign {
   private String value;
 
   public Symbol(String value) {
@@ -14,7 +14,7 @@ public class Symbol extends ToAssign{
 
   @Override
   public String toPython() {
-    return value;
+    return this.binTree + "(key= \"" + value + "\")";
   }
-  
+
 }

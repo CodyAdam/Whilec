@@ -14,6 +14,6 @@ public class Push extends Instruction{
 
   @Override
   public String toPython(Indent indent) {
-    return this.stack+".append("+arg.getName()+")";
+    return indent + this.stack+".append("+arg.getName()+")";
   }
 }
