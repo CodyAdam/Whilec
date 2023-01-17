@@ -16,10 +16,6 @@ public class Generator {
     return instructions;
   }
 
-  public String getTargetCode(){
-    return instructions.toTargetCode();
-  }
-
   private Instructions fromRoot(Tree ast) {
     Instructions i = new Instructions();
     for (int j = 0; j < ast.getChildCount(); j++) {

@@ -58,24 +58,25 @@ public class Main {
         // Generate 3-address code
         Generator generator = new Generator(tree);
         Instructions code3adress = generator.getInstructions();
-        // System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
+        // System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3
+        // Adress Code End ---\n");
 
         // Generate target code from 3-address code
-        String file = "src/base.py";
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-        String base = reader.lines().reduce("", (a, b) -> a + b + "\n");
+        String basePythonFilePath = "src/base.py";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(basePythonFilePath), "UTF-8"));
+        String basePythonFile = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
-        String output = base.replaceFirst("# CODE INSERTED HERE", generator.getTargetCode());
+        String outputPython = basePythonFile.replaceFirst("# CODE INSERTED HERE", code3adress.toTargetCode());
 
         // Write output to file
         Path path = Paths.get("output.py");
-        Files.write(path, output.getBytes());
+        Files.write(path, outputPython.getBytes());
 
         // Run the output file with python
         System.out.println("Output :");
-        ProcessBuilder pb = new ProcessBuilder("python", "output.py");
-        pb.inheritIO();
-        Process p = pb.start();
-        p.waitFor();
+        ProcessBuilder OSRunner = new ProcessBuilder("python", "output.py");
+        OSRunner.inheritIO();
+        Process process = OSRunner.start();
+        process.waitFor();
     }
 }
