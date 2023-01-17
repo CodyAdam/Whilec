@@ -1,6 +1,23 @@
 # Project_TLC
 Project in team of 4 members during our studies at the engineering school of ESIR
 
+# How to run
+
+## Build
+
+```bash
+mvn clean install
+```
+
+
+## Debug
+
+```bash
+mvn clean install
+mvn exec:java
+```
+
+
 # I. Introduction
 
 Pour ce projet, nous allons essayer de fabriquer un compilateur du langage "While" décrit dans le sujet. Ce langage est un langage de programmation fonctionnel, il est donc composé de fonctions et de variables. Il est également possible de faire des boucles et des conditions. 
