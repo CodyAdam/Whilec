@@ -17,6 +17,10 @@ import AST.ASTParser;
 import AST.ASTPrinter;
 import C3A.Generator;
 import C3A.Instructions;
+import Validation.FunctionNameNUsageValidator;
+import Validation.PreCompileValidator;
+import Validation.TypingValidator;
+import Validation.VariableNameNUsageValidator;
 
 public class Main {
 
@@ -25,7 +29,7 @@ public class Main {
         if (args.length != 1) {
             // System.err.println("Wrong number of arguments, expected 1, got " +
             // args.length);
-            filepath = "test/nop.while";
+            filepath = "test/string.while";
         } else {
             filepath = args[0];
         }
@@ -45,16 +49,16 @@ public class Main {
         printer.save("ASTPrinted.puml");
 
         // Validate the AST
-        // PreCompileValidator validator = new PreCompileValidator();
-        // validator.addValidator(new FunctionNameNUsageValidator());
-        // validator.addValidator(new VariableNameNUsageValidator());
-        // validator.addValidator(new TypingValidator());
-        // validator.validate(tree);
+        PreCompileValidator validator = new PreCompileValidator(filepath);
+        validator.addValidator(new FunctionNameNUsageValidator());
+        validator.addValidator(new VariableNameNUsageValidator());
+        validator.addValidator(new TypingValidator());
+        validator.validate(tree);
 
         // Generate 3-address code
         Generator generator = new Generator(tree);
         Instructions code3adress = generator.getInstructions();
-        System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
+        // System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
         // Generate target code from 3-address code
         String file = "src/base.py";
@@ -66,6 +70,12 @@ public class Main {
         // Write output to file
         Path path = Paths.get("output.py");
         Files.write(path, output.getBytes());
-        
+
+        // Run the output file with python
+        System.out.println("Output :");
+        ProcessBuilder pb = new ProcessBuilder("python", "output.py");
+        pb.inheritIO();
+        Process p = pb.start();
+        p.waitFor();
     }
 }
