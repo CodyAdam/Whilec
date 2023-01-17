@@ -29,10 +29,13 @@ public abstract class DeepValidator extends Validator {
         for (int i = 0; i < tree.getChildCount(); i++) {
             String functionName = tree.getChild(i).getChild(0).getText();
             this.validateFunction(tree.getChild(i).getChild(0).getChild(0), this.functions.get(functionName));
+            this.endValidationFunction(tree.getChild(i).getChild(0).getChild(0), this.functions.get(functionName));
         }
     }
 
     protected abstract void validateFUNCTION(Tree tree, Function function);
+
+    protected void endValidationFunction(Tree tree, Function function){}
 
     protected void validateFunction(Tree tree, Function function){
         // COMMANDS
