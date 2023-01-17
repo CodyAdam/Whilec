@@ -13,4 +13,9 @@ public abstract class Validator {
     public void setParent(PreCompileValidator parent) {
         this.parent = parent;
     }
+
+    protected void printError(String message, Tree node){
+        VPrinter.getInstance().printError(message, this.parent.getFilepath(), node.getLine(), node.getCharPositionInLine());
+        this.parent.incrementErrorCount();
+    }
 }

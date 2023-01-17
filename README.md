@@ -66,9 +66,8 @@ Liste des erreurs vérifiées par le compilateur :
 - Assign : ERROR : le nombre de variables à assigner est différent du nombre de valeurs assignées
 - TODO Variable : WARNING : une variable en input n'est pas utilisée dans la fonction
 - TODO Variable : WARNING : une variable en output n'est pas assignée dans la fonction
-- TODO Variable : ERROR : plusieurs variables de l'input ont le même nom
-- TODO Variable : ERROR : plusieurs variables de l'output ont le même nom
-- TODO Variable : ERROR : le nom d'une variable n'est pas valide
+- Variable : ERROR : plusieurs variables de l'input ont le même nom
+- Variable : ERROR : plusieurs variables de l'output ont le même nom
 - TODO Function : ERROR : plusieurs fonctions ont le même nom
 - TODO Function : ERROR : le nom d'une fonction n'est pas valide
 - TODO Function : ERROR : une fonction utilisée dans un appel n'est pas définie

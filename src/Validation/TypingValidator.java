@@ -34,25 +34,16 @@ public class TypingValidator extends DeepValidator{
             if(f != null) {
                 int nbArgs = f.returnType.size();
                 if (nbArgs != tree.getChild(0).getChildCount()) {
-                    VPrinter.getInstance().printError(
-                            "The number of variable(s) is not equals to the number of value(s) that the function called returns. " +
-                                    "Function " + f.functionName + " returns " + nbArgs + " value(s), but " + tree.getChild(0).getChildCount() + " variable(s) are given.",
-                            this.parent.getFilepath(),
-                            tree.getChild(1).getChild(0).getChild(0).getChild(0).getLine(),
-                            tree.getChild(1).getChild(0).getChild(0).getChild(0).getCharPositionInLine());
-                    this.parent.incrementErrorCount();
+                    this.printError("The number of variable(s) is not equals to the number of value(s) that the function called returns. " +
+                            "Function " + f.functionName + " returns " + nbArgs + " value(s), but " + tree.getChild(0).getChildCount() + " variable(s) are given.",
+                            tree.getChild(1).getChild(0).getChild(0).getChild(0));
                 }
             }
             return;
         }
 
         if(tree.getChild(0).getChildCount() != tree.getChild(1).getChildCount()){
-            VPrinter.getInstance().printError(
-                    "The number of variables is not equals to the number of expressions in the assign statement.",
-                    this.parent.getFilepath(),
-                    tree.getLine(),
-                    tree.getCharPositionInLine());
-            this.parent.incrementErrorCount();
+            this.printError("The number of variables is not equals to the number of expressions in the assign statement.", tree);
         }
     }
 
@@ -68,6 +59,7 @@ public class TypingValidator extends DeepValidator{
 
     @Override
     protected void validateFOREACH(Tree tree, Function function) {
+
     }
 
     @Override
@@ -82,12 +74,7 @@ public class TypingValidator extends DeepValidator{
             Function f = functions.get(functionName);
             if(f == null) return;
             if(f.returnType.size() != 1) {
-                VPrinter.getInstance().printError(
-                        "Expected boolean expression. Got function call with multiple return values.",
-                        this.parent.getFilepath(),
-                        tree.getLine(),
-                        tree.getCharPositionInLine());
-                this.parent.incrementErrorCount();
+                this.printError("Expected boolean expression. Got function call with multiple return values.", tree);
             }
         }
     }
@@ -98,12 +85,7 @@ public class TypingValidator extends DeepValidator{
             Function f = functions.get(functionName);
             if(f == null) return;
             if(f.returnType.size() != 1) {
-                VPrinter.getInstance().printError(
-                        "Expected integer value. Got function call with multiple return values.",
-                        this.parent.getFilepath(),
-                        tree.getLine(),
-                        tree.getCharPositionInLine());
-                this.parent.incrementErrorCount();
+                this.printError("Expected integer value. Got function call with multiple return values.", tree);
             }
         }
     }

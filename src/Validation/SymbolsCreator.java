@@ -20,6 +20,7 @@ public class SymbolsCreator extends DeepValidator{
         if(tree.getChild(0).getText().equals("INPUT")) {
             for (int i = 0; i < tree.getChild(0).getChildCount(); i++) {
                 function.args.put(tree.getChild(0).getChild(i).getText(), null);
+                function.inputOrder.add(tree.getChild(0).getChild(i).getText());
             }
             outputInd = 2;
         }
