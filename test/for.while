@@ -4,8 +4,6 @@ read Op1, Op2
   Result := Op1 ; 
   for Op2 do 
     Result := ( cons nil Result )  ;
-    Result := ( cons nil Result )  ;
-    Result := ( cons nil Result )  
   od 
 % 
 write Result
@@ -29,3 +27,12 @@ read Op1, Op2
   od 
 % 
 write Result
+
+function main:
+read
+%
+  For := (add 1 2);
+  While := (whileFunc);
+  Foreach := (addForeach 1 2);
+%
+write For, While, Foreach

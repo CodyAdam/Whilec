@@ -13,7 +13,7 @@ import AST.ASTParser;
 
 public class FunctionNameNUsageValidator extends Validator {
 
-    HashSet<String> notVariable = new HashSet<>(Arrays.asList("cons", "hd", "tl", "list", "nil", "nop", "if", "then", "fi", "while", "do", "od", "foreach", "in", "function", "read", "write", "true", "false"));
+    HashSet<String> notVariable = new HashSet<>(Arrays.asList("cons", "hd", "tl", "list", "nil", "nop", "if", "then", "fi", "while", "do", "od", "foreach", "in", "function", "read", "write"));
 
     @Override
     public void validate(Tree tree, HashMap<String, Function> functions) throws Exception {

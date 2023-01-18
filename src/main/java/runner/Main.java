@@ -27,17 +27,14 @@ import Validation.VariableNameNUsageValidator;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String filepath;
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
                     args.length);
-            System.exit(1);
+            // System.exit(1);
         }
-        filepath = args[0];
+        args = new String[] { "test/for.while", "-v", "-x", "-d" };
+        String filepath = args[0];
 
-        // filepath = "test/multi.while";
-        // args = new String[] { filepath, "2", "(cons nil (cons nil (cons nil (cons nil
-        // nil))))", "-x" };
         Boolean verbose = false;
         Boolean execute = false;
         Boolean debug = false;
