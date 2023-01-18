@@ -6,10 +6,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.tlc</groupId>
-  <artifactId>while</artifactId>
+  <artifactId>whilec</artifactId>
   <version>1.0</version>
 
-  <name>while</name>
+  <name>whilec</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +34,6 @@
   </dependencies>
 
   <build>
-    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -49,20 +48,18 @@
           <version>2.22.1</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-          <configuration>
-            <archive>
-              <index>true</index>
-              <manifest>
-                <addClasspath>true</addClasspath>
-                <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>runner.Main</mainClass>
-              </manifest>
-            </archive>
-          </configuration>
+          <version>2.4</version>
+          <executions>
+            <execution>
+              <id>default-jar</id>
+              <phase />
+            </execution>
+          </executions>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
           <configuration>
             <archive>
@@ -73,9 +70,18 @@
             <descriptorRefs>
               <descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
-            <finalName>while</finalName>
+            <finalName>whilec</finalName>
             <appendAssemblyId>false</appendAssemblyId>
           </configuration>
+          <executions>
+            <execution>
+              <id>make-jar-with-dependencies</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -102,20 +108,10 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.1.0</version>
-          <executions>
-            <execution>
-              <id>my-execution</id>
-              <phase>package</phase>
-              <goals>
-                <goal>java</goal>
-              </goals>
-            </execution>
-          </executions>
           <configuration>
             <mainClass>runner.Main</mainClass>
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
   </build>
 </project>

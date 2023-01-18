@@ -6,14 +6,14 @@ Project in team of 4 members during our studies at the engineering school of ESI
 ## Build
 
 ```bash
-mvn clean install
+mvn clean
+mvn package
 ```
 
-
-## Debug
+## Run in Debug
 
 ```bash
-mvn clean install
+mvn clean
 mvn exec:java
 ```
 
