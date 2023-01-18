@@ -2,6 +2,7 @@ package runner;
 
 // import Validation.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
@@ -66,7 +67,8 @@ public class Main {
         printer.save("ASTPrinted.puml");
 
         // Validate the AST
-        PreCompileValidator validator = new PreCompileValidator(filepath);
+        File filepathAsFile = new File(filepath);
+        PreCompileValidator validator = new PreCompileValidator(filepathAsFile.getAbsolutePath());
         validator.addValidator(new FunctionNameNUsageValidator());
         validator.addValidator(new VariableNameNUsageValidator());
         validator.addValidator(new TypingValidator());
