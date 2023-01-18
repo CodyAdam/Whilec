@@ -16,7 +16,8 @@ public class FuncBegin extends Instruction {
   public String toPython(Indent indent) {
     String s = indent + "def " + funcName + "():\n";
     indent.inc();
-    s += indent + "global stack";
+    s += indent + "global stack\n";
+    s += indent + "output = []";
     return s;
   }
 }

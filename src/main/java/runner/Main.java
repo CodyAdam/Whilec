@@ -1,4 +1,5 @@
 package runner;
+
 // import Validation.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -26,13 +27,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         String filepath;
-        if (args.length != 1) {
-            // System.err.println("Wrong number of arguments, expected 1, got " +
+        if (args.length == 0) {
+            // System.err.println("Wrong number of arguments, expected at least 1, got " +
             // args.length);
-            filepath = "test/string.while";
+            // System.exit(1);
         } else {
             filepath = args[0];
+
         }
+        filepath = "test/multi.while";
+        args = new String[] { filepath, "5", "(cons nil (cons nil (cons nil (cons nil nil))))" };
 
         // Parse the input file
         CharStream cs = new ANTLRFileStream(filepath);
@@ -56,10 +60,9 @@ public class Main {
         validator.validate(tree);
 
         // Generate 3-address code
-        Generator generator = new Generator(tree);
+        Generator generator = new Generator(tree, args);
         Instructions code3adress = generator.getInstructions();
-        // System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3
-        // Adress Code End ---\n");
+        System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
         // Generate target code from 3-address code
         String basePythonFilePath = "resources/base.py";

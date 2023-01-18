@@ -14,7 +14,8 @@ public class FuncEnd extends Instruction {
 
   @Override
   public String toPython(Indent indent) {
+    String s = indent + "return output";
     indent.dec();
-    return "";
+    return s;
   }
 }

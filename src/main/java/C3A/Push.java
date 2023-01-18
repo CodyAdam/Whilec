@@ -9,7 +9,7 @@ public class Push extends Instruction{
 
   @Override
   public String toString() {
-    return "param " + arg;
+    return "push " + arg;
   }
 
   @Override

@@ -2,12 +2,20 @@ package C3A;
 
 import java.util.HashMap;
 
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;
+import org.antlr.runtime.ANTLRStringStream;
+
+import AST.ASTLexer;
+import AST.ASTParser;
 
 public class Generator {
   private Instructions instructions;
+  private String[] args;
 
-  public Generator(Tree ast) {
+  public Generator(Tree ast, String[] args) throws Exception {
+    this.args = args;
     instructions = new Instructions();
     instructions = fromRoot(ast);
   }
@@ -16,7 +24,7 @@ public class Generator {
     return instructions;
   }
 
-  private Instructions fromRoot(Tree ast) {
+  private Instructions fromRoot(Tree ast) throws Exception {
     Instructions i = new Instructions();
     for (int j = 0; j < ast.getChildCount(); j++) {
       Tree child = ast.getChild(j);
@@ -26,13 +34,14 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromFunction(Tree ast) {
+  private Instructions fromFunction(Tree ast) throws Exception {
     Instructions i = new Instructions();
     HashMap<String, Variable> scopeVars = new HashMap<String, Variable>();
 
     // Parse Func name
     Tree funcName = ast.getChild(0);
-    i.add(new FuncBegin(funcName.getText()));
+    String funcNameStr = funcName.getText();
+    i.add(new FuncBegin(funcNameStr));
 
     // Parse Func definition (input?, commands, output)
     {
@@ -42,6 +51,9 @@ public class Generator {
       Tree outputNode = funcDef.getChild(1);
       if (funcDef.getChildCount() == 3) {
         // Has parameters
+
+        if (funcNameStr.equals("main"))
+          i.add(this.fromArgs());
         commandsNode = funcDef.getChild(1);
         outputNode = funcDef.getChild(2);
         // Parse input
@@ -384,6 +396,40 @@ public class Generator {
         i.add(new Assign(expr, new Symbol(symbolValue)));
       default:
         assert (false) : node.getText() + " is not valid child of EXPRESSION";
+    }
+    return i;
+  }
+
+  public Instructions fromArgs() throws Exception {
+    Instructions i = new Instructions();
+    for (int j = 1; j < args.length; j++) {
+      Variable var = new Variable("ARG" + j);
+      String arg = args[j];
+      try {
+        // is a int
+        int value = Integer.parseInt(arg);
+        Variable subVar = new Variable("INT_ARG");
+        i.add(new Assign(subVar, new Nil()));
+        for (int k = 0; k < value; k++) {
+          subVar = new Variable("INT_ARG");
+          i.add(new AssignTab(subVar, 1, i.getLastAssignedVariable()));
+          i.add(new AssignTab(subVar, 0, new Nil()));
+          i.add(new Assign(subVar, subVar));
+        }
+        i.add(new Assign(var, subVar));
+      } catch (Exception e) {
+        // a base expression as string
+        CharStream cs = new ANTLRStringStream(arg);
+        ASTLexer lexer = new ASTLexer(cs);
+        CommonTokenStream tokens = new CommonTokenStream();
+        tokens.setTokenSource(lexer);
+        ASTParser parser = new ASTParser(tokens);
+        var prog = parser.exprbase();
+        Tree tree = (Tree) prog.getTree();
+        i.add(fromExpr(tree, new HashMap<String, Variable>()));
+        i.add(new Assign(var, i.getLastAssignedVariable()));
+      }
+      i.add(new Push(var));
     }
     return i;
   }

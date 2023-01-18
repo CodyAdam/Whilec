@@ -1,0 +1,7 @@
+function main :
+read I1, I2
+%
+  O1 := I1;
+  O2 := I2
+%
+write O1, O2
