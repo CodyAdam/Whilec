@@ -1,3 +1,5 @@
+import sys
+
 class BinTree:
 
     def __init__(self, left=None, right=None, key="CONS") -> None:
@@ -6,13 +8,30 @@ class BinTree:
         self.key = key
 
     def __str__(self) -> str:
-        lines, *_ = self._display_aux()
+        lines, *_ = self.graph()
         graph = "\n".join(lines)
         as_int = "{:>15}  {:<5}".format("as Integer:", self.toInt())
         as_bool = "{:>15}  {:<5}".format("as Boolean:", self.toBool())
         as_string = "{:>15}  {:<5}".format("as String:",
                                            f"\"{self.toString()}\"")
-        return f"\n{graph}\n\n{as_int}\n{as_bool}\n{as_string}\n"
+        as_pp = "{:>15}  {:<5}".format("Pretty print:", self.pp())
+        return f"\n{graph}\n\n{as_int}\n{as_bool}\n{as_string}\n\n{as_pp}\n"
+        return f"\n{as_pp}\n"
+
+    def pp(self):
+        if self.key == "NIL":
+            return "NIL"
+        elif self.key == "CONS":
+            if self.left == "int":
+                self.right.toInt()
+            elif self.left == "bool":
+                self.right.toBool()
+            elif self.left == "string":
+                self.right.toString()
+            else:
+                return f"(cons {self.left.pp()} {self.right.pp()})"
+        else:
+            return self.key
 
     def toInt(self):
         value = 0
@@ -46,7 +65,7 @@ class BinTree:
                 value += cursor.key
         return f"{value}"
 
-    def _display_aux(self):
+    def graph(self):
         """Returns list of strings, width, height, and horizontal coordinate of the root."""
         # No child.
         if self.right is None and self.left is None:
@@ -58,7 +77,7 @@ class BinTree:
 
         # Only left child.
         if self.right is None:
-            lines, n, p, x = self.left._display_aux()
+            lines, n, p, x = self.left.graph()
             s = '%s' % self.key
             u = len(s)
             first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
@@ -69,7 +88,7 @@ class BinTree:
 
         # Only right child.
         if self.left is None:
-            lines, n, p, x = self.right._display_aux()
+            lines, n, p, x = self.right.graph()
             s = '%s' % self.key
             u = len(s)
             first_line = s + x * '_' + (n - x) * ' '
@@ -79,8 +98,8 @@ class BinTree:
                     ] + shifted_lines, n + u, p + 2, u // 2
 
         # Two children.
-        left, n, p, x = self.left._display_aux()
-        right, m, q, y = self.right._display_aux()
+        left, n, p, x = self.left.graph()
+        right, m, q, y = self.right.graph()
         s = '%s' % self.key
         u = len(s)
         first_line = (x + 1) * ' ' + (n - x -
@@ -101,4 +120,5 @@ class BinTree:
 
 if __name__ == "__main__":
     stack = []
-    print(main())
+    for value in main():
+        print(value)
