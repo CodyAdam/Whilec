@@ -1,15 +1,15 @@
-echo 'TODO script need to be changed since project structure changed'
+java -jar ".\lib\antlr3.jar" ".\grammar\AST.g"  -o ".\grammar\java"
+move .\grammar\java\grammar\* .\src\main\java\AST
+rmdir .\grammar\java\grammar\
+del .\grammar\java\AST.tokens
+rmdir .\grammar\java\
 
-@REM java -jar ".\lib\antlr3.jar" ".\grammars\AST.g"  -o ".\src"
-@REM move .\src\grammars\* .\src\AST
-@REM rmdir .\src\grammars
+copy .\src\main\java\AST\ASTLexer.java .\src\main\java\AST\ASTLexer.txt
+echo.package AST;>.\src\main\java\AST\ASTLexer.java
+type .\src\main\java\AST\ASTLexer.txt >>.\src\main\java\AST\ASTLexer.java
+del .\src\main\java\AST\ASTLexer.txt
 
-@REM copy .\src\AST\ASTLexer.java .\src\AST\ASTLexer.txt
-@REM echo.package AST;>.\src\AST\ASTLexer.java
-@REM type .\src\AST\ASTLexer.txt >>.\src\AST\ASTLexer.java
-@REM del .\src\AST\ASTLexer.txt
-
-@REM copy .\src\AST\ASTParser.java .\src\AST\ASTParser.txt
-@REM echo.package AST;>.\src\AST\ASTParser.java
-@REM type .\src\AST\ASTParser.txt >>.\src\AST\ASTParser.java
-@REM del .\src\AST\ASTParser.txt
+copy .\src\main\java\AST\ASTParser.java .\src\main\java\AST\ASTParser.txt
+echo.package AST;>.\src\main\java\AST\ASTParser.java
+type .\src\main\java\AST\ASTParser.txt >>.\src\main\java\AST\ASTParser.java
+del .\src\main\java\AST\ASTParser.txt
