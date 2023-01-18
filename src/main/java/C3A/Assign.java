@@ -23,9 +23,6 @@ public class Assign extends Instruction {
 
   @Override
   public String toPython(Indent indent) {
-    if (right instanceof FuncCall)
-      return indent + "[" + left.getName() + "] = " + right.toPython();
-
     return indent + left.getName() + " = " + right.toPython();
   }
 }

@@ -11,4 +11,4 @@ read
 %
   Out1, Out2 := (oneone)
 %
-write Out
+write Out1, Out2

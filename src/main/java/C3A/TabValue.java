@@ -1,21 +1,21 @@
 package C3A;
 
 public class TabValue extends ToAssign {
-  private String tab;
-  private String index;
+  private Variable tab;
+  private int index;
 
-  public TabValue(String tab, String index) {
+  public TabValue(Variable tab, int index) {
     this.tab = tab;
     this.index = index;
   }
 
   @Override
   public String toString() {
-    return tab + "[" + index + "]";
+    return tab.getName() + "[" + index + "]";
   }
 
   @Override
   public String toPython() {
-    return tab + ".get(" + index + ")";
+    return tab.getName() + "[" + index + "]";
   }
 }
