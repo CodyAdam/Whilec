@@ -7,9 +7,13 @@ public class Goto extends Instruction{
     this.label = label;
   }
 
+  public Label getLabel() {
+    return label;
+  }
+
   @Override
   public String toString() {
-    return "goto " + label;
+    return "goto " + label.getName();
   }
 
   @Override
