@@ -41,6 +41,7 @@ public class Generator {
     // Parse Func name
     Tree funcName = ast.getChild(0);
     String funcNameStr = funcName.getText();
+
     i.add(new FuncBegin(funcNameStr));
 
     // Parse Func definition (input?, commands, output)
@@ -51,7 +52,6 @@ public class Generator {
       Tree outputNode = funcDef.getChild(1);
       if (funcDef.getChildCount() == 3) {
         // Has parameters
-
         if (funcNameStr.equals("main"))
           i.add(this.fromArgs());
         commandsNode = funcDef.getChild(1);
@@ -260,8 +260,8 @@ public class Generator {
   private Instructions fromAssign(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     i.add(new Comment("Assign"));
-    Tree left = ast.getChild(0);
-    Tree right = ast.getChild(1);
+    Tree left = ast.getChild(0); // Vars
+    Tree right = ast.getChild(1); // Expressions
 
     // Parse left (variable names)
     int leftCount = left.getChildCount();
@@ -275,14 +275,23 @@ public class Generator {
     }
 
     // Parse right (expressions)
-    int rightCount = right.getChildCount();
-    if (leftCount != rightCount)
-      assert (false) : "Error during assign : left and right have different number of variables";
-
-    for (int j = 0; j < rightCount; j++) {
-      Tree exprNode = right.getChild(j).getChild(0); // EXPRESSION node
-      i.add(fromExpr(exprNode, scopeVars));
-      i.add(new Assign(names[j], i.getLastAssignedVariable()));
+    Tree firstNode = right.getChild(0).getChild(0);
+    if (AstNode.valueOf(firstNode.getText()) == AstNode.FUNCTIONCALL) {
+      Variable functionCall = new Variable("FUNCCALL");
+      i.add(fromExpr(firstNode, scopeVars));
+      i.add(new Assign(functionCall, i.getLastAssignedVariable()));
+      for (int j = 0; j < leftCount; j++) {
+        i.add(new Assign(names[j], new TabValue(functionCall, j)));
+      }
+    } else {
+      int rightCount = right.getChildCount();
+      if (leftCount != rightCount)
+        throw new Exception("Error during assign : left and right have different number of variables");
+      for (int j = 0; j < rightCount; j++) {
+        Tree exprNode = right.getChild(j).getChild(0); // EXPRBASE node
+        i.add(fromExpr(exprNode, scopeVars));
+        i.add(new Assign(names[j], i.getLastAssignedVariable()));
+      }
     }
 
     return i;
