@@ -14,18 +14,16 @@ public class IfzGoto extends Instruction {
     this.elseLabel = elseLabel;
     this.endIfLabel = endIfLabel;
     this.v = v;
+  }
 
-    this.elseLabel.toPythonCallback = (indent) -> {
-      indent.dec();
-      String s = indent + "else:\n";
-      indent.inc();
-      return s;
-    };
-
-    this.endIfLabel.toPythonCallback = (indent) -> {
-      indent.dec();
-      return "";
-    };
+  public Label getElseLabel() {
+    return elseLabel;
+  }
+  public Label getEndIfLabel() {
+    return endIfLabel;
+  }
+  public Variable getV() {
+    return v;
   }
 
   @Override
