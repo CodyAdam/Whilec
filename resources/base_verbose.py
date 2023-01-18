@@ -5,6 +5,10 @@ class BinTree:
         self.right = right
         self.key = key
 
+    def copy(self):
+        return BinTree(self.left, self.right, self.key)
+
+
     def __str__(self) -> str:
         lines, *_ = self.graph()
         graph = "\n".join(lines)
@@ -29,6 +33,9 @@ class BinTree:
                 return f"(cons {self.left.pp()} {self.right.pp()})"
         else:
             return self.key
+
+    def __repr__(self) -> str:
+        return self.pp()
 
     def toInt(self):
         value = 0

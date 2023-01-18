@@ -8,6 +8,9 @@ class BinTree:
     def __str__(self) -> str:
         return self.pp()
 
+    def copy(self):
+        return BinTree(self.left, self.right, self.key)
+
     def pp(self) -> str:
         if self.key == "NIL":
             return "nil"
@@ -61,4 +64,4 @@ class BinTree:
 if __name__ == "__main__":
     stack = []
     for i, value in enumerate(main()):
-        print(i,":", value)
+        print(value)
