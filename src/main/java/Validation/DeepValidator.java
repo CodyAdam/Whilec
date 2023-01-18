@@ -2,7 +2,6 @@ package Validation;
 
 import org.antlr.runtime.tree.Tree;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class DeepValidator extends Validator {
