@@ -24,16 +24,17 @@ import Validation.FunctionNameNUsageValidator;
 import Validation.PreCompileValidator;
 import Validation.TypingValidator;
 import Validation.VariableNameNUsageValidator;
+import translate.PythonTranslator;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
             // System.err.println("Wrong number of arguments, expected at least 1, got " +
-            //         args.length);
+            // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/funcreturns.while", "-v", "-x", "-d" };
+        args = new String[] { "test/string.while", "-x" };
         String filepath = args[0];
 
         Boolean verbose = false;
@@ -88,7 +89,8 @@ public class Main {
                 new InputStreamReader(new FileInputStream(basePythonFilePath), "UTF-8"));
         String basePythonFile = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
-        String outputPython = basePythonFile.replaceFirst("# CODE INSERTED HERE", code3adress.toTargetCode());
+        PythonTranslator python = new PythonTranslator();
+        String outputPython = basePythonFile.replaceFirst("# CODE INSERTED HERE", python.from(code3adress));
 
         // Write output to file
         Path path = Paths.get("output.py");
