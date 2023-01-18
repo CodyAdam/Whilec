@@ -1,6 +1,5 @@
 package C3A;
 
-
 /**
  * Correspond to a=b in C3A
  */
@@ -12,15 +11,21 @@ public class Assign extends Instruction {
     this.left = left;
     this.right = right;
   }
+
   public Variable getLeft() {
     return left;
   }
+
   @Override
   public String toString() {
     return left + " = " + right;
   }
+
   @Override
   public String toPython(Indent indent) {
+    if (right instanceof FuncCall)
+      return indent + "[" + left.getName() + "] = " + right.toPython();
+
     return indent + left.getName() + " = " + right.toPython();
   }
 }

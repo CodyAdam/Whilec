@@ -23,5 +23,4 @@ public class Variable extends ToAssign {
     return getName();
   }
 
-  
 }

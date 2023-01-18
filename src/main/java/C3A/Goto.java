@@ -14,7 +14,6 @@ public class Goto extends Instruction{
 
   @Override
   public String toPython(Indent indent) {
-    // TODO Auto-generated method stub
     return "";
   }
   

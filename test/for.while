@@ -3,7 +3,7 @@ read Op1, Op2
 % 
   Result := Op1 ; 
   for Op2 do 
-    Result := ( cons nil Result )  ;
+    Result := ( cons nil Result )
   od 
 % 
 write Result
@@ -31,8 +31,8 @@ write Result
 function main:
 read
 %
-  For := (add 1 2);
+  For := (add (cons nil nil) (cons nil (cons nil nil)));
   While := (whileFunc);
-  Foreach := (addForeach 1 2);
+  Foreach := (addForeach (cons nil nil) (cons nil (cons nil nil)));
 %
 write For, While, Foreach

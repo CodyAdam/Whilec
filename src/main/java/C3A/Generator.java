@@ -97,7 +97,7 @@ public class Generator {
    * - foreach
    * - nop
    */
-  private Instructions fromCommands(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromCommands(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     for (int j = 0; j < ast.getChildCount(); j++) {
       Tree child = ast.getChild(j);
@@ -121,7 +121,7 @@ public class Generator {
           i.add(new Nop());
           break;
         default:
-          assert (false) : child.getText() + " is not valid child of COMMANDS";
+          throw new Exception(child.getText() + " is not valid child of COMMANDS");
       }
     }
     return i;
@@ -134,10 +134,10 @@ public class Generator {
    * 
    * ifz d goto end
    */
-  private Instructions fromIf(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromIf(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
 
-    Tree exprConditionNode = ast.getChild(0);
+    Tree exprConditionNode = ast.getChild(0).getChild(0);
     Tree trueCommandsNode = ast.getChild(1);
     Tree falseCommandsNode = null;
     if (ast.getChildCount() == 3) {
@@ -145,9 +145,8 @@ public class Generator {
     }
 
     // Parse condition
-    Instructions exprCondition = fromExpr(exprConditionNode, scopeVars);
-    i.add(exprCondition);
-    Variable conditionVar = exprCondition.getLastAssignedVariable();
+    i.add(fromExpr(exprConditionNode, scopeVars));
+    Variable conditionVar = i.getLastAssignedVariable();
 
     // Labels
     Label elseLabel = new Label("else");
@@ -167,7 +166,7 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromWhile(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromWhile(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     i.add(new Comment("While"));
     Tree expression = ast.getChild(0).getChild(0);
@@ -199,7 +198,7 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromFor(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromFor(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     i.add(new Comment("For"));
     Tree expression = ast.getChild(0).getChild(0);
@@ -224,7 +223,7 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromForeach(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromForeach(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     i.add(new Comment("Foreach"));
     Tree indexNode = ast.getChild(0);
@@ -258,7 +257,7 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromAssign(Tree ast, HashMap<String, Variable> scopeVars) {
+  private Instructions fromAssign(Tree ast, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     i.add(new Comment("Assign"));
     Tree left = ast.getChild(0);
@@ -289,7 +288,7 @@ public class Generator {
     return i;
   }
 
-  private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) {
+  private Instructions fromExpr(Tree exprConditionNode, HashMap<String, Variable> scopeVars) throws Exception {
     Instructions i = new Instructions();
     Tree node = exprConditionNode;
     Variable expr;
@@ -395,7 +394,7 @@ public class Generator {
         String symbolValue = node.getChild(0).getText();
         i.add(new Assign(expr, new Symbol(symbolValue)));
       default:
-        assert (false) : node.getText() + " is not valid child of EXPRESSION";
+        throw new Exception(node.getText() + " is not valid child of EXPRESSION");
     }
     return i;
   }

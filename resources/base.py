@@ -39,7 +39,7 @@ class BinTree:
         cursor = self
         if cursor.key == "CONS":
             value = True
-        return "True" if value else "False"
+        return value
 
     def toString(self):
         value = ""

@@ -46,7 +46,7 @@ class BinTree:
         cursor = self
         if cursor.key == "CONS":
             value = True
-        return "True" if value else "False"
+        return value
 
     def toString(self):
         value = ""
@@ -118,4 +118,4 @@ class BinTree:
 if __name__ == "__main__":
     stack = []
     for i, value in enumerate(main()):
-        print(f"Output value {i+1} :\n" + value)
+        print(f"Output value {i} :\n", value)

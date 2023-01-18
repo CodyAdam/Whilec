@@ -1,0 +1,14 @@
+function oneone :
+read
+%
+  A := (cons nil nil) ;
+  B := (cons nil nil)
+%
+write A, B
+
+function main :
+read
+%
+  Out1, Out2 := (oneone)
+%
+write Out
