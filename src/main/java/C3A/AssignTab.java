@@ -22,12 +22,8 @@ public class AssignTab extends Instruction {
   @Override
   public String toPython(Indent indent) {
     String s = "";
-    s += indent + "if \"" + left.getName() + "\" not in locals():\n";
-    indent.inc();
-    s += indent + left.getName() + " = " + this.binTree + "()\n";
-    indent.dec();
     if (index == 0) {
-      s += indent + left.getName() + ".left = " + right.toPython();
+      s += indent + left.getName() + " = " + this.binTree + "(left=" + right.toPython() + ")\n";
     } else {
       s += indent + left.getName() + ".right = " + right.toPython();
     }
