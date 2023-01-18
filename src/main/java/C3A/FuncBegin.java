@@ -1,20 +1,20 @@
 package C3A;
 
 public class FuncBegin extends Instruction {
-  private String funcName;
+  private Symbol funcSymb;
 
-  public FuncBegin(String funcName) {
-    this.funcName = funcName;
+  public FuncBegin(Symbol funcName) {
+    this.funcSymb = funcName;
   }
 
   @Override
   public String toString() {
-    return "func begin " + funcName;
+    return "func begin " + funcSymb.getValue();
   }
 
   @Override
   public String toPython(Indent indent) {
-    String s = indent + "def " + funcName + "():\n";
+    String s = indent + "def " + funcSymb.getValue() + "():\n";
     indent.inc();
     s += indent + "global stack\n";
     s += indent + "output = []";

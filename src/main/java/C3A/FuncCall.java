@@ -1,23 +1,23 @@
 package C3A;
 
 public class FuncCall extends ToAssign {
-  private String funcName;
+  private Symbol funcSymb;
   private int argsCount;
 
-  public FuncCall(String funcName, int argsCount) {
-    this.funcName = funcName;
+  public FuncCall(Symbol funcName, int argsCount) {
+    this.funcSymb = funcName;
     this.argsCount = argsCount;
   }
 
   @Override
   public String toString() {
-    return "call " + funcName + " " + argsCount;
+    return "call " + funcSymb.getValue() + " " + argsCount;
   }
 
   @Override
   public String toPython() {
 
-    return funcName + "()";
+    return funcSymb.getValue() + "()";
   }
 
 }
