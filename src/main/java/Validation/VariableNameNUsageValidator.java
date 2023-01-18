@@ -49,9 +49,16 @@ public class VariableNameNUsageValidator extends DeepValidator{
 
         for (String s : this.variableUsages.get(function.functionName).variableUsageWrite.keySet()) {
             if(!this.variableUsages.get(function.functionName).variableUsageRead.keySet().contains(s) && !function.returnType.keySet().contains(s)) {
+                ArrayList<String> tips = new ArrayList<>();
+                if(this.variableUsages.get(function.functionName).variableUsageWrite.get(s).getParent().getText().equals("FOREACH")){
+                    tips.add("Replace foreach loop with a for loop.");
+                } else {
+                    tips.add("Remove useless variable "+s+" assignment line.");
+                }
+                System.out.println();
                 this.printWarning("Variable " + s + " value is written but never read.",
                         this.variableUsages.get(function.functionName).variableUsageWrite.get(s),
-                        new ArrayList<>(Arrays.asList("Remove useless variable "+s+" assignment line.")));
+                        new ArrayList<>(tips));
             }
         }
 
@@ -104,22 +111,23 @@ public class VariableNameNUsageValidator extends DeepValidator{
 
     @Override
     protected void validateIF(Tree tree, Function function) {
-
+        this.checkExpressionVariableUsage(tree.getChild(0), function);
     }
 
     @Override
     protected void validateFOR(Tree tree, Function function) {
-
+        this.checkExpressionVariableUsage(tree.getChild(0), function);
     }
 
     @Override
     protected void validateWHILE(Tree tree, Function function) {
-
+        this.checkExpressionVariableUsage(tree.getChild(0), function);
     }
 
     @Override
     protected void validateFOREACH(Tree tree, Function function) {
-
+        this.variableUsages.get(function.functionName).variableUsageWrite.put(tree.getChild(0).getText(), tree.getChild(0));
+        this.checkExpressionVariableUsage(tree.getChild(1), function);
     }
 
 }
