@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
@@ -33,10 +34,24 @@ public class Main {
             // System.exit(1);
         } else {
             filepath = args[0];
-
         }
         filepath = "test/multi.while";
-        args = new String[] { filepath, "5", "(cons nil (cons nil (cons nil (cons nil nil))))" };
+        args = new String[] { filepath, "2", "(cons nil (cons nil (cons nil (cons nil nil))))", "-x" };
+        Boolean verbose = false;
+        Boolean execute = false;
+        Boolean debug = false;
+        for (String arg : args) {
+            if (arg.equals("-v")) {
+                verbose = true;
+            }
+            if (arg.equals("-x")) {
+                execute = true;
+            }
+            if (arg.equals("-d")) {
+                debug = true;
+            }
+        }
+        String[] argsWithoutOptions = Arrays.stream(args).filter(s -> !s.startsWith("-")).toArray(String[]::new);
 
         // Parse the input file
         CharStream cs = new ANTLRFileStream(filepath);
@@ -60,13 +75,17 @@ public class Main {
         validator.validate(tree);
 
         // Generate 3-address code
-        Generator generator = new Generator(tree, args);
+        Generator generator = new Generator(tree, argsWithoutOptions);
         Instructions code3adress = generator.getInstructions();
-        System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
+        if (debug)
+            System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
         // Generate target code from 3-address code
         String basePythonFilePath = "resources/base.py";
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(basePythonFilePath), "UTF-8"));
+        if (verbose)
+            basePythonFilePath = "resources/base_verbose.py";
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(basePythonFilePath), "UTF-8"));
         String basePythonFile = reader.lines().reduce("", (a, b) -> a + b + "\n");
         reader.close();
         String outputPython = basePythonFile.replaceFirst("# CODE INSERTED HERE", code3adress.toTargetCode());
@@ -76,10 +95,11 @@ public class Main {
         Files.write(path, outputPython.getBytes());
 
         // Run the output file with python
-        System.out.println("Output :");
-        ProcessBuilder OSRunner = new ProcessBuilder("python", "output.py");
-        OSRunner.inheritIO();
-        Process process = OSRunner.start();
-        process.waitFor();
+        if (execute) {
+            ProcessBuilder OSRunner = new ProcessBuilder("python", "output.py");
+            OSRunner.inheritIO();
+            Process process = OSRunner.start();
+            process.waitFor();
+        }
     }
 }
