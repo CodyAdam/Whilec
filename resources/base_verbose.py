@@ -15,16 +15,16 @@ class BinTree:
         as_pp = "{:>15}  {:<5}".format("Pretty print:", self.pp())
         return f"\n{graph}\n\n{as_int}\n{as_bool}\n{as_string}\n\n{as_pp}\n"
 
-    def pp(self):
+    def pp(self) -> str:
         if self.key == "NIL":
-            return "NIL"
+            return "nil"
         elif self.key == "CONS":
-            if self.left == "int":
-                self.right.toInt()
-            elif self.left == "bool":
-                self.right.toBool()
-            elif self.left == "string":
-                self.right.toString()
+            if self.left.key == "int":
+                return str(self.right.toInt())
+            elif self.left.key == "bool":
+                return "true" if self.right.toBool() else "false"
+            elif self.left.key == "string":
+                return self.right.toString()
             else:
                 return f"(cons {self.left.pp()} {self.right.pp()})"
         else:
@@ -117,5 +117,5 @@ class BinTree:
 
 if __name__ == "__main__":
     stack = []
-    for value in main():
-        print(value)
+    for i, value in enumerate(main()):
+        print(f"Output value {i+1} :\n" + value)
