@@ -20,7 +20,7 @@ public class Variable extends ToAssign {
 
   @Override
   public String toPython() {
-    return getName();
+    return getName() + ".copy()";
   }
 
 }
