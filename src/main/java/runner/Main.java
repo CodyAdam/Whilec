@@ -29,14 +29,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         String filepath;
         if (args.length == 0) {
-            // System.err.println("Wrong number of arguments, expected at least 1, got " +
-            // args.length);
-            // System.exit(1);
-        } else {
-            filepath = args[0];
+            System.err.println("Wrong number of arguments, expected at least 1, got " +
+                    args.length);
+            System.exit(1);
         }
-        filepath = "test/multi.while";
-        args = new String[] { filepath, "2", "(cons nil (cons nil (cons nil (cons nil nil))))", "-x" };
+        filepath = args[0];
+
+        // filepath = "test/multi.while";
+        // args = new String[] { filepath, "2", "(cons nil (cons nil (cons nil (cons nil
+        // nil))))", "-x" };
         Boolean verbose = false;
         Boolean execute = false;
         Boolean debug = false;
@@ -93,6 +94,8 @@ public class Main {
         // Write output to file
         Path path = Paths.get("output.py");
         Files.write(path, outputPython.getBytes());
+        if (verbose)
+            System.out.println("File output.py generated at " + path.toAbsolutePath().toString());
 
         // Run the output file with python
         if (execute) {
