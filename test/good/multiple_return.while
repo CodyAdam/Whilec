@@ -9,6 +9,8 @@ write A, B
 function main :
 read
 %
-  Out1, Out2 := (oneone)
+  Out1, Out2 := (oneone);
+  Out1 := (cons int Out1);
+  Out2 := (cons int Out2)
 %
 write Out1, Out2

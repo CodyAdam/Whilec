@@ -1,0 +1,35 @@
+function true :
+read
+%
+  Out := (cons nil nil)
+%
+write Out
+
+function false :
+read
+%
+  Out := nil
+%
+write Out
+
+function test :
+read
+%
+  if (true) then
+    if (false) then
+      Out := (cons not right)
+    else
+      Out := (cons yes good)
+    fi
+  else
+    Out := (cons not right)
+  fi
+%
+write Out
+
+function main :
+read
+%
+  Out := (cons string (test))
+%
+write Out

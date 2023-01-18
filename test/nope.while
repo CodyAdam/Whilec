@@ -1,8 +1,0 @@
-function nope: 
-read
-%
-	nop;
-%
-write Out
-
-

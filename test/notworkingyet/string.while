@@ -1,0 +1,28 @@
+function stringtest:
+  read
+  %
+    A := (cons (cons (cons (cons ceci est) une) liste) nil)
+  %
+write A
+
+function stringtest2:
+  read
+  %
+    A := (cons nil liste une est ceci)
+  %
+write A
+
+function stringtest3:
+  read
+  %
+    A := (list ceci est une liste en vrai)
+  %
+write A
+
+
+function main:
+read
+%
+  A, B, C := (cons string (stringtest)), (cons string (stringtest2)), (cons string (stringtest3))
+%
+write A, B, C

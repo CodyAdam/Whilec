@@ -1,4 +1,4 @@
-function nope: 
+function nopfunc: 
 read
 %
 	nop;
@@ -9,6 +9,8 @@ write A
 function main:
 read
 %
-	A:= (nope)
+	nop;
+	A:= (cons int (nopfunc));
+	nop;
 %
 write A

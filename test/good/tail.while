@@ -7,7 +7,7 @@ read Op1
 write Result 
  
 function sub1 : 
-read Op1, Op2  
+read Op1
 % 
   Result := Op1 ;
   Result := (tl Result) 
@@ -24,9 +24,16 @@ write Result
 function main:
 read
 %
-  Two := (cons nil (cons nil nil)) ;
-  Result := (add1 Two);
-  Result := (add1 Result)
+  Zero := nil ;
+  Result := (add1 Zero);
+  Result := (sub1 Result);
+  Result := (add1 Result);
+  Result := (add1 Result);
+  Result := (add1 Result);
+  Result := (add1 Result);
+  Result := (sub1 Result);
+  Result := (sub1 Result);
+  Result := (cons int Result)
 %
 write Result
 

@@ -1,24 +1,20 @@
-function oui:
+function list:
 read
 %
 	nop;
 %
 write Out
 
-function non:
+function Oui:
 read
 %
 	nop;
 %
 write Out
 
-
-function oui:
+function main:
 read
 %
 	nop;
 %
 write Out
-
-
-

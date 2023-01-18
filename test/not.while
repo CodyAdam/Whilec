@@ -1,7 +1,0 @@
-// Logical not
-function not :
-  read Op1
-  %
-    if Op1 then Result := (false) else Result := (true) fi
-  %
-write Result

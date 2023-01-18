@@ -1,6 +1,0 @@
-function list1:
-  read
-  %
-    A := (list un deu tri)
-  %
-write A

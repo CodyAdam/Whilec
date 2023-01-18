@@ -1,0 +1,6 @@
+function main:
+read
+%
+    A := (list un deu tri)
+%
+write A

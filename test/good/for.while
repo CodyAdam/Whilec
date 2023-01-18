@@ -1,0 +1,16 @@
+function add : 
+read Op1, Op2 
+% 
+  Result := Op1 ; 
+  for Op2 do 
+    Result := ( cons nil Result )
+  od 
+% 
+write Result
+
+function main:
+read
+%
+  For := (cons int (add (cons nil nil) (cons nil (cons nil nil)));
+%
+write For

@@ -22,13 +22,6 @@ write Result
 function main:
   read
   %
-    Result := (returnSecond (true) (false))
-  %
-write Result
-
-function not :
-  read Op1
-  %
-    if Op1 then Result := (false) else Result := (true) fi
+    Result := (cons bool (returnSecond (true) (false)))
   %
 write Result
