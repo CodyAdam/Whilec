@@ -8,7 +8,7 @@ public class Nil extends ToAssign {
 
   @Override
   public String toPython() {
-    return this.binTree + "(key= \"NIL\")";
+    return this.binTree + "(key=\"NIL\")";
   }
 
 }

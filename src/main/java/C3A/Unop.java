@@ -41,9 +41,9 @@ public class Unop extends ToAssign {
   public String toPython() {
     switch (op) {
       case TAIL:
-        return arg.getName() + ".left";
-      case HEAD:
         return arg.getName() + ".right";
+      case HEAD:
+        return arg.getName() + ".left";
       default:
         System.err.println("Unop not implemented in python");
         return null;
