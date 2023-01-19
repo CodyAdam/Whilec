@@ -80,7 +80,9 @@ exprbase
  	| SYMBOL_LEX')' -> ^(FUNCTIONCALL SYMBOL_LEX)
  	|'hd 'exprbase WS?')' -> ^(HEAD exprbase)
  	|'tl 'exprbase WS?')' -> ^(TAIL exprbase)
+ 	|'cons)' -> ^(CONS)
  	|'cons 'lexpr')' -> ^(CONS lexpr)
+ 	|'list)' -> ^(LIST)
  	|'list 'lexpr')' -> ^(LIST lexpr)
  	)
 	| 'nil' -> NIL
