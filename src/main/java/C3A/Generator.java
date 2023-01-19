@@ -455,8 +455,9 @@ public class Generator {
         i.add(new Assign(subVar, new Nil()));
         for (int k = 0; k < value; k++) {
           subVar = new Variable("INT_ARG");
-          i.add(new AssignTab(subVar, 1, i.getLastAssignedVariable()));
+          Variable last = i.getLastAssignedVariable();
           i.add(new AssignTab(subVar, 0, new Nil()));
+          i.add(new AssignTab(subVar, 1, last));
           i.add(new Assign(subVar, subVar));
         }
         i.add(new Assign(var, subVar));
