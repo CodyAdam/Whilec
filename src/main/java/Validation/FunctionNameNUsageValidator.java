@@ -1,15 +1,9 @@
 package Validation;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Stack;
 
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
-
-import AST.ASTLexer;
-import AST.ASTParser;
 
 public class FunctionNameNUsageValidator extends DeepValidator {
 
