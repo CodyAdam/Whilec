@@ -18,7 +18,7 @@ public class Goto extends Instruction{
 
   @Override
   public String toPython(Indent indent) {
-    return "";
+    return indent+ "# Goto";
   }
   
 }

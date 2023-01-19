@@ -20,6 +20,6 @@ public class Label extends Instruction {
 
   @Override
   public String toPython(Indent indent) {
-    return "";
+    return indent + "Label";
   }
 }

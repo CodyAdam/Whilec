@@ -35,7 +35,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        //args = new String[] { "sample/good/for.while", "-x", "-v" };
+        // args = new String[] { "sample/good/double.while", "5", "-x", "-v"};
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +

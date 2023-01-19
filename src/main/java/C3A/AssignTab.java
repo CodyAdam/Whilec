@@ -23,7 +23,7 @@ public class AssignTab extends Instruction {
   public String toPython(Indent indent) {
     String s = "";
     if (index == 0) {
-      s += indent + left.getName() + " = " + this.binTree + "(left=" + right.toPython() + ")\n";
+      s += indent + left.getName() + " = " + this.binTree + "(left=" + right.toPython() + ")";
     } else {
       s += indent + left.getName() + ".right = " + right.toPython();
     }
