@@ -1,6 +1,7 @@
 package Validation;
 
 import org.antlr.runtime.tree.Tree;
+import runner.Main;
 
 import java.io.File;
 import java.util.Collections;
@@ -30,7 +31,7 @@ public class PreCompileValidator {
     }
 
     public void validate(Tree tree) throws Exception {
-        this.printBanner();
+        if(Main.verbose) this.printBanner();
 
         SymbolsCreator symbols = new SymbolsCreator();
 
@@ -39,7 +40,7 @@ public class PreCompileValidator {
             if(errorCount>0) break;
         }
 
-        this.printReportBanner();
+        if(Main.verbose) this.printReportBanner();
     }
 
     private void printBanner(){
