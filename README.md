@@ -1,22 +1,27 @@
-# Project_TLC
-Project in team of 4 members during our studies at the engineering school of ESIR
+# Projet TLC : Théorie des Langages et Compilation
 
 # How to run
 
-## Build
+## Build the compiler jar
 
 ```bash
 mvn clean
 mvn package
 ```
 
-## Run in Debug
+## Run the compiler
 
 ```bash
-mvn clean
-mvn exec:java
+java -jar target/whilec.jar filepath [options]
 ```
 
+filepath est requis et il s'agit du chemin vers le fichier while à compiler.
+
+Options :
+
+* `-x` : execute le programme dans le langage cible après la compilation
+* `-v` : verbose mode, affiche les étapes de compilation avec plus de détails
+* `-d` : debug mode, print l'AST dans un fichier PlantUML et affiche le code 3 adresses dans la console.
 
 # I. Introduction
 
@@ -99,7 +104,6 @@ Voici la liste des erreurs de validation que nous avons implémentée :
 | `variable`              | les variables en entrée de fonction ne doivent pas avoir le même nom                                      | Duplicate variable argument name {$VARNAME}.                                                        |
 | `variable`              | les variables en sortie de fonction ne doivent pas avoir le même nom                                      | Duplicate variable output name {$VARNAME}.                                                          |
 | `function`              | les fonctions doivent avoir des noms différents                                                           |                                                                                                     |
-| `function`              | les fonctions doivent avoir un nom valide                                                                 |                                                                                                     |
 | `function`              | un appel de fonction doit appelé une fonction qui est défini dans le programme                            |                                                                                                     |
 | `function`              | un appel de fonction doit avoir le bon nombre d'arguments                                                 |                                                                                                     |
 | `program`               | un programme doit contenir une fonction nommée "main"                                                     |                                                                                                     |
