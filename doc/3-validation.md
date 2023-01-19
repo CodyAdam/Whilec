@@ -1,5 +1,4 @@
-
-## ?. Validation du langage :
+## Validation du langage :
 
 La validation est une étape cruciale dans le processus de compilation de notre compilateur.
 Pour cela, nous avons conçu un objet PreCompileValidator qui permet d'attacher un ou plusieurs modules de validation, appelés Validator. 
