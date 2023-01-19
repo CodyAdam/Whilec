@@ -1,6 +1,5 @@
 package runner;
 
-// import Validation.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +17,7 @@ import org.antlr.runtime.tree.Tree;
 import AST.ASTLexer;
 import AST.ASTParser;
 import AST.ASTPrinter;
+import AST.OurASTParser;
 import C3A.Generator;
 import C3A.Instructions;
 import Validation.FunctionNameNUsageValidator;
@@ -34,7 +34,7 @@ public class Main {
             // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/good/foreach.while" };
+        args = new String[] { "test/bad/badsyntax.while", "-x" };
         String filepath = args[0];
 
         Boolean verbose = false;
@@ -58,7 +58,7 @@ public class Main {
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
-        ASTParser parser = new ASTParser(tokens);
+        ASTParser parser = new OurASTParser(tokens);
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
