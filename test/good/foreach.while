@@ -1,0 +1,16 @@
+function foreachtest:
+read A, B
+%
+  foreach X in B do
+    A := (cons X A)
+  od
+%
+write A
+
+function main:
+read
+%
+  Three := (cons a (cons b (cons c nil)));
+  For := (cons string (foreachtest hello Three));
+%
+write For

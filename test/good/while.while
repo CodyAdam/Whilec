@@ -1,0 +1,19 @@
+function time3:
+read A
+%
+  while A do
+    A := (tl A);
+    B := (cons nil B);
+    B := (cons nil B);
+    B := (cons nil B);
+  od
+%
+write B
+
+function main:
+read
+%
+  Three := (cons a (cons b (cons c nil)));
+  While := (cons int (time3 Three));
+%
+write While

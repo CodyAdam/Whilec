@@ -1,6 +1,8 @@
 function main:
 read
 %
-    A := (list un deu tri)
+    A := (list);
+    B := (list un);
+    C := (list un deu tri)
 %
-write A
+write A, B, C

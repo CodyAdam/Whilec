@@ -8,7 +8,7 @@ write A
 function stringtest2:
   read
   %
-    A := (cons nil liste une est ceci)
+    A := (cons ceci est une liste de cons)
   %
 write A
 

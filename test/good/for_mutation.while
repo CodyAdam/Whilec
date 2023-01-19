@@ -1,0 +1,16 @@
+function double : 
+read X 
+%
+  for X do 
+    X := (cons nil X) 
+  od 
+% 
+write X
+
+function main:
+read
+%
+  Two := (cons nil (cons nil nil));
+  For := (cons int (double (double Two)))
+%
+write For

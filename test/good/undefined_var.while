@@ -1,0 +1,7 @@
+function main:
+read
+%
+	B := E;
+  C := A
+%
+write A, B, C

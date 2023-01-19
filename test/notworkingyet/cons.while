@@ -1,0 +1,9 @@
+function main:
+read
+%
+    A := (cons);
+    B := (cons un);
+    C := (cons un deu);
+    D := (cons un deu trei);
+%
+write A, B, C, D
