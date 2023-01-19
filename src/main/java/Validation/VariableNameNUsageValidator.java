@@ -88,7 +88,7 @@ public class VariableNameNUsageValidator extends DeepValidator{
 
         for (int i = 0; i < tree.getChild(0).getChildCount(); i++) {
             this.variableUsages.get(function.functionName).variableUsageWrite.put(tree.getChild(0).getChild(i).getText(), tree.getChild(0).getChild(i));
-            if(!this.variableUsages.get(function.functionName).variableUsageRead.keySet().contains(tree.getChild(0).getChild(i).getText())) {
+            if(!this.variableUsages.get(function.functionName).variableUsageRead.containsKey(tree.getChild(0).getChild(i).getText())) {
                 this.variableUsages.get(function.functionName).variableWrittenBeforeRead.put(tree.getChild(0).getChild(i).getText(), tree.getChild(0).getChild(i));
             }
         }
