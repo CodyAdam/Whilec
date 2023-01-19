@@ -7,6 +7,10 @@ public class FuncEnd extends Instruction {
     this.funcSymb = funcName;
   }
 
+  public Symbol getFuncSymb() {
+    return funcSymb;
+  }
+
   @Override
   public String toString() {
     return "func end\n";

@@ -1,0 +1,6 @@
+function main:
+read A
+% 
+   A := A + 1
+%
+write A
