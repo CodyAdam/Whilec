@@ -30,13 +30,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
-            // System.err.println("Wrong number of arguments, expected at least 1, got " +
-            // args.length);
-            // System.exit(1);
+            System.err.println("Wrong number of arguments, expected at least 1, got " +
+                    args.length);
+            System.exit(1);
         }
-        args = new String[] { "test/notworkingyet/cons.while", "-x" };
-        String filepath = args[0];
 
+        // for debugging
+        // args = new String[] { "test/notworkingyet/cons.while", "-x" };
+
+        
+        String filepath = args[0];
         Boolean verbose = false;
         Boolean execute = false;
         Boolean debug = false;
@@ -63,13 +66,12 @@ public class Main {
         Tree tree = (Tree) prog.getTree();
 
         // Print the AST to PlantUML
-        if(debug){
+        if (debug) {
             System.out.println("Printing AST to ./ASTPrintend.puml ...");
             ASTPrinter printer = new ASTPrinter();
             printer.printTree(tree);
             printer.save("ASTPrinted.puml");
         }
-
 
         // Validate the AST
         File filepathAsFile = new File(filepath);
