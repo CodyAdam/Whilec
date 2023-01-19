@@ -53,5 +53,5 @@ Cela facilite encore plus l'identification et la correction de l'erreur.
 Ensuite, certains avertissements ou erreurs sont accompagnés d'astuces ou de suggestions pour résoudre le problème. 
 Ces astuces et suggestions peuvent aider les développeurs à corriger rapidement les erreurs sans avoir à perdre du temps à rechercher la solution eux-mêmes.
 
-![Tips Validation Exampele](/doc/tips_1.png)
-![Tips Validation Exampele](/doc/tips_2.png)
+![Tips Validation Exemple](./assets/tips_1.png)
+![Tips Validation Exemple](./assets/tips_2.png)
