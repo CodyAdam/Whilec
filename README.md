@@ -1,10 +1,34 @@
 # 🧱 While Compiler
 
-This is a compiler for the While language. It is written in Java and compile to Python.
+The goal of this project is to create a new programming language and a compiler for it. The language is called While and is a simple imperative language. The compiler is written in Java and compile to Python.
+
 This project has been realised by a group of 4 students of ESIR. The goal of this project is to learn how works and how to write a compiler.
 
-Features :
-- [x] Grammar lexer and parser
+## Example
+
+This is an example of a While program that compute the the double of a number.
+
+```
+function double : 
+read X 
+%
+  for X do 
+    X := (cons nil X) 
+  od 
+% 
+write X
+
+function main:
+read UserInput
+%
+  Output := (cons int (double UserInput))
+%
+write For
+```
+
+### Features
+
+- [x] Grammar lexer and parser (ANTLR)
 - [x] AST generation
 - [x] AST Validation
 - [x] Three Adress Code generation
