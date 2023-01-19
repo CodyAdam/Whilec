@@ -12,4 +12,4 @@ read UserInput
 %
   Output := (cons int (double UserInput))
 %
-write For
+write Output

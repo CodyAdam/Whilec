@@ -47,7 +47,7 @@ read UserInput
 %
   Output := (cons int (double UserInput))
 %
-write For
+write Output
 ```
 
 > Note : Standard input and output are available through the `main` function. Thus the `main` function is mandatory.
@@ -75,14 +75,69 @@ The goal of the `whilec.jar` is to compile a While program into a Python program
 ```bash
 java -jar whilec.jar [filepath] [...arguments?] [...options?]
 ```
-- `filepath` : the path of the file to compile (e.g. `java -jar whilec.jar sample/good/for.while`)
+- `filepath` : the path of the file to compile (example : `java -jar whilec.jar sample/good/for.while`)
 - `arguments` *optional* : there are two ways for format the arguments of the program (seperated by a space)
     - `2 0` : using integers that are converted into binary tree (2 become `(cons nil (cons nil nil))`)
     - `(cons nil (cons nil nil)) (cons nil nil)` : using the binary tree format directly
-- `options` *optional* : the options of the compiler (seperated by a space, e.g. `java -jar whilec.jar sample/good/for.while -x -v -d`)
+  - example : `java -jar whilec.jar sample/good/double.while 5`
+- `options` *optional* : the options of the compiler (seperated by a space)
   - `-x` : execute the program at the end of the compilation
   - `-v` : verbose mode, display compilation steps with more details
   - `-d` : debug mode, print AST into a PlantUML file and display the intermediate code in the console
+  - example : `java -jar whilec.jar sample/good/for.while -x -v -d`
+
+**Example**
+
+```bash
+java -jar whilec.jar sample/good/double.while 5 -x -v
+```
+
+**Output**
+
+```
+###########################################
+### STARTING VALIDATION OF double.while ###
+###########################################
+
+###########################
+###  VALIDATION REPORT  ###
+###  0 ERROR(S) FOUND   ###
+###########################
+
+File output.py generated at /home/cody/Git/Project_TLC/output.py
+Output value 0 :
+ 
+  _CONS_____                                                                    
+ /          \                                                                   
+int      _CONS_____                                                             
+        /          \                                                            
+       NIL      _CONS_____                                                      
+               /          \                                                     
+              NIL      _CONS_____                                               
+                      /          \                                              
+                     NIL      _CONS_____                                        
+                             /          \                                       
+                            NIL      _CONS_____                                 
+                                    /          \                                
+                                   NIL      _CONS_____                          
+                                           /          \                         
+                                          NIL      _CONS_____                   
+                                                  /          \                  
+                                                 NIL      _CONS_____            
+                                                         /          \           
+                                                        NIL      _CONS_____     
+                                                                /          \    
+                                                               NIL      _CONS_  
+                                                                       /      \ 
+                                                                      NIL    NIL
+
+    as Integer:  11   
+    as Boolean:  1    
+     as String:  "int"
+
+  Pretty print:  10   
+```
+
 
 ## 📂 Project Structure
 
@@ -100,7 +155,7 @@ java -jar whilec.jar [filepath] [...arguments?] [...options?]
  ┃ ┣ 📂C3A                // Generated 3AC 
  ┃ ┣ 📂translate          // Generated target from 3AC
  ┃ ┗ 📂Validation         // Validation system
- ┣ 📂sample                 // Sample while files
+ ┣ 📂sample               // Sample while files
  ┃ ┣ 📂bad                // Should raise compiler error
  ┃ ┗ 📂good               // Should compile
  ┣ 📜.gitignore
