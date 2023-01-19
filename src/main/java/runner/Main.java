@@ -29,15 +29,15 @@ import translate.PythonTranslator;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+
+        // for debugging
+        //args = new String[] { "sample/good/for.while", "-x", "-d", "-v" };
+
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
                     args.length);
             System.exit(1);
         }
-
-        // for debugging
-        // args = new String[] { "test/notworkingyet/cons.while", "-x" };
-
         
         String filepath = args[0];
         Boolean verbose = false;
