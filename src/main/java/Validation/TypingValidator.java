@@ -49,43 +49,32 @@ public class TypingValidator extends DeepValidator{
 
     @Override
     protected void validateIF(Tree tree, Function function) {
-        checkBooleanExpression(tree.getChild(0));
+        checkTypeExpression(tree.getChild(0), "boolean");
     }
 
     @Override
     protected void validateFOR(Tree tree, Function function) {
-        checkIntExpression(tree.getChild(0));
+        checkTypeExpression(tree.getChild(0), "int");
     }
 
     @Override
     protected void validateFOREACH(Tree tree, Function function) {
-
+        checkTypeExpression(tree.getChild(1), "list");
     }
 
     @Override
     protected void validateWHILE(Tree tree, Function function) {
-        checkBooleanExpression(tree.getChild(0));
+        checkTypeExpression(tree.getChild(0), "boolean");
     }
 
-    private void checkBooleanExpression(Tree tree){
+    private void checkTypeExpression(Tree tree, String expectedType){
         if(tree.getChildCount() == 0) return;
         if(tree.getChild(0).getText().equals("FUNCTIONCALL")){
             String functionName = tree.getChild(0).getChild(0).getText();
             Function f = functions.get(functionName);
             if(f == null) return;
             if(f.returnType.size() != 1) {
-                this.printError("Expected boolean expression. Got function call with multiple return values.", tree);
-            }
-        }
-    }
-    private void checkIntExpression(Tree tree){
-        if(tree.getChildCount() == 0) return;
-        if(tree.getChild(0).getText().equals("FUNCTIONCALL")){
-            String functionName = tree.getChild(0).getChild(0).getText();
-            Function f = functions.get(functionName);
-            if(f == null) return;
-            if(f.returnType.size() != 1) {
-                this.printError("Expected integer value. Got function call with multiple return values.", tree);
+                this.printError("Expected "+expectedType+" expression. Got function call with multiple return values.", tree);
             }
         }
     }
