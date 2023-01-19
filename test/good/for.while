@@ -11,6 +11,6 @@ write Result
 function main:
 read
 %
-  For := (cons int (add (cons nil nil) (cons nil (cons nil nil)));
+  For := (cons int (add (cons nil nil) (cons nil (cons nil nil))));
 %
 write For
