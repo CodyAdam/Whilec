@@ -1,6 +1,5 @@
 package runner;
 
-// import Validation.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +17,7 @@ import org.antlr.runtime.tree.Tree;
 import AST.ASTLexer;
 import AST.ASTParser;
 import AST.ASTPrinter;
+import AST.OurASTParser;
 import C3A.Generator;
 import C3A.Instructions;
 import Validation.FunctionNameNUsageValidator;
@@ -28,18 +28,22 @@ import translate.PythonTranslator;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
-            // System.err.println("Wrong number of arguments, expected at least 1, got " +
-            // args.length);
-            // System.exit(1);
-        }
-        args = new String[] { "test/bad/multipleNameFunction.while" };
-        String filepath = args[0];
+    public static boolean verbose = false;
+    public static boolean execute = false;
+    public static boolean debug = false;
 
-        Boolean verbose = false;
-        Boolean execute = false;
-        Boolean debug = false;
+    public static void main(String[] args) throws Exception {
+
+        // for debugging
+        //args = new String[] { "sample/good/for.while", "-x", "-v" };
+
+        if (args.length == 0) {
+            System.err.println("Wrong number of arguments, expected at least 1, got " +
+                    args.length);
+            System.exit(1);
+        }
+        
+        String filepath = args[0];
         for (String arg : args) {
             if (arg.equals("-v")) {
                 verbose = true;
@@ -58,18 +62,17 @@ public class Main {
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
-        ASTParser parser = new ASTParser(tokens);
+        ASTParser parser = new OurASTParser(tokens);
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
         // Print the AST to PlantUML
-        if(debug){
+        if (debug) {
             System.out.println("Printing AST to ./ASTPrintend.puml ...");
             ASTPrinter printer = new ASTPrinter();
             printer.printTree(tree);
             printer.save("ASTPrinted.puml");
         }
-
 
         // Validate the AST
         File filepathAsFile = new File(filepath);
