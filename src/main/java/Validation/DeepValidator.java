@@ -76,6 +76,8 @@ public abstract class DeepValidator extends Validator {
     private void vIF(Tree tree, Function function){
         if(tree.getChildCount() == 0) return;
 
+        this.validateIF(tree, function);
+
         for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
             this.validateCommand(tree.getChild(1).getChild(i), function);
         }
@@ -84,8 +86,6 @@ public abstract class DeepValidator extends Validator {
                 this.validateCommand(tree.getChild(2).getChild(i), function);
             }
         }
-
-        this.validateIF(tree, function);
     }
 
     protected abstract void validateIF(Tree tree, Function function);
@@ -93,11 +93,11 @@ public abstract class DeepValidator extends Validator {
     private void vFOR(Tree tree, Function function){
         if(tree.getChildCount() == 0) return;
 
+        this.validateFOR(tree, function);
+
         for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
             this.validateCommand(tree.getChild(1).getChild(i), function);
         }
-
-        this.validateFOR(tree, function);
     }
 
     protected abstract void validateFOR(Tree tree, Function function);
@@ -105,11 +105,11 @@ public abstract class DeepValidator extends Validator {
     private void vWHILE(Tree tree, Function function) {
         if(tree.getChildCount() == 0) return;
 
+        this.validateWHILE(tree, function);
+
         for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
             this.validateCommand(tree.getChild(1).getChild(i), function);
         }
-
-        this.validateWHILE(tree, function);
     }
 
     protected abstract void validateWHILE(Tree tree, Function function);
@@ -117,11 +117,11 @@ public abstract class DeepValidator extends Validator {
     private void vFOREACH(Tree tree, Function function) {
         if(tree.getChildCount() == 0) return;
 
+        this.validateFOREACH(tree, function);
+
         for (int i = 0; i < tree.getChild(2).getChildCount(); i++) {
             this.validateCommand(tree.getChild(2).getChild(i), function);
         }
-
-        this.validateFOREACH(tree, function);
     }
 
     protected abstract void validateFOREACH(Tree tree, Function function);
