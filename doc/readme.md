@@ -10,7 +10,7 @@
 6. [Vers le code cible](6-to-target-code.md)
 7. [Librairie runtime](7-runtime-lib.md)
 8. [Méthodologie](8-methodology.md)
-9.  [Postmortem](9-postmortem.md)
+9. [Postmortem](9-postmortem.md)
 
 # Autres documents
 
