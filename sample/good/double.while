@@ -1,0 +1,15 @@
+function double : 
+read X 
+%
+  for X do 
+    X := (cons nil X) 
+  od 
+% 
+write X
+
+function main:
+read UserInput
+%
+  Output := (cons int (double UserInput))
+%
+write For
