@@ -8,7 +8,7 @@ write A
 function stringtest2:
   read
   %
-    A := (cons ceci est une liste de cons)
+    A := (cons ceci est une liste de trucs)
   %
 write A
 
