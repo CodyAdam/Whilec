@@ -28,10 +28,14 @@ import translate.PythonTranslator;
 
 public class Main {
 
+    public static boolean verbose = false;
+    public static boolean execute = false;
+    public static boolean debug = false;
+
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        //args = new String[] { "sample/good/for.while", "-x", "-d", "-v" };
+        //args = new String[] { "sample/good/for.while", "-x", "-v" };
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
@@ -40,9 +44,6 @@ public class Main {
         }
         
         String filepath = args[0];
-        Boolean verbose = false;
-        Boolean execute = false;
-        Boolean debug = false;
         for (String arg : args) {
             if (arg.equals("-v")) {
                 verbose = true;
