@@ -34,7 +34,7 @@ public class Main {
             // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/good/foreach.while" };
+        args = new String[] { "test/bad/multipleNameFunction.while" };
         String filepath = args[0];
 
         Boolean verbose = false;

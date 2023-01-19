@@ -11,42 +11,85 @@ import org.antlr.runtime.tree.Tree;
 import AST.ASTLexer;
 import AST.ASTParser;
 
-public class FunctionNameNUsageValidator extends Validator {
+public class FunctionNameNUsageValidator extends DeepValidator {
 
-    HashSet<String> notVariable = new HashSet<>(Arrays.asList("cons", "hd", "tl", "list", "nil", "nop", "if", "then", "fi", "while", "do", "od", "foreach", "in", "function", "read", "write"));
+    HashMap<String, FunctionUsage> functionUsages = new HashMap<>();
 
     @Override
-    public void validate(Tree tree, HashMap<String, Function> functions) throws Exception {
-        List<String> functionNames = new ArrayList<>();
-        for (int i = 0; i < tree.getChildCount(); i++) {
-            String functionName = tree.getChild(i).getChild(0).getText();
-            if(functionNames.contains(functionName)) {
-                throw new Exception("Multiple declarations with the same name");
-            }
-            functionNames.add(functionName);
-            if(notVariable.contains(functionName)) {
-                throw new Exception("Invalid function name");
+    protected void validateFUNCTION(Tree tree, Function function) {
+        Tree lineNode = tree.getChild(0).getChild(0);
+        if(functionUsages.containsKey(function.functionName)) {
+            this.printError("Duplicate function name " + function.functionName + ".", lineNode.getChild(0));
+        } else {
+            this.functionUsages.put(function.functionName, new FunctionUsage());
+        }
+    }
+
+    @Override
+    protected void endValidationFunction(Tree tree, Function function) {
+        if(!functionUsages.containsKey("main")) {
+            this.printError("No main in the program", tree.getChild(0));
+        }
+    }
+
+    private void checkExpressionFunctionUsage(Tree tree, Function function) {
+        Stack<Tree> stack = new Stack<>();
+        stack.push(tree);
+        while(!stack.empty()){
+            Tree node = stack.pop();
+            if(node.getText().equals("FUNCTIONCALL")) {
+                if(!this.functions.containsKey(node.getChild(0).getText())) {
+                    System.out.println(node);
+                    this.printError("No function called " + node.getChild(0).getText() + ".", node.getChild(0));
+                }
+                if(this.functions.get(node.getChild(0).getText()).inputOrder.size() != node.getChild(0).getChildCount()) {
+                    this.printError("Bad number of input arguments.", node.getChild(0));
+                    System.out.println(this.functions.get(node.getChild(0).getText()).inputOrder.size());
+                    System.out.println(node.getChildCount());
+                    System.out.println(node);
+                }
+            } else {
+                for (int i = 0; i < node.getChildCount(); i++) {
+                    stack.push(node.getChild(i));
+                }
             }
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        String filepath = "/home/pataubeur/IdeaProjects/Project_TLC/test/badfunctionname.while";
-        CharStream cs = new ANTLRFileStream(filepath);
-        ASTLexer lexer = new ASTLexer(cs);
-        CommonTokenStream tokens = new CommonTokenStream();
-        tokens.setTokenSource(lexer);
-        ASTParser parser = new ASTParser(tokens);
+    @Override
+    protected void validateASSIGN(Tree tree, Function function) {
+        for (int i = 0; i < tree.getChild(1).getChildCount(); i++) {
+            this.checkExpressionFunctionUsage(tree.getChild(1).getChild(i), function);
+        }
+    }
 
-        var prog = parser.program();
-        prog.getStart();
-        CommonTree tree = (CommonTree) prog.getTree();
+    @Override
+    protected void validateIF(Tree tree, Function function) {
+        this.checkExpressionFunctionUsage(tree.getChild(0), function);
+    }
 
-        PreCompileValidator validator = new PreCompileValidator(filepath);
-        validator.addValidator(new FunctionNameNUsageValidator());
-        //validator.addValidator(new VariableNameNUsageValidator());
-        //validator.addValidator(new TypingValidator());
-        validator.validate(tree);
+    @Override
+    protected void validateFOR(Tree tree, Function function) {
+        this.checkExpressionFunctionUsage(tree.getChild(0), function);
+    }
+
+    @Override
+    protected void validateWHILE(Tree tree, Function function) {
+        this.checkExpressionFunctionUsage(tree.getChild(0), function);
+    }
+
+    @Override
+    protected void validateFOREACH(Tree tree, Function function) {
+        this.functionUsages.get(function.functionName).functionUsageCall.put(tree.getChild(0).getText(), tree.getChild(0));
+        this.checkExpressionFunctionUsage(tree.getChild(1), function);
+    }
+
+    class FunctionUsage {
+        public HashMap<String, Tree> functionUsageCall;
+
+        public FunctionUsage() {
+            this.functionUsageCall = new HashMap<>();
+        }
     }
 
 }

@@ -1,0 +1,21 @@
+function oui:
+read In
+%
+	nop;
+%
+write Out
+
+function non:
+read
+%
+	Var := (cons nil nil);
+	Vars := (ouis Var Var);
+%
+write Out
+
+function main:
+read
+%
+	nop;
+%
+write Out
