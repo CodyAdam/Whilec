@@ -35,7 +35,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        // args = new String[] { "sample/good/double.while", "5", "-x", "-v"};
+        args = new String[] { "sample/good/string.while", "-x", "-v"};
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
@@ -62,7 +62,7 @@ public class Main {
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
-        ASTParser parser = new OurASTParser(tokens);
+        ASTParser parser = new OurASTParser(tokens, filepath);
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
