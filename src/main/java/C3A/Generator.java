@@ -75,6 +75,7 @@ public class Generator {
         String varName = outputNode.getChild(j).getText();
         if (!scopeVars.containsKey(varName)) {
           scopeVars.put(varName, new Variable(varName));
+          i.add(new Assign(scopeVars.get(varName), new Nil()));
         }
       }
 
@@ -231,27 +232,27 @@ public class Generator {
     Tree commands = ast.getChild(2);
 
     String name = indexNode.getText();
-    Variable index;
+    Variable item;
     if (scopeVars.containsKey(name)) {
-      index = scopeVars.get(name);
+      item = scopeVars.get(name);
     } else {
-      index = new Variable(name);
-      scopeVars.put(name, index);
+      item = new Variable(name);
+      scopeVars.put(name, item);
     }
     i.add(fromExpr(expression, scopeVars));
-    i.add(new Assign(index, i.getLastAssignedVariable()));
+    i.add(new Assign(item, i.getLastAssignedVariable()));
+    Variable index = new Variable("INDEX");
+    i.add(new Assign(index, item));
 
     // Labels
     Label startForLabel = new Label("for_start");
     Label endForLabel = new Label("for_end");
-    Label startIfLabel = new Label("if_start");
 
     i.add(startForLabel);
-    i.add(new IfzGoto(startIfLabel, endForLabel, index));
-    i.add(new Goto(endForLabel));
-    i.add(startIfLabel);
+    i.add(new IfzGoto(endForLabel, endForLabel, index));
+    i.add(new Assign(item, new Unop(UnopEnum.HEAD, index)));
     i.add(fromCommands(commands, scopeVars));
-    i.add(new Assign(index, new Unop(UnopEnum.TAIL, index))); // decrement index
+    i.add(new Assign(index, new Unop(UnopEnum.TAIL, index)));
     i.add(new Goto(startForLabel));
     i.add(endForLabel);
     return i;
@@ -265,13 +266,14 @@ public class Generator {
 
     // Parse left (variable names)
     int leftCount = left.getChildCount();
-    Variable[] names = new Variable[leftCount];
+    Variable[] vars = new Variable[leftCount];
     for (int j = 0; j < leftCount; j++) {
       String varName = left.getChild(j).getText();
       if (!scopeVars.containsKey(varName)) {
         scopeVars.put(varName, new Variable(varName));
+        i.add(new Assign(scopeVars.get(varName), new Nil()));
       }
-      names[j] = scopeVars.get(varName);
+      vars[j] = scopeVars.get(varName);
     }
 
     // Parse right (expressions)
@@ -294,7 +296,7 @@ public class Generator {
       }
       i.add(new Assign(functionCall, i.getLastAssignedVariable()));
       for (int j = 0; j < leftCount; j++) {
-        i.add(new Assign(names[j], new TabValue(functionCall, j)));
+        i.add(new Assign(vars[j], new TabValue(functionCall, j)));
       }
     } else {
       int rightCount = right.getChildCount();
@@ -303,7 +305,7 @@ public class Generator {
       for (int j = 0; j < rightCount; j++) {
         Tree exprNode = right.getChild(j).getChild(0); // EXPRBASE node
         i.add(fromExpr(exprNode, scopeVars));
-        i.add(new Assign(names[j], i.getLastAssignedVariable()));
+        i.add(new Assign(vars[j], i.getLastAssignedVariable()));
       }
     }
 
@@ -318,12 +320,35 @@ public class Generator {
     switch (AstNode.valueOf(node.getText())) {
       case CONS:
         expr = new Variable("CONS");
-        for (int j = 0; j < childCount; j++) {
-          Tree exprNode = node.getChild(j); // EXPRESSION node
+        Variable subnode = new Variable("CONS_FIRST");
+        if (childCount > 0) {
+          Tree exprNode = node.getChild(childCount - 1); // EXPRESSION node
           i.add(fromExpr(exprNode, scopeVars));
-          i.add(new AssignTab(expr, j, i.getLastAssignedVariable()));
+          i.add(new Assign(subnode, i.getLastAssignedVariable()));
         }
-        i.add(new Assign(expr, expr));
+        for (int j = childCount - 2; j >= 0; j--) {
+          Tree exprNode = node.getChild(j); // EXPRESSION node
+          Variable newNode = new Variable("CONS");
+          i.add(fromExpr(exprNode, scopeVars));
+          i.add(new AssignTab(newNode, 0, i.getLastAssignedVariable()));
+          i.add(new AssignTab(newNode, 1, subnode));
+          subnode = newNode;
+        }
+        i.add(new Assign(expr, subnode));
+        break;
+      case LIST:
+        expr = new Variable("LIST");
+        Variable subNode = new Variable("NIL");
+        i.add(new Assign(subNode, new Nil()));
+        for (int j = childCount - 1; j >= 0; j--) {
+          Tree exprNode = node.getChild(j); // EXPRESSION node
+          Variable newNode = new Variable("CONS");
+          i.add(fromExpr(exprNode, scopeVars));
+          i.add(new AssignTab(newNode, 0, i.getLastAssignedVariable()));
+          i.add(new AssignTab(newNode, 1, subNode));
+          subNode = newNode;
+        }
+        i.add(new Assign(expr, subNode));
         break;
       case HEAD:
         expr = new Variable("HEAD");
@@ -373,19 +398,6 @@ public class Generator {
           i.add(new Assign(expr, new Nil()));
         }
         break;
-
-      case LIST:
-        expr = new Variable("CONS");
-        for (int j = 0; j < childCount; j++) {
-          Tree exprNode = node.getChild(j); // EXPRESSION node
-          i.add(fromExpr(exprNode, scopeVars));
-          i.add(new AssignTab(expr, j, i.getLastAssignedVariable()));
-        }
-        // append a nill at the end
-        i.add(new AssignTab(expr, childCount, new Nil()));
-        i.add(new Assign(expr, expr));
-        break;
-
       case NIL:
         expr = new Variable("NIL");
         i.add(new Assign(expr, new Nil()));
