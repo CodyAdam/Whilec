@@ -104,38 +104,30 @@ java -jar whilec.jar sample/good/double.while 5 -x -v
 ###  0 ERROR(S) FOUND   ###
 ###########################
 
-File output.py generated at /home/cody/Git/Project_TLC/output.py
+File output.py generated at /Project_TLC/output.py
 Output value 0 :
  
-  _CONS_____                                                                    
- /          \                                                                   
-int      _CONS_____                                                             
-        /          \                                                            
-       NIL      _CONS_____                                                      
-               /          \                                                     
-              NIL      _CONS_____                                               
-                      /          \                                              
-                     NIL      _CONS_____                                        
-                             /          \                                       
-                            NIL      _CONS_____                                 
-                                    /          \                                
-                                   NIL      _CONS_____                          
-                                           /          \                         
-                                          NIL      _CONS_____                   
-                                                  /          \                  
-                                                 NIL      _CONS_____            
-                                                         /          \           
-                                                        NIL      _CONS_____     
-                                                                /          \    
-                                                               NIL      _CONS_  
-                                                                       /      \ 
-                                                                      NIL    NIL
+  _CONS_____                                        
+ /          \                                       
+int      _CONS_____                                 
+        /          \                                
+       NIL      _CONS_____                          
+               /          \                         
+              NIL      _CONS_____                   
+                      /          \                  
+                     NIL      _CONS_____            
+                             /          \           
+                            NIL      _CONS_____     
+                                    /          \    
+                                   NIL      _CONS_  
+                                           /      \ 
+                                          NIL    NIL
 
-    as Integer:  11   
+    as Integer:  7    
     as Boolean:  1    
      as String:  "int"
 
-  Pretty print:  10   
+  Pretty print:  6    
 ```
 
 
