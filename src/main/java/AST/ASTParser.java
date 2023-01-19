@@ -1,5 +1,5 @@
 package AST;
-// $ANTLR 3.5.3 ./grammar/AST.g 2023-01-17 17:27:22
+// $ANTLR 3.5.3 ./grammar/AST.g 2023-01-19 13:38:59
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -18,9 +18,9 @@ public class ASTParser extends Parser {
 		"HEAD", "IF", "INPUT", "LIST", "NIL", "NOP", "OUTPUT", "ROOT", "SYMBOL", 
 		"SYMBOL_LEX", "TAIL", "TOKENS", "VARIABLE", "VARIABLE_LEX", "VARS", "WHILE", 
 		"WS", "' = '", "'%'", "'('", "')'", "','", "':'", "':='", "';'", "'cons '", 
-		"'do'", "'else'", "'fi'", "'for'", "'foreach'", "'function'", "'hd '", 
-		"'if'", "'in'", "'list '", "'nil'", "'nop'", "'od'", "'read'", "'then'", 
-		"'tl '", "'while'", "'write'"
+		"'cons'", "'do'", "'else'", "'fi'", "'for'", "'foreach'", "'function'", 
+		"'hd '", "'if'", "'in'", "'list '", "'list'", "'nil'", "'nop'", "'od'", 
+		"'read'", "'then'", "'tl '", "'while'", "'write'"
 	};
 	public static final int EOF=-1;
 	public static final int T__37=37;
@@ -50,6 +50,8 @@ public class ASTParser extends Parser {
 	public static final int T__61=61;
 	public static final int T__62=62;
 	public static final int T__63=63;
+	public static final int T__64=64;
+	public static final int T__65=65;
 	public static final int ASSIGN=4;
 	public static final int COMMAND=5;
 	public static final int COMMANDS=6;
@@ -169,7 +171,7 @@ public class ASTParser extends Parser {
 			while (true) {
 				int alt3=2;
 				int LA3_0 = input.LA(1);
-				if ( (LA3_0==51) ) {
+				if ( (LA3_0==52) ) {
 					alt3=1;
 				}
 
@@ -302,8 +304,8 @@ public class ASTParser extends Parser {
 		Object char_literal8_tree=null;
 		Object WS9_tree=null;
 		RewriteRuleTokenStream stream_SYMBOL_LEX=new RewriteRuleTokenStream(adaptor,"token SYMBOL_LEX");
-		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
+		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
 		RewriteRuleTokenStream stream_42=new RewriteRuleTokenStream(adaptor,"token 42");
 		RewriteRuleSubtreeStream stream_definition=new RewriteRuleSubtreeStream(adaptor,"rule definition");
 
@@ -311,8 +313,8 @@ public class ASTParser extends Parser {
 			// ./grammar/AST.g:42:9: ( 'function' WS SYMBOL_LEX ( WS )? ':' WS definition -> ^( FUNCTION ^( SYMBOL_LEX definition ) ) )
 			// ./grammar/AST.g:42:11: 'function' WS SYMBOL_LEX ( WS )? ':' WS definition
 			{
-			string_literal4=(Token)match(input,51,FOLLOW_51_in_function169);  
-			stream_51.add(string_literal4);
+			string_literal4=(Token)match(input,52,FOLLOW_52_in_function169);  
+			stream_52.add(string_literal4);
 
 			WS5=(Token)match(input,WS,FOLLOW_WS_in_function171);  
 			stream_WS.add(WS5);
@@ -441,10 +443,10 @@ public class ASTParser extends Parser {
 		Object char_literal19_tree=null;
 		Object WS20_tree=null;
 		Object string_literal21_tree=null;
-		RewriteRuleTokenStream stream_59=new RewriteRuleTokenStream(adaptor,"token 59");
 		RewriteRuleTokenStream stream_38=new RewriteRuleTokenStream(adaptor,"token 38");
+		RewriteRuleTokenStream stream_61=new RewriteRuleTokenStream(adaptor,"token 61");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_63=new RewriteRuleTokenStream(adaptor,"token 63");
+		RewriteRuleTokenStream stream_65=new RewriteRuleTokenStream(adaptor,"token 65");
 		RewriteRuleSubtreeStream stream_output=new RewriteRuleSubtreeStream(adaptor,"rule output");
 		RewriteRuleSubtreeStream stream_input=new RewriteRuleSubtreeStream(adaptor,"rule input");
 		RewriteRuleSubtreeStream stream_commands=new RewriteRuleSubtreeStream(adaptor,"rule commands");
@@ -453,8 +455,8 @@ public class ASTParser extends Parser {
 			// ./grammar/AST.g:44:11: ( 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output -> ^( FUNCDEF ( input )? ^( COMMANDS commands ) ^( OUTPUT output ) ) )
 			// ./grammar/AST.g:45:2: 'read' WS ( input WS )? '%' WS commands WS '%' WS 'write' output
 			{
-			string_literal11=(Token)match(input,59,FOLLOW_59_in_definition201);  
-			stream_59.add(string_literal11);
+			string_literal11=(Token)match(input,61,FOLLOW_61_in_definition201);  
+			stream_61.add(string_literal11);
 
 			WS12=(Token)match(input,WS,FOLLOW_WS_in_definition203);  
 			stream_WS.add(WS12);
@@ -502,8 +504,8 @@ public class ASTParser extends Parser {
 			WS20=(Token)match(input,WS,FOLLOW_WS_in_definition222);  
 			stream_WS.add(WS20);
 
-			string_literal21=(Token)match(input,63,FOLLOW_63_in_definition224);  
-			stream_63.add(string_literal21);
+			string_literal21=(Token)match(input,65,FOLLOW_65_in_definition224);  
+			stream_65.add(string_literal21);
 
 			pushFollow(FOLLOW_output_in_definition226);
 			output22=output();
@@ -1024,7 +1026,7 @@ public class ASTParser extends Parser {
 						if ( (LA14_3==41) ) {
 							alt14=1;
 						}
-						else if ( (LA14_3==EOF||LA14_3==WS||LA14_3==51) ) {
+						else if ( (LA14_3==EOF||LA14_3==WS||LA14_3==52) ) {
 							alt14=2;
 						}
 
@@ -1050,7 +1052,7 @@ public class ASTParser extends Parser {
 						}
 						break;
 					case EOF:
-					case 51:
+					case 52:
 						{
 						alt14=2;
 						}
@@ -1091,7 +1093,7 @@ public class ASTParser extends Parser {
 					if ( (LA14_3==41) ) {
 						alt14=1;
 					}
-					else if ( (LA14_3==EOF||LA14_3==WS||LA14_3==51) ) {
+					else if ( (LA14_3==EOF||LA14_3==WS||LA14_3==52) ) {
 						alt14=2;
 					}
 
@@ -1117,7 +1119,7 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case EOF:
-				case 51:
+				case 52:
 					{
 					alt14=2;
 					}
@@ -1355,12 +1357,12 @@ public class ASTParser extends Parser {
 					int LA18_1 = input.LA(2);
 					if ( (LA18_1==WS) ) {
 						int LA18_3 = input.LA(3);
-						if ( (LA18_3==VARIABLE_LEX||(LA18_3 >= 49 && LA18_3 <= 50)||LA18_3==53||LA18_3==57||LA18_3==62) ) {
+						if ( (LA18_3==VARIABLE_LEX||(LA18_3 >= 50 && LA18_3 <= 51)||LA18_3==54||LA18_3==59||LA18_3==64) ) {
 							alt18=1;
 						}
 
 					}
-					else if ( (LA18_1==VARIABLE_LEX||(LA18_1 >= 49 && LA18_1 <= 50)||LA18_1==53||LA18_1==57||LA18_1==62) ) {
+					else if ( (LA18_1==VARIABLE_LEX||(LA18_1 >= 50 && LA18_1 <= 51)||LA18_1==54||LA18_1==59||LA18_1==64) ) {
 						alt18=1;
 					}
 
@@ -1602,10 +1604,9 @@ public class ASTParser extends Parser {
 		Object WS92_tree=null;
 		Object WS94_tree=null;
 		Object string_literal95_tree=null;
-		RewriteRuleTokenStream stream_57=new RewriteRuleTokenStream(adaptor,"token 57");
-		RewriteRuleTokenStream stream_46=new RewriteRuleTokenStream(adaptor,"token 46");
+		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
 		RewriteRuleTokenStream stream_47=new RewriteRuleTokenStream(adaptor,"token 47");
-		RewriteRuleTokenStream stream_58=new RewriteRuleTokenStream(adaptor,"token 58");
+		RewriteRuleTokenStream stream_59=new RewriteRuleTokenStream(adaptor,"token 59");
 		RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
 		RewriteRuleTokenStream stream_49=new RewriteRuleTokenStream(adaptor,"token 49");
 		RewriteRuleTokenStream stream_VARIABLE_LEX=new RewriteRuleTokenStream(adaptor,"token VARIABLE_LEX");
@@ -1613,7 +1614,8 @@ public class ASTParser extends Parser {
 		RewriteRuleTokenStream stream_50=new RewriteRuleTokenStream(adaptor,"token 50");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
 		RewriteRuleTokenStream stream_62=new RewriteRuleTokenStream(adaptor,"token 62");
-		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
+		RewriteRuleTokenStream stream_51=new RewriteRuleTokenStream(adaptor,"token 51");
+		RewriteRuleTokenStream stream_64=new RewriteRuleTokenStream(adaptor,"token 64");
 		RewriteRuleTokenStream stream_43=new RewriteRuleTokenStream(adaptor,"token 43");
 		RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
 		RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
@@ -1625,7 +1627,7 @@ public class ASTParser extends Parser {
 			// ./grammar/AST.g:56:8: ( ( 'nop' ) -> NOP | ( vars ( WS )? ':=' ( WS )? exprs ) -> ^( ASSIGN ^( VARS vars ) ^( EXPRESSIONS exprs ) ) | ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' ) -> ^( IF expression ^( COMMANDS commands ) ( ^( ELSECOMMANDS commands ) )? ) | ( 'while' WS expression WS 'do' WS commands WS 'od' ) -> ^( WHILE expression ^( COMMANDS commands ) ) | ( 'for' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOR expression ^( COMMANDS commands ) ) | ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' ) -> ^( FOREACH VARIABLE_LEX expression ^( COMMANDS commands ) ) )
 			int alt24=6;
 			switch ( input.LA(1) ) {
-			case 57:
+			case 59:
 				{
 				alt24=1;
 				}
@@ -1635,22 +1637,22 @@ public class ASTParser extends Parser {
 				alt24=2;
 				}
 				break;
-			case 53:
+			case 54:
 				{
 				alt24=3;
 				}
 				break;
-			case 62:
+			case 64:
 				{
 				alt24=4;
 				}
 				break;
-			case 49:
+			case 50:
 				{
 				alt24=5;
 				}
 				break;
-			case 50:
+			case 51:
 				{
 				alt24=6;
 				}
@@ -1667,8 +1669,8 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:57:4: ( 'nop' )
 					// ./grammar/AST.g:57:5: 'nop'
 					{
-					string_literal45=(Token)match(input,57,FOLLOW_57_in_command387);  
-					stream_57.add(string_literal45);
+					string_literal45=(Token)match(input,59,FOLLOW_59_in_command387);  
+					stream_59.add(string_literal45);
 
 					}
 
@@ -1801,8 +1803,8 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:59:4: ( 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi' )
 					// ./grammar/AST.g:59:5: 'if' WS expression WS 'then' WS commands WS ( ( WS )? 'else' WS commands WS )? 'fi'
 					{
-					string_literal51=(Token)match(input,53,FOLLOW_53_in_command433);  
-					stream_53.add(string_literal51);
+					string_literal51=(Token)match(input,54,FOLLOW_54_in_command433);  
+					stream_54.add(string_literal51);
 
 					WS52=(Token)match(input,WS,FOLLOW_WS_in_command435);  
 					stream_WS.add(WS52);
@@ -1815,8 +1817,8 @@ public class ASTParser extends Parser {
 					WS54=(Token)match(input,WS,FOLLOW_WS_in_command439);  
 					stream_WS.add(WS54);
 
-					string_literal55=(Token)match(input,60,FOLLOW_60_in_command441);  
-					stream_60.add(string_literal55);
+					string_literal55=(Token)match(input,62,FOLLOW_62_in_command441);  
+					stream_62.add(string_literal55);
 
 					WS56=(Token)match(input,WS,FOLLOW_WS_in_command443);  
 					stream_WS.add(WS56);
@@ -1832,7 +1834,7 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:59:48: ( ( WS )? 'else' WS commands WS )?
 					int alt23=2;
 					int LA23_0 = input.LA(1);
-					if ( (LA23_0==WS||LA23_0==47) ) {
+					if ( (LA23_0==WS||LA23_0==48) ) {
 						alt23=1;
 					}
 					switch (alt23) {
@@ -1857,8 +1859,8 @@ public class ASTParser extends Parser {
 
 							}
 
-							string_literal60=(Token)match(input,47,FOLLOW_47_in_command452);  
-							stream_47.add(string_literal60);
+							string_literal60=(Token)match(input,48,FOLLOW_48_in_command452);  
+							stream_48.add(string_literal60);
 
 							WS61=(Token)match(input,WS,FOLLOW_WS_in_command453);  
 							stream_WS.add(WS61);
@@ -1876,8 +1878,8 @@ public class ASTParser extends Parser {
 
 					}
 
-					string_literal64=(Token)match(input,48,FOLLOW_48_in_command461);  
-					stream_48.add(string_literal64);
+					string_literal64=(Token)match(input,49,FOLLOW_49_in_command461);  
+					stream_49.add(string_literal64);
 
 					}
 
@@ -1937,8 +1939,8 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:60:4: ( 'while' WS expression WS 'do' WS commands WS 'od' )
 					// ./grammar/AST.g:60:5: 'while' WS expression WS 'do' WS commands WS 'od'
 					{
-					string_literal65=(Token)match(input,62,FOLLOW_62_in_command489);  
-					stream_62.add(string_literal65);
+					string_literal65=(Token)match(input,64,FOLLOW_64_in_command489);  
+					stream_64.add(string_literal65);
 
 					WS66=(Token)match(input,WS,FOLLOW_WS_in_command491);  
 					stream_WS.add(WS66);
@@ -1951,8 +1953,8 @@ public class ASTParser extends Parser {
 					WS68=(Token)match(input,WS,FOLLOW_WS_in_command495);  
 					stream_WS.add(WS68);
 
-					string_literal69=(Token)match(input,46,FOLLOW_46_in_command497);  
-					stream_46.add(string_literal69);
+					string_literal69=(Token)match(input,47,FOLLOW_47_in_command497);  
+					stream_47.add(string_literal69);
 
 					WS70=(Token)match(input,WS,FOLLOW_WS_in_command499);  
 					stream_WS.add(WS70);
@@ -1965,8 +1967,8 @@ public class ASTParser extends Parser {
 					WS72=(Token)match(input,WS,FOLLOW_WS_in_command503);  
 					stream_WS.add(WS72);
 
-					string_literal73=(Token)match(input,58,FOLLOW_58_in_command505);  
-					stream_58.add(string_literal73);
+					string_literal73=(Token)match(input,60,FOLLOW_60_in_command505);  
+					stream_60.add(string_literal73);
 
 					}
 
@@ -2013,8 +2015,8 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:61:4: ( 'for' WS expression WS 'do' WS commands WS 'od' )
 					// ./grammar/AST.g:61:5: 'for' WS expression WS 'do' WS commands WS 'od'
 					{
-					string_literal74=(Token)match(input,49,FOLLOW_49_in_command526);  
-					stream_49.add(string_literal74);
+					string_literal74=(Token)match(input,50,FOLLOW_50_in_command526);  
+					stream_50.add(string_literal74);
 
 					WS75=(Token)match(input,WS,FOLLOW_WS_in_command528);  
 					stream_WS.add(WS75);
@@ -2027,8 +2029,8 @@ public class ASTParser extends Parser {
 					WS77=(Token)match(input,WS,FOLLOW_WS_in_command532);  
 					stream_WS.add(WS77);
 
-					string_literal78=(Token)match(input,46,FOLLOW_46_in_command534);  
-					stream_46.add(string_literal78);
+					string_literal78=(Token)match(input,47,FOLLOW_47_in_command534);  
+					stream_47.add(string_literal78);
 
 					WS79=(Token)match(input,WS,FOLLOW_WS_in_command536);  
 					stream_WS.add(WS79);
@@ -2041,8 +2043,8 @@ public class ASTParser extends Parser {
 					WS81=(Token)match(input,WS,FOLLOW_WS_in_command540);  
 					stream_WS.add(WS81);
 
-					string_literal82=(Token)match(input,58,FOLLOW_58_in_command542);  
-					stream_58.add(string_literal82);
+					string_literal82=(Token)match(input,60,FOLLOW_60_in_command542);  
+					stream_60.add(string_literal82);
 
 					}
 
@@ -2089,8 +2091,8 @@ public class ASTParser extends Parser {
 					// ./grammar/AST.g:62:4: ( 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od' )
 					// ./grammar/AST.g:62:5: 'foreach' WS VARIABLE_LEX WS 'in' WS expression WS 'do' WS commands WS 'od'
 					{
-					string_literal83=(Token)match(input,50,FOLLOW_50_in_command563);  
-					stream_50.add(string_literal83);
+					string_literal83=(Token)match(input,51,FOLLOW_51_in_command563);  
+					stream_51.add(string_literal83);
 
 					WS84=(Token)match(input,WS,FOLLOW_WS_in_command565);  
 					stream_WS.add(WS84);
@@ -2101,8 +2103,8 @@ public class ASTParser extends Parser {
 					WS86=(Token)match(input,WS,FOLLOW_WS_in_command569);  
 					stream_WS.add(WS86);
 
-					string_literal87=(Token)match(input,54,FOLLOW_54_in_command571);  
-					stream_54.add(string_literal87);
+					string_literal87=(Token)match(input,55,FOLLOW_55_in_command571);  
+					stream_55.add(string_literal87);
 
 					WS88=(Token)match(input,WS,FOLLOW_WS_in_command573);  
 					stream_WS.add(WS88);
@@ -2115,8 +2117,8 @@ public class ASTParser extends Parser {
 					WS90=(Token)match(input,WS,FOLLOW_WS_in_command577);  
 					stream_WS.add(WS90);
 
-					string_literal91=(Token)match(input,46,FOLLOW_46_in_command579);  
-					stream_46.add(string_literal91);
+					string_literal91=(Token)match(input,47,FOLLOW_47_in_command579);  
+					stream_47.add(string_literal91);
 
 					WS92=(Token)match(input,WS,FOLLOW_WS_in_command581);  
 					stream_WS.add(WS92);
@@ -2129,8 +2131,8 @@ public class ASTParser extends Parser {
 					WS94=(Token)match(input,WS,FOLLOW_WS_in_command585);  
 					stream_WS.add(WS94);
 
-					string_literal95=(Token)match(input,58,FOLLOW_58_in_command587);  
-					stream_58.add(string_literal95);
+					string_literal95=(Token)match(input,60,FOLLOW_60_in_command587);  
+					stream_60.add(string_literal95);
 
 					}
 
@@ -2735,7 +2737,7 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "exprbase"
-	// ./grammar/AST.g:77:1: exprbase : ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) );
+	// ./grammar/AST.g:77:1: exprbase : ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons' ( WS )? ')' -> ^( CONS ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list' ( WS )? ')' -> ^( LIST ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) );
 	public final ASTParser.exprbase_return exprbase() throws RecognitionException {
 		ASTParser.exprbase_return retval = new ASTParser.exprbase_return();
 		retval.start = input.LT(1);
@@ -2756,17 +2758,23 @@ public class ASTParser extends Parser {
 		Token WS122=null;
 		Token char_literal123=null;
 		Token string_literal124=null;
+		Token WS125=null;
 		Token char_literal126=null;
 		Token string_literal127=null;
 		Token char_literal129=null;
 		Token string_literal130=null;
-		Token VARIABLE_LEX131=null;
-		Token SYMBOL_LEX132=null;
+		Token WS131=null;
+		Token char_literal132=null;
+		Token string_literal133=null;
+		Token char_literal135=null;
+		Token string_literal136=null;
+		Token VARIABLE_LEX137=null;
+		Token SYMBOL_LEX138=null;
 		ParserRuleReturnScope lexpr112 =null;
 		ParserRuleReturnScope exprbase117 =null;
 		ParserRuleReturnScope exprbase121 =null;
-		ParserRuleReturnScope lexpr125 =null;
 		ParserRuleReturnScope lexpr128 =null;
+		ParserRuleReturnScope lexpr134 =null;
 
 		Object char_literal108_tree=null;
 		Object WS109_tree=null;
@@ -2782,57 +2790,65 @@ public class ASTParser extends Parser {
 		Object WS122_tree=null;
 		Object char_literal123_tree=null;
 		Object string_literal124_tree=null;
+		Object WS125_tree=null;
 		Object char_literal126_tree=null;
 		Object string_literal127_tree=null;
 		Object char_literal129_tree=null;
 		Object string_literal130_tree=null;
-		Object VARIABLE_LEX131_tree=null;
-		Object SYMBOL_LEX132_tree=null;
-		RewriteRuleTokenStream stream_55=new RewriteRuleTokenStream(adaptor,"token 55");
-		RewriteRuleTokenStream stream_45=new RewriteRuleTokenStream(adaptor,"token 45");
+		Object WS131_tree=null;
+		Object char_literal132_tree=null;
+		Object string_literal133_tree=null;
+		Object char_literal135_tree=null;
+		Object string_literal136_tree=null;
+		Object VARIABLE_LEX137_tree=null;
+		Object SYMBOL_LEX138_tree=null;
 		RewriteRuleTokenStream stream_56=new RewriteRuleTokenStream(adaptor,"token 56");
+		RewriteRuleTokenStream stream_45=new RewriteRuleTokenStream(adaptor,"token 45");
 		RewriteRuleTokenStream stream_SYMBOL_LEX=new RewriteRuleTokenStream(adaptor,"token SYMBOL_LEX");
+		RewriteRuleTokenStream stream_57=new RewriteRuleTokenStream(adaptor,"token 57");
+		RewriteRuleTokenStream stream_46=new RewriteRuleTokenStream(adaptor,"token 46");
+		RewriteRuleTokenStream stream_58=new RewriteRuleTokenStream(adaptor,"token 58");
 		RewriteRuleTokenStream stream_VARIABLE_LEX=new RewriteRuleTokenStream(adaptor,"token VARIABLE_LEX");
 		RewriteRuleTokenStream stream_39=new RewriteRuleTokenStream(adaptor,"token 39");
-		RewriteRuleTokenStream stream_61=new RewriteRuleTokenStream(adaptor,"token 61");
 		RewriteRuleTokenStream stream_40=new RewriteRuleTokenStream(adaptor,"token 40");
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
-		RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
+		RewriteRuleTokenStream stream_63=new RewriteRuleTokenStream(adaptor,"token 63");
+		RewriteRuleTokenStream stream_53=new RewriteRuleTokenStream(adaptor,"token 53");
 		RewriteRuleSubtreeStream stream_lexpr=new RewriteRuleSubtreeStream(adaptor,"rule lexpr");
 		RewriteRuleSubtreeStream stream_exprbase=new RewriteRuleSubtreeStream(adaptor,"rule exprbase");
 
 		try {
-			// ./grammar/AST.g:78:2: ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) )
-			int alt36=4;
+			// ./grammar/AST.g:78:2: ( '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons' ( WS )? ')' -> ^( CONS ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list' ( WS )? ')' -> ^( LIST ) | 'list ' lexpr ')' -> ^( LIST lexpr ) ) | 'nil' -> NIL | VARIABLE_LEX -> ^( VARIABLE VARIABLE_LEX ) | SYMBOL_LEX -> ^( SYMBOL SYMBOL_LEX ) )
+			int alt38=4;
 			switch ( input.LA(1) ) {
 			case 39:
 				{
-				alt36=1;
+				alt38=1;
 				}
 				break;
-			case 56:
+			case 58:
 				{
-				alt36=2;
+				alt38=2;
 				}
 				break;
 			case VARIABLE_LEX:
 				{
-				alt36=3;
+				alt38=3;
 				}
 				break;
 			case SYMBOL_LEX:
 				{
-				alt36=4;
+				alt38=4;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 36, 0, input);
+					new NoViableAltException("", 38, 0, input);
 				throw nvae;
 			}
-			switch (alt36) {
+			switch (alt38) {
 				case 1 :
-					// ./grammar/AST.g:78:5: '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
+					// ./grammar/AST.g:78:5: '(' ( WS )? ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons' ( WS )? ')' -> ^( CONS ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list' ( WS )? ')' -> ^( LIST ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
 					{
 					char_literal108=(Token)match(input,39,FOLLOW_39_in_exprbase739);  
 					stream_39.add(char_literal108);
@@ -2855,17 +2871,17 @@ public class ASTParser extends Parser {
 
 					}
 
-					// ./grammar/AST.g:78:13: ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
-					int alt35=6;
+					// ./grammar/AST.g:78:13: ( SYMBOL_LEX WS lexpr ')' -> ^( FUNCTIONCALL ^( SYMBOL_LEX lexpr ) ) | SYMBOL_LEX ')' -> ^( FUNCTIONCALL SYMBOL_LEX ) | 'hd ' exprbase ( WS )? ')' -> ^( HEAD exprbase ) | 'tl ' exprbase ( WS )? ')' -> ^( TAIL exprbase ) | 'cons' ( WS )? ')' -> ^( CONS ) | 'cons ' lexpr ')' -> ^( CONS lexpr ) | 'list' ( WS )? ')' -> ^( LIST ) | 'list ' lexpr ')' -> ^( LIST lexpr ) )
+					int alt37=8;
 					switch ( input.LA(1) ) {
 					case SYMBOL_LEX:
 						{
-						int LA35_1 = input.LA(2);
-						if ( (LA35_1==WS) ) {
-							alt35=1;
+						int LA37_1 = input.LA(2);
+						if ( (LA37_1==WS) ) {
+							alt37=1;
 						}
-						else if ( (LA35_1==40) ) {
-							alt35=2;
+						else if ( (LA37_1==40) ) {
+							alt37=2;
 						}
 
 						else {
@@ -2873,7 +2889,7 @@ public class ASTParser extends Parser {
 							try {
 								input.consume();
 								NoViableAltException nvae =
-									new NoViableAltException("", 35, 1, input);
+									new NoViableAltException("", 37, 1, input);
 								throw nvae;
 							} finally {
 								input.rewind(nvaeMark);
@@ -2882,32 +2898,42 @@ public class ASTParser extends Parser {
 
 						}
 						break;
-					case 52:
+					case 53:
 						{
-						alt35=3;
+						alt37=3;
 						}
 						break;
-					case 61:
+					case 63:
 						{
-						alt35=4;
+						alt37=4;
+						}
+						break;
+					case 46:
+						{
+						alt37=5;
 						}
 						break;
 					case 45:
 						{
-						alt35=5;
+						alt37=6;
 						}
 						break;
-					case 55:
+					case 57:
 						{
-						alt35=6;
+						alt37=7;
+						}
+						break;
+					case 56:
+						{
+						alt37=8;
 						}
 						break;
 					default:
 						NoViableAltException nvae =
-							new NoViableAltException("", 35, 0, input);
+							new NoViableAltException("", 37, 0, input);
 						throw nvae;
 					}
-					switch (alt35) {
+					switch (alt37) {
 						case 1 :
 							// ./grammar/AST.g:79:3: SYMBOL_LEX WS lexpr ')'
 							{
@@ -3002,8 +3028,8 @@ public class ASTParser extends Parser {
 						case 3 :
 							// ./grammar/AST.g:81:4: 'hd ' exprbase ( WS )? ')'
 							{
-							string_literal116=(Token)match(input,52,FOLLOW_52_in_exprbase785);  
-							stream_52.add(string_literal116);
+							string_literal116=(Token)match(input,53,FOLLOW_53_in_exprbase785);  
+							stream_53.add(string_literal116);
 
 							pushFollow(FOLLOW_exprbase_in_exprbase786);
 							exprbase117=exprbase();
@@ -3063,8 +3089,8 @@ public class ASTParser extends Parser {
 						case 4 :
 							// ./grammar/AST.g:82:4: 'tl ' exprbase ( WS )? ')'
 							{
-							string_literal120=(Token)match(input,61,FOLLOW_61_in_exprbase803);  
-							stream_61.add(string_literal120);
+							string_literal120=(Token)match(input,63,FOLLOW_63_in_exprbase803);  
+							stream_63.add(string_literal120);
 
 							pushFollow(FOLLOW_exprbase_in_exprbase804);
 							exprbase121=exprbase();
@@ -3122,22 +3148,35 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 5 :
-							// ./grammar/AST.g:83:4: 'cons ' lexpr ')'
+							// ./grammar/AST.g:83:4: 'cons' ( WS )? ')'
 							{
-							string_literal124=(Token)match(input,45,FOLLOW_45_in_exprbase821);  
-							stream_45.add(string_literal124);
+							string_literal124=(Token)match(input,46,FOLLOW_46_in_exprbase821);  
+							stream_46.add(string_literal124);
 
-							pushFollow(FOLLOW_lexpr_in_exprbase822);
-							lexpr125=lexpr();
-							state._fsp--;
+							// ./grammar/AST.g:83:11: ( WS )?
+							int alt35=2;
+							int LA35_0 = input.LA(1);
+							if ( (LA35_0==WS) ) {
+								alt35=1;
+							}
+							switch (alt35) {
+								case 1 :
+									// ./grammar/AST.g:83:11: WS
+									{
+									WS125=(Token)match(input,WS,FOLLOW_WS_in_exprbase823);  
+									stream_WS.add(WS125);
 
-							stream_lexpr.add(lexpr125.getTree());
-							char_literal126=(Token)match(input,40,FOLLOW_40_in_exprbase823);  
+									}
+									break;
+
+							}
+
+							char_literal126=(Token)match(input,40,FOLLOW_40_in_exprbase826);  
 							stream_40.add(char_literal126);
 
 
 							// AST REWRITE
-							// elements: lexpr
+							// elements: 
 							// token labels: 
 							// rule labels: retval
 							// token list labels: 
@@ -3147,13 +3186,12 @@ public class ASTParser extends Parser {
 							RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 							root_0 = (Object)adaptor.nil();
-							// 83:20: -> ^( CONS lexpr )
+							// 83:19: -> ^( CONS )
 							{
-								// ./grammar/AST.g:83:23: ^( CONS lexpr )
+								// ./grammar/AST.g:83:22: ^( CONS )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(CONS, "CONS"), root_1);
-								adaptor.addChild(root_1, stream_lexpr.nextTree());
 								adaptor.addChild(root_0, root_1);
 								}
 
@@ -3165,17 +3203,17 @@ public class ASTParser extends Parser {
 							}
 							break;
 						case 6 :
-							// ./grammar/AST.g:84:4: 'list ' lexpr ')'
+							// ./grammar/AST.g:84:4: 'cons ' lexpr ')'
 							{
-							string_literal127=(Token)match(input,55,FOLLOW_55_in_exprbase836);  
-							stream_55.add(string_literal127);
+							string_literal127=(Token)match(input,45,FOLLOW_45_in_exprbase837);  
+							stream_45.add(string_literal127);
 
-							pushFollow(FOLLOW_lexpr_in_exprbase837);
+							pushFollow(FOLLOW_lexpr_in_exprbase838);
 							lexpr128=lexpr();
 							state._fsp--;
 
 							stream_lexpr.add(lexpr128.getTree());
-							char_literal129=(Token)match(input,40,FOLLOW_40_in_exprbase838);  
+							char_literal129=(Token)match(input,40,FOLLOW_40_in_exprbase839);  
 							stream_40.add(char_literal129);
 
 
@@ -3190,9 +3228,107 @@ public class ASTParser extends Parser {
 							RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 							root_0 = (Object)adaptor.nil();
-							// 84:20: -> ^( LIST lexpr )
+							// 84:20: -> ^( CONS lexpr )
 							{
-								// ./grammar/AST.g:84:23: ^( LIST lexpr )
+								// ./grammar/AST.g:84:23: ^( CONS lexpr )
+								{
+								Object root_1 = (Object)adaptor.nil();
+								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(CONS, "CONS"), root_1);
+								adaptor.addChild(root_1, stream_lexpr.nextTree());
+								adaptor.addChild(root_0, root_1);
+								}
+
+							}
+
+
+							retval.tree = root_0;
+
+							}
+							break;
+						case 7 :
+							// ./grammar/AST.g:85:4: 'list' ( WS )? ')'
+							{
+							string_literal130=(Token)match(input,57,FOLLOW_57_in_exprbase852);  
+							stream_57.add(string_literal130);
+
+							// ./grammar/AST.g:85:11: ( WS )?
+							int alt36=2;
+							int LA36_0 = input.LA(1);
+							if ( (LA36_0==WS) ) {
+								alt36=1;
+							}
+							switch (alt36) {
+								case 1 :
+									// ./grammar/AST.g:85:11: WS
+									{
+									WS131=(Token)match(input,WS,FOLLOW_WS_in_exprbase854);  
+									stream_WS.add(WS131);
+
+									}
+									break;
+
+							}
+
+							char_literal132=(Token)match(input,40,FOLLOW_40_in_exprbase857);  
+							stream_40.add(char_literal132);
+
+
+							// AST REWRITE
+							// elements: 
+							// token labels: 
+							// rule labels: retval
+							// token list labels: 
+							// rule list labels: 
+							// wildcard labels: 
+							retval.tree = root_0;
+							RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
+
+							root_0 = (Object)adaptor.nil();
+							// 85:19: -> ^( LIST )
+							{
+								// ./grammar/AST.g:85:22: ^( LIST )
+								{
+								Object root_1 = (Object)adaptor.nil();
+								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(LIST, "LIST"), root_1);
+								adaptor.addChild(root_0, root_1);
+								}
+
+							}
+
+
+							retval.tree = root_0;
+
+							}
+							break;
+						case 8 :
+							// ./grammar/AST.g:86:4: 'list ' lexpr ')'
+							{
+							string_literal133=(Token)match(input,56,FOLLOW_56_in_exprbase868);  
+							stream_56.add(string_literal133);
+
+							pushFollow(FOLLOW_lexpr_in_exprbase869);
+							lexpr134=lexpr();
+							state._fsp--;
+
+							stream_lexpr.add(lexpr134.getTree());
+							char_literal135=(Token)match(input,40,FOLLOW_40_in_exprbase870);  
+							stream_40.add(char_literal135);
+
+
+							// AST REWRITE
+							// elements: lexpr
+							// token labels: 
+							// rule labels: retval
+							// token list labels: 
+							// rule list labels: 
+							// wildcard labels: 
+							retval.tree = root_0;
+							RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
+
+							root_0 = (Object)adaptor.nil();
+							// 86:20: -> ^( LIST lexpr )
+							{
+								// ./grammar/AST.g:86:23: ^( LIST lexpr )
 								{
 								Object root_1 = (Object)adaptor.nil();
 								root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(LIST, "LIST"), root_1);
@@ -3213,10 +3349,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./grammar/AST.g:86:4: 'nil'
+					// ./grammar/AST.g:88:4: 'nil'
 					{
-					string_literal130=(Token)match(input,56,FOLLOW_56_in_exprbase855);  
-					stream_56.add(string_literal130);
+					string_literal136=(Token)match(input,58,FOLLOW_58_in_exprbase887);  
+					stream_58.add(string_literal136);
 
 
 					// AST REWRITE
@@ -3230,7 +3366,7 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 86:10: -> NIL
+					// 88:10: -> NIL
 					{
 						adaptor.addChild(root_0, (Object)adaptor.create(NIL, "NIL"));
 					}
@@ -3241,10 +3377,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ./grammar/AST.g:87:5: VARIABLE_LEX
+					// ./grammar/AST.g:89:5: VARIABLE_LEX
 					{
-					VARIABLE_LEX131=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_exprbase865);  
-					stream_VARIABLE_LEX.add(VARIABLE_LEX131);
+					VARIABLE_LEX137=(Token)match(input,VARIABLE_LEX,FOLLOW_VARIABLE_LEX_in_exprbase897);  
+					stream_VARIABLE_LEX.add(VARIABLE_LEX137);
 
 
 					// AST REWRITE
@@ -3258,9 +3394,9 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 87:18: -> ^( VARIABLE VARIABLE_LEX )
+					// 89:18: -> ^( VARIABLE VARIABLE_LEX )
 					{
-						// ./grammar/AST.g:87:21: ^( VARIABLE VARIABLE_LEX )
+						// ./grammar/AST.g:89:21: ^( VARIABLE VARIABLE_LEX )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(VARIABLE, "VARIABLE"), root_1);
@@ -3276,10 +3412,10 @@ public class ASTParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ./grammar/AST.g:88:5: SYMBOL_LEX
+					// ./grammar/AST.g:90:5: SYMBOL_LEX
 					{
-					SYMBOL_LEX132=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase879);  
-					stream_SYMBOL_LEX.add(SYMBOL_LEX132);
+					SYMBOL_LEX138=(Token)match(input,SYMBOL_LEX,FOLLOW_SYMBOL_LEX_in_exprbase911);  
+					stream_SYMBOL_LEX.add(SYMBOL_LEX138);
 
 
 					// AST REWRITE
@@ -3293,9 +3429,9 @@ public class ASTParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (Object)adaptor.nil();
-					// 88:16: -> ^( SYMBOL SYMBOL_LEX )
+					// 90:16: -> ^( SYMBOL SYMBOL_LEX )
 					{
-						// ./grammar/AST.g:88:19: ^( SYMBOL SYMBOL_LEX )
+						// ./grammar/AST.g:90:19: ^( SYMBOL SYMBOL_LEX )
 						{
 						Object root_1 = (Object)adaptor.nil();
 						root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(SYMBOL, "SYMBOL"), root_1);
@@ -3339,77 +3475,77 @@ public class ASTParser extends Parser {
 
 
 	// $ANTLR start "lexpr"
-	// ./grammar/AST.g:90:2: lexpr : ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* ;
+	// ./grammar/AST.g:92:2: lexpr : ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* ;
 	public final ASTParser.lexpr_return lexpr() throws RecognitionException {
 		ASTParser.lexpr_return retval = new ASTParser.lexpr_return();
 		retval.start = input.LT(1);
 
 		Object root_0 = null;
 
-		Token WS133=null;
-		Token WS135=null;
-		ParserRuleReturnScope exprbase134 =null;
+		Token WS139=null;
+		Token WS141=null;
+		ParserRuleReturnScope exprbase140 =null;
 
-		Object WS133_tree=null;
-		Object WS135_tree=null;
+		Object WS139_tree=null;
+		Object WS141_tree=null;
 		RewriteRuleTokenStream stream_WS=new RewriteRuleTokenStream(adaptor,"token WS");
 		RewriteRuleSubtreeStream stream_exprbase=new RewriteRuleSubtreeStream(adaptor,"rule exprbase");
 
 		try {
-			// ./grammar/AST.g:91:5: ( ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* )
-			// ./grammar/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
+			// ./grammar/AST.g:93:5: ( ( ( WS )? ( exprbase ( WS )? )* ) -> ( exprbase )* )
+			// ./grammar/AST.g:93:7: ( ( WS )? ( exprbase ( WS )? )* )
 			{
-			// ./grammar/AST.g:91:7: ( ( WS )? ( exprbase ( WS )? )* )
-			// ./grammar/AST.g:91:8: ( WS )? ( exprbase ( WS )? )*
+			// ./grammar/AST.g:93:7: ( ( WS )? ( exprbase ( WS )? )* )
+			// ./grammar/AST.g:93:8: ( WS )? ( exprbase ( WS )? )*
 			{
-			// ./grammar/AST.g:91:8: ( WS )?
-			int alt37=2;
-			int LA37_0 = input.LA(1);
-			if ( (LA37_0==WS) ) {
-				alt37=1;
+			// ./grammar/AST.g:93:8: ( WS )?
+			int alt39=2;
+			int LA39_0 = input.LA(1);
+			if ( (LA39_0==WS) ) {
+				alt39=1;
 			}
-			switch (alt37) {
+			switch (alt39) {
 				case 1 :
-					// ./grammar/AST.g:91:8: WS
+					// ./grammar/AST.g:93:8: WS
 					{
-					WS133=(Token)match(input,WS,FOLLOW_WS_in_lexpr902);  
-					stream_WS.add(WS133);
+					WS139=(Token)match(input,WS,FOLLOW_WS_in_lexpr934);  
+					stream_WS.add(WS139);
 
 					}
 					break;
 
 			}
 
-			// ./grammar/AST.g:91:12: ( exprbase ( WS )? )*
-			loop39:
+			// ./grammar/AST.g:93:12: ( exprbase ( WS )? )*
+			loop41:
 			while (true) {
-				int alt39=2;
-				int LA39_0 = input.LA(1);
-				if ( (LA39_0==SYMBOL_LEX||LA39_0==VARIABLE_LEX||LA39_0==39||LA39_0==56) ) {
-					alt39=1;
+				int alt41=2;
+				int LA41_0 = input.LA(1);
+				if ( (LA41_0==SYMBOL_LEX||LA41_0==VARIABLE_LEX||LA41_0==39||LA41_0==58) ) {
+					alt41=1;
 				}
 
-				switch (alt39) {
+				switch (alt41) {
 				case 1 :
-					// ./grammar/AST.g:91:13: exprbase ( WS )?
+					// ./grammar/AST.g:93:13: exprbase ( WS )?
 					{
-					pushFollow(FOLLOW_exprbase_in_lexpr906);
-					exprbase134=exprbase();
+					pushFollow(FOLLOW_exprbase_in_lexpr938);
+					exprbase140=exprbase();
 					state._fsp--;
 
-					stream_exprbase.add(exprbase134.getTree());
-					// ./grammar/AST.g:91:22: ( WS )?
-					int alt38=2;
-					int LA38_0 = input.LA(1);
-					if ( (LA38_0==WS) ) {
-						alt38=1;
+					stream_exprbase.add(exprbase140.getTree());
+					// ./grammar/AST.g:93:22: ( WS )?
+					int alt40=2;
+					int LA40_0 = input.LA(1);
+					if ( (LA40_0==WS) ) {
+						alt40=1;
 					}
-					switch (alt38) {
+					switch (alt40) {
 						case 1 :
-							// ./grammar/AST.g:91:22: WS
+							// ./grammar/AST.g:93:22: WS
 							{
-							WS135=(Token)match(input,WS,FOLLOW_WS_in_lexpr908);  
-							stream_WS.add(WS135);
+							WS141=(Token)match(input,WS,FOLLOW_WS_in_lexpr940);  
+							stream_WS.add(WS141);
 
 							}
 							break;
@@ -3420,7 +3556,7 @@ public class ASTParser extends Parser {
 					break;
 
 				default :
-					break loop39;
+					break loop41;
 				}
 			}
 
@@ -3438,9 +3574,9 @@ public class ASTParser extends Parser {
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 			root_0 = (Object)adaptor.nil();
-			// 91:29: -> ( exprbase )*
+			// 93:29: -> ( exprbase )*
 			{
-				// ./grammar/AST.g:91:32: ( exprbase )*
+				// ./grammar/AST.g:93:32: ( exprbase )*
 				while ( stream_exprbase.hasNext() ) {
 					adaptor.addChild(root_0, stream_exprbase.nextTree());
 				}
@@ -3475,27 +3611,27 @@ public class ASTParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_WS_in_program144 = new BitSet(new long[]{0x0008001000000000L});
-	public static final BitSet FOLLOW_function_in_program148 = new BitSet(new long[]{0x0008001000000002L});
-	public static final BitSet FOLLOW_WS_in_program150 = new BitSet(new long[]{0x0008001000000002L});
-	public static final BitSet FOLLOW_51_in_function169 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_program144 = new BitSet(new long[]{0x0010001000000000L});
+	public static final BitSet FOLLOW_function_in_program148 = new BitSet(new long[]{0x0010001000000002L});
+	public static final BitSet FOLLOW_WS_in_program150 = new BitSet(new long[]{0x0010001000000002L});
+	public static final BitSet FOLLOW_52_in_function169 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_function171 = new BitSet(new long[]{0x0000000020000000L});
 	public static final BitSet FOLLOW_SYMBOL_LEX_in_function173 = new BitSet(new long[]{0x0000041000000000L});
 	public static final BitSet FOLLOW_WS_in_function175 = new BitSet(new long[]{0x0000040000000000L});
 	public static final BitSet FOLLOW_42_in_function178 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_function180 = new BitSet(new long[]{0x0800000000000000L});
+	public static final BitSet FOLLOW_WS_in_function180 = new BitSet(new long[]{0x2000000000000000L});
 	public static final BitSet FOLLOW_definition_in_function182 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_59_in_definition201 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_61_in_definition201 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_definition203 = new BitSet(new long[]{0x0000005200000000L});
 	public static final BitSet FOLLOW_input_in_definition206 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_definition208 = new BitSet(new long[]{0x0000004000000000L});
 	public static final BitSet FOLLOW_38_in_definition212 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_definition214 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_definition214 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_definition216 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_definition218 = new BitSet(new long[]{0x0000004000000000L});
 	public static final BitSet FOLLOW_38_in_definition220 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_definition222 = new BitSet(new long[]{0x8000000000000000L});
-	public static final BitSet FOLLOW_63_in_definition224 = new BitSet(new long[]{0x0000001200000000L});
+	public static final BitSet FOLLOW_WS_in_definition222 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+	public static final BitSet FOLLOW_65_in_definition224 = new BitSet(new long[]{0x0000001200000000L});
 	public static final BitSet FOLLOW_output_in_definition226 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_inputsub_in_input255 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_WS_in_inputsub273 = new BitSet(new long[]{0x0000000200000000L});
@@ -3512,64 +3648,64 @@ public class ASTParser extends Parser {
 	public static final BitSet FOLLOW_output_in_output319 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_WS_in_output330 = new BitSet(new long[]{0x0000000200000000L});
 	public static final BitSet FOLLOW_VARIABLE_LEX_in_output333 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WS_in_commands350 = new BitSet(new long[]{0x4226000200000000L});
+	public static final BitSet FOLLOW_WS_in_commands350 = new BitSet(new long[]{0x084C000200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_command_in_commands353 = new BitSet(new long[]{0x0000101000000002L});
 	public static final BitSet FOLLOW_WS_in_commands356 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_44_in_commands359 = new BitSet(new long[]{0x4226001200000000L});
-	public static final BitSet FOLLOW_WS_in_commands361 = new BitSet(new long[]{0x4226000200000000L});
+	public static final BitSet FOLLOW_44_in_commands359 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
+	public static final BitSet FOLLOW_WS_in_commands361 = new BitSet(new long[]{0x084C000200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_command_in_commands364 = new BitSet(new long[]{0x0000101000000002L});
 	public static final BitSet FOLLOW_44_in_commands369 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_57_in_command387 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_59_in_command387 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_vars_in_command398 = new BitSet(new long[]{0x0000081000000000L});
 	public static final BitSet FOLLOW_WS_in_command400 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_43_in_command403 = new BitSet(new long[]{0x0100009220000000L});
-	public static final BitSet FOLLOW_WS_in_command405 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_43_in_command403 = new BitSet(new long[]{0x0400009220000000L});
+	public static final BitSet FOLLOW_WS_in_command405 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_exprs_in_command408 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_53_in_command433 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command435 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_54_in_command433 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command435 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_expression_in_command437 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command439 = new BitSet(new long[]{0x1000000000000000L});
-	public static final BitSet FOLLOW_60_in_command441 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command443 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_command439 = new BitSet(new long[]{0x4000000000000000L});
+	public static final BitSet FOLLOW_62_in_command441 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command443 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_command445 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command447 = new BitSet(new long[]{0x0001801000000000L});
-	public static final BitSet FOLLOW_WS_in_command449 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_47_in_command452 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command453 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_command447 = new BitSet(new long[]{0x0003001000000000L});
+	public static final BitSet FOLLOW_WS_in_command449 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_48_in_command452 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command453 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_command455 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command457 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_48_in_command461 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_62_in_command489 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command491 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_WS_in_command457 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_49_in_command461 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_64_in_command489 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command491 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_expression_in_command493 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command495 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_46_in_command497 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command499 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_command495 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_47_in_command497 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command499 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_command501 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command503 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_58_in_command505 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_49_in_command526 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command528 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_WS_in_command503 = new BitSet(new long[]{0x1000000000000000L});
+	public static final BitSet FOLLOW_60_in_command505 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_50_in_command526 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command528 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_expression_in_command530 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command532 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_46_in_command534 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command536 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_command532 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_47_in_command534 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command536 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_command538 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command540 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_58_in_command542 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_50_in_command563 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command540 = new BitSet(new long[]{0x1000000000000000L});
+	public static final BitSet FOLLOW_60_in_command542 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_51_in_command563 = new BitSet(new long[]{0x0000001000000000L});
 	public static final BitSet FOLLOW_WS_in_command565 = new BitSet(new long[]{0x0000000200000000L});
 	public static final BitSet FOLLOW_VARIABLE_LEX_in_command567 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command569 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_54_in_command571 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command573 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_WS_in_command569 = new BitSet(new long[]{0x0080000000000000L});
+	public static final BitSet FOLLOW_55_in_command571 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command573 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_expression_in_command575 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command577 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_46_in_command579 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command581 = new BitSet(new long[]{0x4226001200000000L});
+	public static final BitSet FOLLOW_WS_in_command577 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_47_in_command579 = new BitSet(new long[]{0x0000001000000000L});
+	public static final BitSet FOLLOW_WS_in_command581 = new BitSet(new long[]{0x084C001200000000L,0x0000000000000001L});
 	public static final BitSet FOLLOW_commands_in_command583 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_command585 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_58_in_command587 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WS_in_command585 = new BitSet(new long[]{0x1000000000000000L});
+	public static final BitSet FOLLOW_60_in_command587 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars619 = new BitSet(new long[]{0x0000021000000000L});
 	public static final BitSet FOLLOW_WS_in_vars621 = new BitSet(new long[]{0x0000020000000000L});
 	public static final BitSet FOLLOW_41_in_vars624 = new BitSet(new long[]{0x0000001200000000L});
@@ -3578,38 +3714,44 @@ public class ASTParser extends Parser {
 	public static final BitSet FOLLOW_VARIABLE_LEX_in_vars641 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_expression_in_exprs656 = new BitSet(new long[]{0x0000021000000002L});
 	public static final BitSet FOLLOW_WS_in_exprs659 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_41_in_exprs662 = new BitSet(new long[]{0x0100009220000000L});
-	public static final BitSet FOLLOW_WS_in_exprs664 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_41_in_exprs662 = new BitSet(new long[]{0x0400009220000000L});
+	public static final BitSet FOLLOW_WS_in_exprs664 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_expression_in_exprs667 = new BitSet(new long[]{0x0000021000000002L});
 	public static final BitSet FOLLOW_exprbase_in_expression688 = new BitSet(new long[]{0x0000002000000002L});
-	public static final BitSet FOLLOW_37_in_expression693 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_37_in_expression693 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_exprbase_in_expression696 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_39_in_exprbase739 = new BitSet(new long[]{0x2090201020000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase741 = new BitSet(new long[]{0x2090200020000000L});
+	public static final BitSet FOLLOW_39_in_exprbase739 = new BitSet(new long[]{0x8320601020000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase741 = new BitSet(new long[]{0x8320600020000000L});
 	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase748 = new BitSet(new long[]{0x0000001000000000L});
-	public static final BitSet FOLLOW_WS_in_exprbase750 = new BitSet(new long[]{0x0100019220000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase750 = new BitSet(new long[]{0x0400019220000000L});
 	public static final BitSet FOLLOW_lexpr_in_exprbase752 = new BitSet(new long[]{0x0000010000000000L});
 	public static final BitSet FOLLOW_40_in_exprbase753 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase771 = new BitSet(new long[]{0x0000010000000000L});
 	public static final BitSet FOLLOW_40_in_exprbase772 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_52_in_exprbase785 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_53_in_exprbase785 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_exprbase_in_exprbase786 = new BitSet(new long[]{0x0000011000000000L});
 	public static final BitSet FOLLOW_WS_in_exprbase788 = new BitSet(new long[]{0x0000010000000000L});
 	public static final BitSet FOLLOW_40_in_exprbase790 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_61_in_exprbase803 = new BitSet(new long[]{0x0100008220000000L});
+	public static final BitSet FOLLOW_63_in_exprbase803 = new BitSet(new long[]{0x0400008220000000L});
 	public static final BitSet FOLLOW_exprbase_in_exprbase804 = new BitSet(new long[]{0x0000011000000000L});
 	public static final BitSet FOLLOW_WS_in_exprbase806 = new BitSet(new long[]{0x0000010000000000L});
 	public static final BitSet FOLLOW_40_in_exprbase808 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_45_in_exprbase821 = new BitSet(new long[]{0x0100019220000000L});
-	public static final BitSet FOLLOW_lexpr_in_exprbase822 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase823 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_55_in_exprbase836 = new BitSet(new long[]{0x0100019220000000L});
-	public static final BitSet FOLLOW_lexpr_in_exprbase837 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_40_in_exprbase838 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_56_in_exprbase855 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VARIABLE_LEX_in_exprbase865 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase879 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WS_in_lexpr902 = new BitSet(new long[]{0x0100008220000002L});
-	public static final BitSet FOLLOW_exprbase_in_lexpr906 = new BitSet(new long[]{0x0100009220000002L});
-	public static final BitSet FOLLOW_WS_in_lexpr908 = new BitSet(new long[]{0x0100008220000002L});
+	public static final BitSet FOLLOW_46_in_exprbase821 = new BitSet(new long[]{0x0000011000000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase823 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase826 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_45_in_exprbase837 = new BitSet(new long[]{0x0400019220000000L});
+	public static final BitSet FOLLOW_lexpr_in_exprbase838 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase839 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_57_in_exprbase852 = new BitSet(new long[]{0x0000011000000000L});
+	public static final BitSet FOLLOW_WS_in_exprbase854 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase857 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_56_in_exprbase868 = new BitSet(new long[]{0x0400019220000000L});
+	public static final BitSet FOLLOW_lexpr_in_exprbase869 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_40_in_exprbase870 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_58_in_exprbase887 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VARIABLE_LEX_in_exprbase897 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SYMBOL_LEX_in_exprbase911 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WS_in_lexpr934 = new BitSet(new long[]{0x0400008220000002L});
+	public static final BitSet FOLLOW_exprbase_in_lexpr938 = new BitSet(new long[]{0x0400009220000002L});
+	public static final BitSet FOLLOW_WS_in_lexpr940 = new BitSet(new long[]{0x0400008220000002L});
 }

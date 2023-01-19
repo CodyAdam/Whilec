@@ -34,7 +34,7 @@ public class Main {
             // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/bad/badsyntax.while", "-x" };
+        args = new String[] { "test/notworkingyet/cons.while", "-x" };
         String filepath = args[0];
 
         Boolean verbose = false;

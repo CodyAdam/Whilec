@@ -325,6 +325,8 @@ public class Generator {
           Tree exprNode = node.getChild(childCount - 1); // EXPRESSION node
           i.add(fromExpr(exprNode, scopeVars));
           i.add(new Assign(subnode, i.getLastAssignedVariable()));
+        } else {
+          i.add(new Assign(subnode, new Nil()));
         }
         for (int j = childCount - 2; j >= 0; j--) {
           Tree exprNode = node.getChild(j); // EXPRESSION node
