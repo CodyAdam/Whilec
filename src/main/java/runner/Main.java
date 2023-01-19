@@ -34,7 +34,7 @@ public class Main {
             // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/good/string.while", "-x", "-v" , "-d" };
+        args = new String[] { "test/good/foreach.while" };
         String filepath = args[0];
 
         Boolean verbose = false;
@@ -63,9 +63,13 @@ public class Main {
         Tree tree = (Tree) prog.getTree();
 
         // Print the AST to PlantUML
-        ASTPrinter printer = new ASTPrinter();
-        printer.printTree(tree);
-        printer.save("ASTPrinted.puml");
+        if(debug){
+            System.out.println("Printing AST to ./ASTPrintend.puml ...");
+            ASTPrinter printer = new ASTPrinter();
+            printer.printTree(tree);
+            printer.save("ASTPrinted.puml");
+        }
+
 
         // Validate the AST
         File filepathAsFile = new File(filepath);
