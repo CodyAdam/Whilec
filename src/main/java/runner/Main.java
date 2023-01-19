@@ -34,7 +34,7 @@ public class Main {
             // args.length);
             // System.exit(1);
         }
-        args = new String[] { "test/string.while", "-x" };
+        args = new String[] { "test/good/string.while", "-x", "-v" , "-d" };
         String filepath = args[0];
 
         Boolean verbose = false;
