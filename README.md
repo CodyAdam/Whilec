@@ -1,7 +1,17 @@
 # 🧱 While Compiler
 
-This is a compiler for the While language. It is written in Java and compile to python.
+This is a compiler for the While language. It is written in Java and compile to Python.
 This project has been realised by a group of 4 students of ESIR. The goal of this project is to learn how works and how to write a compiler.
+
+Features :
+- [x] Grammar lexer and parser
+- [x] AST generation
+- [x] AST Validation
+- [x] Three Adress Code generation
+- [x] Optimisation
+- [x] Target code generation
+- [x] Runtime library
+- [x] Command line interface   
 
 Team member : [Cody ADAM](https://github.com/CodyAdam) ,[Arthur ALLAIN](https://github.com/Pataubeur), [Romain BRIEND](https://github.com/yami2200), [Thomas DELAPART](https://github.com/Thomega35)
 
@@ -26,7 +36,7 @@ Options :
 * `-v` : verbose mode, display compilation steps with more details
 * `-d` : debug mode, print AST into a PlantUML file and display the intermediate code in the console
 
-## 📂 Structure du projet
+## 📂 Project Structure
 
 ```
 📦while-lang
