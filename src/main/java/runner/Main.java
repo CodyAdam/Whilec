@@ -35,15 +35,16 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        args = new String[] { "sample/good/string.while", "-x", "-v"};
+        args = new String[] { "sample/good/string.while", "-x", "-v" };
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
                     args.length);
             System.exit(1);
         }
-        
+
         String filepath = args[0];
+        File filepathAsFile = new File(filepath);
         for (String arg : args) {
             if (arg.equals("-v")) {
                 verbose = true;
@@ -62,7 +63,7 @@ public class Main {
         ASTLexer lexer = new ASTLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream();
         tokens.setTokenSource(lexer);
-        ASTParser parser = new OurASTParser(tokens, filepath);
+        ASTParser parser = new OurASTParser(tokens, filepathAsFile.getAbsolutePath());
         var prog = parser.program();
         Tree tree = (Tree) prog.getTree();
 
@@ -75,7 +76,7 @@ public class Main {
         }
 
         // Validate the AST
-        File filepathAsFile = new File(filepath);
+
         PreCompileValidator validator = new PreCompileValidator(filepathAsFile.getAbsolutePath());
         validator.addValidator(new FunctionNameNUsageValidator());
         validator.addValidator(new VariableNameNUsageValidator());

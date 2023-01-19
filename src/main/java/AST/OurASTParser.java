@@ -21,7 +21,11 @@ public class OurASTParser extends ASTParser {
 
   @Override
   public void reportError(RecognitionException e) {
-    VPrinter.getInstance().printError("Syntax error during parsing : " + getErrorMessage(e, tokenNames), filepath, e.line, e.charPositionInLine);
+    // TODO path to absolute path
+
+    
+    VPrinter.getInstance().printError("Syntax error during parsing : " + getErrorMessage(e, tokenNames), filepath,
+        e.line, e.charPositionInLine);
     System.exit(1);
   }
 }
