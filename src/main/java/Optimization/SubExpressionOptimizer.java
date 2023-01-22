@@ -2,93 +2,143 @@ package Optimization;
 
 import C3A.*;
 
+import java.util.HashSet;
+
 public class SubExpressionOptimizer extends LocalOptimizer {
     @Override
     protected void optimizeInstructionWithContext(Instruction instruction, Context context) {
         if(instruction instanceof Assign){
             Assign assign = (Assign) instruction;
             if(assign.getRight() instanceof Pop) return;
-            if(context.assignExpressions.containsKey(assign.getRight().toString())) {
-                System.out.println("From "+assign);
-                assign.setRight(context.assignExpressions.get(assign.getRight().toString()));
-                System.out.println("To "+assign);
-                this.codeChanged = true;
-            }/* else if (context.assignTabExpressions.containsKey(assign.getRight().toString())){
-                    AssignTab assignTab = context.assignTabExpressions.get(assign.getRight().toString());
-                    assign.setRight(new TabValue(assignTab.getLeft(), assignTab.getIndex()));
-                    this.changeInstructions = true;
-                }*/ else {
-                    context.assignExpressions.put(assign.getRight().toString(), assign.getLeft());
+
+            // Remove all stored assignments that depend on the current assign
+            if(context.varDependencies.containsKey(new VarAssign(assign))) {
+                for (VarAssign s : context.varDependencies.get(new VarAssign(assign))) {
+                    context.assignments.remove(s);
                 }
-            } else if(instruction instanceof AssignTab){
-                AssignTab assignTab = (AssignTab) instruction;
-                if(assignTab.getRight() instanceof Pop) return;
-                if(context.assignExpressions.containsKey(assignTab.getRight().toString())) {
-                    System.out.println("From "+assignTab);
-                    assignTab.setRight(context.assignExpressions.get(assignTab.getRight().toString()));
-                    System.out.println("To "+assignTab);
-                    this.codeChanged = true;
-                    System.out.println("Changed");
-                }/* else if (context.assignTabExpressions.containsKey(assignTab.getRight().toString())){
-                    AssignTab assignTab2 = context.assignTabExpressions.get(assignTab.getRight().toString());
-                    assignTab.setRight(new TabValue(assignTab2.getLeft(), assignTab2.getIndex()));
-                    this.changeInstructions = true;
-                } else {
-                    context.assignTabExpressions.put(assignTab.getRight().toString(), assignTab);
-                }*/
             }
+
+            // Optimization
+            if(assign.getRight() instanceof Variable){
+                Variable variable = (Variable) assign.getRight();
+                if(context.assignments.containsKey(new VarAssign(variable.getName())) &&
+                        (context.assignments.get(new VarAssign(variable.getName())) instanceof Variable
+                                || context.assignments.get(new VarAssign(variable.getName())) instanceof TabValue)){
+                    ToAssign newValue = context.assignments.get(new VarAssign(variable.getName()));
+                    if(!newValue.equals(assign.getRight())) {
+                        System.out.println("From "+assign);
+                        assign.setRight(newValue);
+                        System.out.println("To "+assign);
+                        this.codeChanged = true;
+                    }
+                }
+            } else if(assign.getRight() instanceof TabValue){
+                TabValue tabvalue = (TabValue) assign.getRight();
+                if(context.assignments.containsKey(new VarAssign(tabvalue)) &&
+                        (context.assignments.get(new VarAssign(tabvalue)) instanceof Variable
+                                || context.assignments.get(new VarAssign(tabvalue)) instanceof TabValue)){
+                    ToAssign newValue =context.assignments.get(new VarAssign(tabvalue));
+                    if(!newValue.equals(assign.getRight())) {
+                        System.out.println("From "+assign);
+                        assign.setRight(newValue);
+                        System.out.println("To "+assign);
+                        this.codeChanged = true;
+                    }
+                }
+            } else {
+                for (VarAssign key : context.assignments.keySet()) {
+                    ToAssign value = context.assignments.get(key);
+
+                    if (value.equals(assign.getRight()) && (!(assign.getRight() instanceof Variable) || !(assign.getRight() instanceof TabValue))) {
+                        System.out.println("From " + assign);
+                        assign.setRight(new Variable(key.name, false));
+                        System.out.println("To " + assign);
+                        this.codeChanged = true;
+                        break;
+                    }
+                }
+            }
+
+            context.assignments.put(new VarAssign(assign), assign.getRight());
+
+            // Process dependencies of the variable
+            for (VarAssign dependency : context.getDependencies(assign.getRight())) {
+                if(context.varDependencies.containsKey(dependency)){
+                    context.varDependencies.get(dependency).add(new VarAssign(assign));
+                } else {
+                    HashSet<VarAssign> dependencies = new HashSet<>();
+                    dependencies.add(new VarAssign(assign));
+                    context.varDependencies.put(dependency, dependencies);
+                }
+            }
+
+        } else if(instruction instanceof AssignTab){
+            AssignTab assignTab = (AssignTab) instruction;
+            if(assignTab.getRight() instanceof Pop) return;
+
+            // Remove all stored assignments that depend on the current assign
+            if(context.varDependencies.containsKey(new VarAssign(assignTab))){
+                for (VarAssign s : context.varDependencies.get(new VarAssign(assignTab))) {
+                    context.assignments.remove(s);
+                }
+            }
+
+            // Optimization
+            if(assignTab.getRight() instanceof Variable){
+                Variable variable = (Variable) assignTab.getRight();
+                if(context.assignments.containsKey(new VarAssign(variable.getName())) &&
+                        (context.assignments.get(new VarAssign(variable.getName())) instanceof Variable
+                                || context.assignments.get(new VarAssign(variable.getName())) instanceof TabValue)){
+                    ToAssign newValue = context.assignments.get(new VarAssign(variable.getName()));
+                    if(!newValue.equals(assignTab.getRight())) {
+                        System.out.println("From "+assignTab);
+                        assignTab.setRight(newValue);
+                        System.out.println("To "+assignTab);
+                        this.codeChanged = true;
+                    }
+
+                }
+            } else if(assignTab.getRight() instanceof TabValue){
+                TabValue tabvalue = (TabValue) assignTab.getRight();
+                if(context.assignments.containsKey(new VarAssign(tabvalue)) &&
+                        (context.assignments.get(new VarAssign(tabvalue)) instanceof Variable
+                                || context.assignments.get(new VarAssign(tabvalue)) instanceof TabValue)){
+                    ToAssign newValue = context.assignments.get(new VarAssign(tabvalue));
+                    if(!newValue.equals(assignTab.getRight())) {
+                        System.out.println("From "+assignTab);
+                        assignTab.setRight(newValue);
+                        System.out.println("To "+assignTab);
+                        this.codeChanged = true;
+                    }
+
+                }
+            } else {
+                for (VarAssign key : context.assignments.keySet()) {
+                    ToAssign value = context.assignments.get(key);
+
+                    if(value.equals(assignTab.getRight()) && (!(assignTab.getRight() instanceof Variable) || !(assignTab.getRight() instanceof TabValue))){
+                        System.out.println("From "+assignTab);
+                        assignTab.setRight(new Variable(key.name, false));
+                        System.out.println("To "+assignTab);
+                        this.codeChanged = true;
+                        break;
+                    }
+                }
+            }
+
+            context.assignments.put(new VarAssign(assignTab), assignTab.getRight());
+
+            // Process dependencies of the variable
+            for (VarAssign dependency : context.getDependencies(assignTab.getRight())) {
+                if(context.varDependencies.containsKey(dependency)){
+                    context.varDependencies.get(dependency).add(new VarAssign(assignTab));
+                } else {
+                    HashSet<VarAssign> dependencies = new HashSet<>();
+                    dependencies.add(new VarAssign(assignTab));
+                    context.varDependencies.put(dependency, dependencies);
+                }
+            }
+
+        }
     }
-
-    /*@Override
-    public void optimize(Instructions code) {
-        // Iterator over the instructions
-        Iterator<Instruction> it = code.getInstructions().iterator();
-        while(it.hasNext()){
-            Instruction instruction = it.next();
-            if(instruction instanceof FuncBegin){
-                it = this.optimizeWithContext(it, new Context());
-            }
-        }
-        if(this.changeInstructions){
-            this.changeInstructions = false;
-            this.optimize(code);
-            System.out.println("re-optimize");
-        }
-    }*/
-
-    /*private Iterator<Instruction> optimizeWithContext(Iterator<Instruction> it, Context context){
-        while (it.hasNext()){
-            Instruction instruction = it.next();
-            if(instruction instanceof FuncEnd || instruction instanceof FuncReturn){
-                return it;
-            } else if(instruction instanceof Assign){
-                Assign assign = (Assign) instruction;
-                if(assign.getRight() instanceof Pop) continue;
-                if(context.assignExpressions.containsKey(assign.getRight().toString())) {
-                    assign.setRight(context.assignExpressions.get(assign.getRight().toString()));
-                    this.changeInstructions = true;
-                }/* else if (context.assignTabExpressions.containsKey(assign.getRight().toString())){
-                    AssignTab assignTab = context.assignTabExpressions.get(assign.getRight().toString());
-                    assign.setRight(new TabValue(assignTab.getLeft(), assignTab.getIndex()));
-                    this.changeInstructions = true;
-                } else {
-                    context.assignExpressions.put(assign.getRight().toString(), assign.getLeft());
-                }
-            } else if(instruction instanceof AssignTab){
-                AssignTab assignTab = (AssignTab) instruction;
-                if(assignTab.getRight() instanceof Pop) continue;
-                if(context.assignExpressions.containsKey(assignTab.getRight().toString())) {
-                    assignTab.setRight(context.assignExpressions.get(assignTab.getRight().toString()));
-                    this.changeInstructions = true;
-                }/* else if (context.assignTabExpressions.containsKey(assignTab.getRight().toString())){
-                    AssignTab assignTab2 = context.assignTabExpressions.get(assignTab.getRight().toString());
-                    assignTab.setRight(new TabValue(assignTab2.getLeft(), assignTab2.getIndex()));
-                    this.changeInstructions = true;
-                } else {
-                    context.assignTabExpressions.put(assignTab.getRight().toString(), assignTab);
-                }
-            }
-        }
-        return it;
-    }*/
 }
