@@ -28,8 +28,9 @@ public abstract class LocalOptimizer extends Optimizer{
         }
         if(this.codeChanged){
             this.optimizeWithRepeat(code);
+        } else {
+            this.endOptimization(code);
         }
-        this.endOptimization(code);
     }
 
     private void optimizeWithContext(Iterator<Instruction> it, Context context) {
