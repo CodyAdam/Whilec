@@ -29,14 +29,29 @@ Une fois structure de la grammaire et du projet java étbalie. Nous avons commen
 
 En continuant à travailler en binomes, nous avons ainsi commencé à travailler sur la génération du code 3 adresses et de la grammaire. Nous faisions des retours sur les avancées de chacun régulièrement pour faire évoluer la structure de l'ast et les classes java du projet ensemble.
 
-### Validation et compilation en langage cible
+### Perfectionnement de l'AST et optimisation du code 3 adresses
 
-todo
+Avec un premier code 3 adresses généré et un ast fonctionnel, nous avons commencé à travailler sur l'optimisation du code 3 adresses.(Suppression des variables inutiles / optimisation des expressions arithmétiques / etc...)
 
+En même temps, nous avons continué à optimiser l'ast et à le rendre plus lisible.
+
+Durant cette étape, nous avons fait des retours sur les avancées de chacun régulièrement pour faire évoluer la structure de l'ast et les classes java du projet ensemble.
+
+### Compilation en langage cible et validation
+
+Nous sommes ensuite passé à la compilation en langage cible. (Python) et la validation du code while de l'utilisateur.
+
+L'implémentation de l'AST et de la compilation en langage cible ont elles aussi faites ressortir des problèmes dans l'ast et dans le code 3 adresses. Ainsi pour chaque problème rencontré, nous avons fait des points globaux pour déterminer comment les résoudre au mieux.
+
+A la fin de cette étape, nous avons fait un point global sur l'ensemble du projet pour déterminer les dernières améliorations à apporter et nous sommes arriver au résultat final tel que présenté dans le rapport.
 
 ## Répartition des tâches
 
-todo
+Nous avons fait deux binome stout au long du projet, de sorte à travailler plus efficacement. Nous avons ainsi pu avancer plus rapidement sur le projet. Nous avons aussi pu nous répartir les tâches de manière plus équitable.
+
+Le premier binome était composé de Romain Briend et Arthur Allain. Ils ont travaillé sur la grammaire et sur la génération de l'ast dans un premier temps. Ils ont ensuite travaillé sur la validation.
+
+Le second binome était composé de Thomas Delapart et Cody Adam. Ils ont travaillé sur la génération du code 3 adresses à partir de l'ast. Ils ont ensuite travaillé sur la compilation en langage cible.
 
 ## Rapports personnels
 
