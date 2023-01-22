@@ -3,16 +3,19 @@ package Optimization;
 import C3A.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public abstract class LocalOptimizer extends Optimizer{
 
     protected Instructions code;
     protected boolean codeChanged;
+    HashSet<String> visitedLabel;
 
     @Override
     public void optimize(Instructions code) {
         this.code = code;
+        visitedLabel = new HashSet<>();
         this.optimizeWithRepeat(code);
     }
 
@@ -38,14 +41,24 @@ public abstract class LocalOptimizer extends Optimizer{
                 return;
             } else if(instruction instanceof Goto){
                 Goto gotoI = (Goto) instruction;
-                optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getLabel().getName())), new Context(context));
+                optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getLabel().getName())), new Context());
                 return;
             } else if(instruction instanceof IfzGoto){
                 IfzGoto gotoI = (IfzGoto) instruction;
-                optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getEndIfLabel().getName())), new Context(context));
-                optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getElseLabel().getName())), new Context(context));
+                optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getEndIfLabel().getName())), new Context());
+                optimizeWithContext(it, new Context(context));
                 return;
-            } else {
+            } else if(instruction instanceof Label){
+                Label label = (Label) instruction;
+                if(visitedLabel.contains(label.getName())){
+                    return;
+                } else {
+                    visitedLabel.add(label.getName());
+                    optimizeWithContext(it, new Context());
+                    return;
+                }
+            }
+            else {
                 this.optimizeInstructionWithContext(instruction, context);
             }
         }
@@ -56,21 +69,76 @@ public abstract class LocalOptimizer extends Optimizer{
 }
 
 class Context {
-    public HashMap<String, Variable> assignExpressions;
-    public HashMap<String, AssignTab> assignTabExpressions;
+
+    public HashMap<VarAssign, ToAssign> assignments;
+    public HashMap<VarAssign, HashSet<VarAssign>> varDependencies;
 
     public Context() {
-        assignExpressions = new HashMap<>();
-        assignTabExpressions = new HashMap<>();
+        assignments = new HashMap<>();
+        varDependencies = new HashMap<>();
     }
 
     public Context(Context context) {
-        assignExpressions = new HashMap<>(context.assignExpressions);
-        assignTabExpressions = new HashMap<>(context.assignTabExpressions);
+        assignments = new HashMap<>(context.assignments);
+        varDependencies = new HashMap<>(context.varDependencies);
     }
 
-    public Context(HashMap<String, Variable> assignExpressions, HashMap<String, AssignTab> assignTabExpressions) {
-        this.assignExpressions = new HashMap<>(assignExpressions);
-        this.assignTabExpressions = new HashMap<>(assignTabExpressions);
+    public HashSet<VarAssign> getDependencies(ToAssign value){
+        HashSet<VarAssign> dependencies = new HashSet<>();
+        if(value instanceof Variable){
+            Variable variable = (Variable) value;
+            dependencies.add(new VarAssign(variable.getName()));
+        } else if(value instanceof TabValue){
+            TabValue tabValue = (TabValue) value;
+            dependencies.add(new VarAssign(tabValue.getTab().getName(), tabValue.getIndex()));
+        } else if(value instanceof Unop){
+            Unop unop = (Unop) value;
+            dependencies.add(new VarAssign(unop.getArg().getName()));
+        }
+        return dependencies;
+    }
+}
+
+class VarAssign{
+    public String name;
+    public int index;
+
+    public VarAssign(String name, int index){
+        this.name = name;
+        this.index = index;
+    }
+
+    public VarAssign(String name){
+        this.name = name;
+        this.index = -1;
+    }
+
+    public VarAssign(Assign assign){
+        this.name = assign.getLeft().getName();
+        this.index = -1;
+    }
+
+    public VarAssign(AssignTab assignTab){
+        this.name = assignTab.getLeft().getName();
+        this.index = assignTab.getIndex();
+    }
+
+    public VarAssign(TabValue value){
+        this.name = value.getTab().getName();
+        this.index = value.getIndex();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof VarAssign){
+            VarAssign other = (VarAssign) o;
+            return this.name.equals(other.name) && this.index == other.index;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode() + this.index;
     }
 }
