@@ -1,7 +1,12 @@
 package Optimization;
 
 import C3A.*;
+import Validation.Color;
+import Validation.FontDetail;
+import Validation.VPrinter;
+import runner.Main;
 
+import java.util.Collections;
 import java.util.HashSet;
 
 public class SubExpressionOptimizer extends LocalOptimizer {
@@ -26,10 +31,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                                 || context.assignments.get(new VarAssign(variable.getName())) instanceof TabValue)){
                     ToAssign newValue = context.assignments.get(new VarAssign(variable.getName()));
                     if(!newValue.equals(assign.getRight())) {
-                        System.out.println("From "+assign);
                         assign.setRight(newValue);
-                        System.out.println("To "+assign);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                     }
                 }
             } else if(assign.getRight() instanceof TabValue){
@@ -39,10 +42,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                                 || context.assignments.get(new VarAssign(tabvalue)) instanceof TabValue)){
                     ToAssign newValue =context.assignments.get(new VarAssign(tabvalue));
                     if(!newValue.equals(assign.getRight())) {
-                        System.out.println("From "+assign);
                         assign.setRight(newValue);
-                        System.out.println("To "+assign);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                     }
                 }
             } else {
@@ -50,10 +51,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                     ToAssign value = context.assignments.get(key);
 
                     if (value.equals(assign.getRight()) && (!(assign.getRight() instanceof Variable) || !(assign.getRight() instanceof TabValue))) {
-                        System.out.println("From " + assign);
                         assign.setRight(new Variable(key.name, false));
-                        System.out.println("To " + assign);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                         break;
                     }
                 }
@@ -91,10 +90,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                                 || context.assignments.get(new VarAssign(variable.getName())) instanceof TabValue)){
                     ToAssign newValue = context.assignments.get(new VarAssign(variable.getName()));
                     if(!newValue.equals(assignTab.getRight())) {
-                        System.out.println("From "+assignTab);
                         assignTab.setRight(newValue);
-                        System.out.println("To "+assignTab);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                     }
 
                 }
@@ -105,10 +102,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                                 || context.assignments.get(new VarAssign(tabvalue)) instanceof TabValue)){
                     ToAssign newValue = context.assignments.get(new VarAssign(tabvalue));
                     if(!newValue.equals(assignTab.getRight())) {
-                        System.out.println("From "+assignTab);
                         assignTab.setRight(newValue);
-                        System.out.println("To "+assignTab);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                     }
 
                 }
@@ -117,10 +112,8 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                     ToAssign value = context.assignments.get(key);
 
                     if(value.equals(assignTab.getRight()) && (!(assignTab.getRight() instanceof Variable) || !(assignTab.getRight() instanceof TabValue))){
-                        System.out.println("From "+assignTab);
                         assignTab.setRight(new Variable(key.name, false));
-                        System.out.println("To "+assignTab);
-                        this.codeChanged = true;
+                        this.addEditedInstruction();
                         break;
                     }
                 }
@@ -139,6 +132,27 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                 }
             }
 
+        }
+    }
+
+    @Override
+    protected void endOptimization(Instructions code) {
+        printResult();
+    }
+
+    private void printResult(){
+        if(Main.verbose){
+            String message = "### OPTIMIZATION : SUBEXPRESSIONS ###";
+            String reportmessage = this.nbInstructionsEdited + " LINE(S) EDITED";
+            int n = (message.length() - reportmessage.length() - 6);
+            String space = String.join("", Collections.nCopies(n/2, " "));
+            reportmessage = "###" + space + reportmessage + space + (n%2!=0 ? " " : "") + "###";
+            String line = String.join("", Collections.nCopies(message.length(), "#"));
+            FontDetail font = new FontDetail(Color.PURPLE, true, false);
+            VPrinter.getInstance().println(line, font);
+            VPrinter.getInstance().println(message, font);
+            VPrinter.getInstance().println(reportmessage, font);
+            VPrinter.getInstance().println(line+"\n", font);
         }
     }
 }
