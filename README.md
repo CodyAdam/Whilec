@@ -22,7 +22,7 @@ This project has been realised by a group of 4 students of ESIR. The goal of thi
 - [x] AST generation
 - [x] AST Validation
 - [x] Three Adress Code generation
-- [x] Optimisation
+- [x] Optimization
 - [x] Target code generation
 - [x] Runtime library
 - [x] Command line interface   
@@ -84,12 +84,13 @@ java -jar whilec.jar [filepath] [...arguments?] [...options?]
   - `-x` : execute the program at the end of the compilation
   - `-v` : verbose mode, display compilation steps with more details
   - `-d` : debug mode, print AST into a PlantUML file and display the intermediate code in the console
-  - example : `java -jar whilec.jar sample/good/for.while -x -v -d`
+  - `-o` : optimisation mode, enable optimisation of the intermediate code, during the compilation
+  - example : `java -jar target/whilec.jar sample/good/for.while -x -v -d -o`
 
 **Example**
 
 ```bash
-java -jar whilec.jar sample/good/double.while 5 -x -v
+java -jar target/whilec.jar sample/good/double.while 5 -x -v -o
 ```
 
 **Output**
@@ -147,6 +148,7 @@ int      _CONS_____
  ┃ ┣ 📂C3A                // Generated 3AC 
  ┃ ┣ 📂translate          // Generated target from 3AC
  ┃ ┗ 📂Validation         // Validation system
+ ┃ ┗ 📂Optimization       // 3AC code optimization system
  ┣ 📂sample               // Sample while files
  ┃ ┣ 📂bad                // Should raise compiler error
  ┃ ┗ 📂good               // Should compile
