@@ -1,14 +1,12 @@
 package runner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import Optimization.DeadCodeOptimizer;
 import Optimization.GlobalOptimizer;
 import Optimization.SubExpressionOptimizer;
 import org.antlr.runtime.ANTLRFileStream;
@@ -33,11 +31,12 @@ public class Main {
     public static boolean verbose = false;
     public static boolean execute = false;
     public static boolean debug = false;
+    public static boolean optimize = false;
 
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        args = new String[] { "sample/good/foreach.while", "-x" };
+        //args = new String[] { "sample/good/integers.while", "-x", "-o", "-v", "-d" };
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
@@ -56,6 +55,9 @@ public class Main {
             }
             if (arg.equals("-d")) {
                 debug = true;
+            }
+            if(arg.equals("-o")){
+                optimize = true;
             }
         }
         String[] argsWithoutOptions = Arrays.stream(args).filter(s -> !s.startsWith("-")).toArray(String[]::new);
@@ -92,9 +94,12 @@ public class Main {
             System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
 
         // Optimize 3-address code
-        GlobalOptimizer optimizer = new GlobalOptimizer();
-        optimizer.addOptimizer(new SubExpressionOptimizer());
-        //optimizer.optimize(code3adress);
+        if(optimize){
+            GlobalOptimizer optimizer = new GlobalOptimizer();
+            optimizer.addOptimizer(new SubExpressionOptimizer());
+            optimizer.addOptimizer(new DeadCodeOptimizer());
+            optimizer.optimize(code3adress);
+        }
 
         // Generate target code from 3-address code
         String basePythonFilePath = "resources/base.py";
