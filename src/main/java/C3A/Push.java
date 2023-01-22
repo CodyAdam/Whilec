@@ -16,4 +16,8 @@ public class Push extends Instruction{
   public String toPython(Indent indent) {
     return indent + this.stack+".append("+arg.getName()+")";
   }
+
+    public Variable getV() {
+        return arg;
+    }
 }

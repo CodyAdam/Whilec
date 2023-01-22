@@ -16,4 +16,8 @@ public class FuncReturn extends Instruction {
   public String toPython(Indent indent) {
     return indent + "output.append(" + var.getName() + ")";
   }
+
+    public Variable getVar(){
+        return var;
+    }
 }
