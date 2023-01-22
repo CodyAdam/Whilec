@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public abstract class LocalOptimizer extends Optimizer{
-
-    protected Instructions code;
-    protected boolean codeChanged;
     HashSet<String> visitedLabel;
 
     @Override
@@ -18,6 +15,7 @@ public abstract class LocalOptimizer extends Optimizer{
         visitedLabel = new HashSet<>();
         this.optimizeWithRepeat(code);
     }
+    protected void endOptimization(Instructions code){}
 
     private void optimizeWithRepeat(Instructions code){
         this.codeChanged = false;
@@ -29,24 +27,27 @@ public abstract class LocalOptimizer extends Optimizer{
             }
         }
         if(this.codeChanged){
-            System.out.println("##### New optimization cycle ####");
             this.optimizeWithRepeat(code);
         }
+        this.endOptimization(code);
     }
 
     private void optimizeWithContext(Iterator<Instruction> it, Context context) {
         while (it.hasNext()){
             Instruction instruction = it.next();
             if(instruction instanceof FuncEnd || instruction instanceof FuncReturn){
+                this.optimizeInstructionWithContext(instruction, context);
                 return;
             } else if(instruction instanceof Goto){
+                this.optimizeInstructionWithContext(instruction, context);
                 Goto gotoI = (Goto) instruction;
                 optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getLabel().getName())), new Context());
                 return;
             } else if(instruction instanceof IfzGoto){
+                this.optimizeInstructionWithContext(instruction, context);
                 IfzGoto gotoI = (IfzGoto) instruction;
                 optimizeWithContext(this.code.getInstructions().listIterator(parent.getLabels().get(gotoI.getEndIfLabel().getName())), new Context());
-                optimizeWithContext(it, new Context(context));
+                optimizeWithContext(it, context);
                 return;
             } else if(instruction instanceof Label){
                 Label label = (Label) instruction;
