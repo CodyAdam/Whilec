@@ -17,10 +17,22 @@ Nous avons utilisé Discord pour travailler à distance ensemble. Nous pouvions 
 
 ## Etapes de développement
 
-### 1. Création de l'ast
+### Début du projet
 
-Nous avons commencé par créer l'ast du langage while sur antlr d'un côté et de l'autre le projet java. En faisant cela, nous avons pu travailler en parallèle par groupe de 2. Nous avons ensuite fait une réunion pour discuter de nos avancées et de nos difficultés. Nous avons ensuite décidé de faire une réunion par semaine pour faire un point sur l'avancement du projet.
- Nous avons décidé de faire cela pour séparer les deux langages et pour pouvoir travailler en parallèle sur les deux langages.
+Nous avons commencé par créer un grammaire while sur antlr d'un côté et de l'autre le projet java. En faisant cela, nous avons pu travailler en parallèle par groupe de 2. Nous avons fonctionné de cette manière jusqu'à avoir :
+- un prémisse de grammaire capable de traiter un cas particulier du langage while.
+- un projet java basique capable d'importer et lancer un déroulement d'un ast sur un fichier while.
+
+### AST et génération du code 3 adresses
+
+Une fois structure de la grammaire et du projet java étbalie. Nous avons commencé à travailler sur l'ast et la génération du code 3 adresses. Pour cela nous nous sommes mis d'accord sur une structure de l'ast et sur les classes java du projet sur Figma. 
+
+En continuant à travailler en binomes, nous avons ainsi commencé à travailler sur la génération du code 3 adresses et de la grammaire. Nous faisions des retours sur les avancées de chacun régulièrement pour faire évoluer la structure de l'ast et les classes java du projet ensemble.
+
+### Validation et compilation en langage cible
+
+todo
+
 
 ## Répartition des tâches
 
