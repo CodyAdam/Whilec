@@ -34,4 +34,4 @@ todo
 
 ### Arthur Allain
 
-### Romain Brient
+### [Romain Briend](8.1-romain briend.md)
