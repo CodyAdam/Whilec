@@ -16,7 +16,8 @@ public abstract class Validator {
     }
 
     protected void printError(String message, Tree node){
-        VPrinter.getInstance().printError(message, this.parent.getFilepath(), node.getLine(), node.getCharPositionInLine());
+        if(node == null) VPrinter.getInstance().printError(message, this.parent.getFilepath(), 0, 0);
+        else VPrinter.getInstance().printError(message, this.parent.getFilepath(), node.getLine(), node.getCharPositionInLine());
         this.parent.incrementErrorCount();
     }
 
