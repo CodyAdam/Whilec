@@ -37,7 +37,7 @@ public class FunctionNameNUsageValidator extends DeepValidator {
                     this.printError("No function called " + node.getChild(0).getText() + ".", node.getChild(0));
                 }
                 if(this.functions.get(node.getChild(0).getText()).inputOrder.size() != node.getChild(0).getChildCount()) {
-                    this.printError("Bad number of input arguments.", node.getChild(0));
+                    this.printError("Wrong number of input arguments.", node.getChild(0));
                     System.out.println(this.functions.get(node.getChild(0).getText()).inputOrder.size());
                     System.out.println(node.getChildCount());
                     System.out.println(node);
