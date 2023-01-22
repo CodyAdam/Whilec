@@ -37,4 +37,8 @@ public class IfzGoto extends Instruction {
     indent.inc();
     return s;
   }
+
+  public void setV(Variable v) {
+    this.v = v;
+  }
 }

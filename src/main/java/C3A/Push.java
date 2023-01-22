@@ -20,4 +20,8 @@ public class Push extends Instruction{
     public Variable getV() {
         return arg;
     }
+
+  public void setV(Variable newValue) {
+    this.arg = newValue;
+  }
 }

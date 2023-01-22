@@ -6,6 +6,7 @@ import Validation.FontDetail;
 import Validation.VPrinter;
 import runner.Main;
 
+import java.nio.channels.Pipe;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -132,6 +133,28 @@ public class SubExpressionOptimizer extends LocalOptimizer {
                 }
             }
 
+        } else if(instruction instanceof IfzGoto){
+            IfzGoto ifzGoto = (IfzGoto) instruction;
+            Variable var = ifzGoto.getV();
+            if(context.assignments.containsKey(new VarAssign(var.getName())) &&
+                    (context.assignments.get(new VarAssign(var.getName())) instanceof Variable)){
+                    Variable newValue = (Variable) context.assignments.get(new VarAssign(var.getName()));
+                    if(!newValue.equals(ifzGoto.getV())) {
+                        ifzGoto.setV(newValue);
+                        this.addEditedInstruction();
+                    }
+                }
+        } else if(instruction instanceof Push){
+            Push push = (Push) instruction;
+            Variable var = push.getV();
+            if(context.assignments.containsKey(new VarAssign(var.getName())) &&
+                    (context.assignments.get(new VarAssign(var.getName())) instanceof Variable)){
+                Variable newValue = (Variable) context.assignments.get(new VarAssign(var.getName()));
+                if(!newValue.equals(push.getV())) {
+                    push.setV(newValue);
+                    this.addEditedInstruction();
+                }
+            }
         }
     }
 
