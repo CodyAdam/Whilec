@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import Optimization.GlobalOptimizer;
+import Optimization.SubExpressionOptimizer;
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -35,7 +37,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // for debugging
-        args = new String[] { "sample/good/string.while", "-x", "-v" };
+        args = new String[] { "sample/good/foreach.while", "-x" };
 
         if (args.length == 0) {
             System.err.println("Wrong number of arguments, expected at least 1, got " +
@@ -88,6 +90,11 @@ public class Main {
         Instructions code3adress = generator.getInstructions();
         if (debug)
             System.out.println("\n--- 3 Adress Code Start ---\n" + code3adress + "\n--- 3 Adress Code End ---\n");
+
+        // Optimize 3-address code
+        GlobalOptimizer optimizer = new GlobalOptimizer();
+        optimizer.addOptimizer(new SubExpressionOptimizer());
+        //optimizer.optimize(code3adress);
 
         // Generate target code from 3-address code
         String basePythonFilePath = "resources/base.py";

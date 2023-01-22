@@ -1,12 +1,17 @@
 package Optimization;
 
+import C3A.Instruction;
+import C3A.Instructions;
+import C3A.Label;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GlobalOptimizer {
 
-    List<Optimizer> optimizers;
-
+    private List<Optimizer> optimizers;
+    private HashMap<String, Integer> labels;
 
     /**
      * Creates a new GlobalOptimizer with the given optimizers
@@ -26,14 +31,12 @@ public class GlobalOptimizer {
     /**
      * Optimize the given 3 address code with all components optimizers
      * @param code the 3 address code to optimize
-     * @return the optimized 3 address code
      */
-    public String optimize(String code){
-        String codeOpti = code;
+    public void optimize(Instructions code){
+        this.processLabelsIndex(code);
         for (Optimizer optimizer : optimizers) {
-            codeOpti = optimizer.optimize(codeOpti);
+            optimizer.optimize(code);
         }
-        return codeOpti;
     }
 
     /**
@@ -42,5 +45,23 @@ public class GlobalOptimizer {
      */
     public void addOptimizer(Optimizer optimizer){
         optimizers.add(optimizer);
+        optimizer.setParent(this);
+    }
+
+    private void processLabelsIndex(Instructions code){
+        HashMap<String, Integer> result = new HashMap<>();
+        int i = 0;
+        for (Instruction instruction : code.getInstructions()) {
+            if(instruction instanceof Label){
+                Label label = (Label) instruction;
+                result.put(label.getName(), i);
+            }
+            i++;
+        }
+        this.labels = result;
+    }
+
+    public HashMap<String, Integer> getLabels() {
+        return labels;
     }
 }
