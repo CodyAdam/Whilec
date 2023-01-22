@@ -1,7 +1,3 @@
-Postmortem
-o Qu’est-ce  qui  a  bien  fonctionné,  moins  bien  fonctionné  dans  votre  organisation  de projet?
-oAvec plus de recul, comment feriez-vous maintenant?
-
 # Point positifs du projet
 
 Durant ce projet, nous avons séparé le travail en plusieurs parties. Dont chaque binôme à pu s'occuper. Nous avons ainsi pu travailler en parallèle sur plusieurs parties du projet et avancer plus rapidement en nous aidant mutuellement. 
