@@ -29,9 +29,9 @@ write Result
 function main:
 read
 %
-    N1 (cons int (one));
-    N2 (cons int (two));
-    N2bis (cons int (twobis));
-    N3 (cons int (three))
+    N1 := (cons int (one));
+    N2 := (cons int (two));
+    N2bis := (cons int (twobis));
+    N3 := (cons int (three))
 %
 write N1, N2, N2bis, N3
