@@ -40,7 +40,8 @@ public class PreCompileValidator {
             if(errorCount>0) break;
         }
 
-        if(Main.verbose) this.printReportBanner();
+        if(Main.verbose || errorCount>0) this.printReportBanner();
+        if(errorCount>0) System.exit(1);
     }
 
     private void printBanner(){
