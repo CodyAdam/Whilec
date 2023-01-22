@@ -44,4 +44,8 @@ public class Instructions {
     s = s.substring(0, s.length() - 1);
     return s;
   }
+
+  public void remove(Instruction instruction){
+        stack.remove(instruction);
+  }
 }
