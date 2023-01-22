@@ -6,6 +6,7 @@ Team members : [Cody ADAM](https://github.com/CodyAdam) ,[Arthur ALLAIN](https:/
   - [🔨 Build the compiler jar](#-build-the-compiler-jar)
   - [📟 Run the compiler](#-run-the-compiler)
   - [📂 Project Structure](#-project-structure)
+- [📚 TLC Report](doc/readme.md)
 
 
 # 🧱 While Compiler
