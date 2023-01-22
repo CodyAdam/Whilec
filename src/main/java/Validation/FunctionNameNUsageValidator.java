@@ -20,9 +20,9 @@ public class FunctionNameNUsageValidator extends DeepValidator {
     }
 
     @Override
-    protected void endValidationFunction(Tree tree, Function function) {
+    protected void endValidation() {
         if(!functionUsages.containsKey("main")) {
-            this.printError("No main in the program", tree.getChild(0));
+            this.printError("No main function in the program", null);
         }
     }
 
