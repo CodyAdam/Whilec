@@ -49,4 +49,17 @@ public class Unop extends ToAssign {
         return null;
     }
   }
+
+  public Variable getArg() {
+    return arg;
+  }
+
+  @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Unop unop = (Unop) o;
+        return op == unop.op &&
+                arg.equals(unop.arg);
+    }
 }

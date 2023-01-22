@@ -41,4 +41,19 @@ public class Symbol extends ToAssign {
     return this.binTree + "(key= \"" + value + "\")";
   }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!Symbol.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final Symbol other = (Symbol) obj;
+        if ((this.value == null) ? (other.value != null) : !this.value.equals(other.value)) {
+            return false;
+        }
+        return true;
+    }
+
 }

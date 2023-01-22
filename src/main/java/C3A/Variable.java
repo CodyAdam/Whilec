@@ -9,6 +9,14 @@ public class Variable extends ToAssign {
     count++;
   }
 
+  public Variable(String name, boolean extra) {
+    if(!extra) this.name = name;
+    else {
+        this.name = name + "_" + count;
+        count++;
+    }
+  }
+
   public String getName() {
     return name;
   }
@@ -22,5 +30,14 @@ public class Variable extends ToAssign {
   public String toPython() {
     return getName() + ".copy()";
   }
+
+  @Override
+    public boolean equals(Object o) {
+        if (o instanceof Variable) {
+        Variable other = (Variable) o;
+        return this.name.equals(other.name);
+        }
+        return false;
+    }
 
 }

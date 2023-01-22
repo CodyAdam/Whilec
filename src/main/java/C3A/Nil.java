@@ -11,4 +11,9 @@ public class Nil extends ToAssign {
     return this.binTree + "(key=\"NIL\")";
   }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Nil;
+    }
+
 }
