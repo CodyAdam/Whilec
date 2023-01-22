@@ -28,10 +28,10 @@ todo
 
 ## Rapports personnels
 
-### Cody Adam
+### [Cody Adam](8.2-cody-adam.md)
 
-### Thomas Delapart
+### [Thomas Delapart](8.3-thomas-delapart.md)
 
-### Arthur Allain
+### [Arthur Allain](8.4-arthur-allain.md)
 
-### [Romain Briend](8.1-romain briend.md)
+### [Romain Briend](8.1-romain-briend.md)
