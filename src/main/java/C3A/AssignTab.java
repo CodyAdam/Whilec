@@ -29,4 +29,20 @@ public class AssignTab extends Instruction {
     }
     return s;
   }
+
+  public Variable getLeft() {
+    return left;
+  }
+
+  public int getIndex() {
+    return index;
+  }
+
+  public ToAssign getRight() {
+    return right;
+  }
+
+  public void setRight(ToAssign right) {
+    this.right = right;
+  }
 }

@@ -25,4 +25,12 @@ public class Assign extends Instruction {
   public String toPython(Indent indent) {
     return indent + left.getName() + " = " + right.toPython();
   }
+
+  public ToAssign getRight() {
+    return right;
+  }
+
+  public void setRight(ToAssign right) {
+    this.right = right;
+  }
 }
