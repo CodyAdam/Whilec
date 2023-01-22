@@ -1,3 +1,5 @@
+## Architecture :
+
 Dans cette section, nous allons décrire l'architecture du compilateur et la chaîne de compilation utilisée pour transformer le code source écrit en langage While en un programme exécutable en Python. 
 
 Voici les étapes de la chaîne de compilation:
